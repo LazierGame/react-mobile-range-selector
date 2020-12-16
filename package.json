@@ -4,10 +4,23 @@
   "description": "time range select",
   "main": "index.js",
   "scripts": {
-    "clean": "rm dist/bundle.js",
-    "build-dev": "webpack --mode development",
-    "build-prod": "webpack --mode production",
-    "start": "webpack serve --hot --mode development"
+    "start": "rollup -c -w",
+    "build": "rollup -c && npm run declaration && print-sizes ./dist",
+    "declaration": "rm -rf declaration && tsc -p tsconfig.declaration.json",
+    "doc": "rm -rf ./doc && jsdoc -c jsdoc.json",
+    "test": "jest --watchAll",
+    "coverage": "jest --coverage && print-coveralls --sort=desc",
+    "prerelease": "npm run build && npm run doc && npm run storybook && prerelease --dirs=dist,doc",
+    "storybook": "cd storybook/ && npm run build && cd ../",
+    "release": "npm run build && npm run doc && npm run storybook && release --dirs=dist,doc",
+    "release:init": "npm run build && npm run doc && npm run storybook && release -i --dirs=dist,doc",
+    "deploy": "gh-pages -d ./demo --dest=./ --add --remote origin",
+    "deploy:init": "gh-pages -d ./demo --dest=./ --remote origin",
+    "packages": "npm run packages:update && npm run packages:build && npm run packages:publish && npm run packages:preact",
+    "packages:update": "pvu --update=react-selecto,ngx-selecto/projects/ngx-selecto,svelte-selecto,lit-selecto,vue-selecto",
+    "packages:build": "pvu --build=react-selecto,ngx-selecto,svelte-selecto,lit-selecto,vue-selecto",
+    "packages:publish": "pvu --publish=react-selecto,ngx-selecto/dist/ngx-selecto,svelte-selecto,lit-selecto,vue-selecto",
+    "packages:preact": "cd ./packages/react-selecto && npm run packages && cd ../.."
   },
   "repository": {
     "type": "git",
@@ -24,26 +37,32 @@
   },
   "homepage": "https://github.com/LazierGame/react-time-range-selector#readme",
   "dependencies": {
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-hot-loader": "^4.13.0",
-    "tailwindcss": "^2.0.1"
+    "@daybrush/utils": "^1.4.0",
+    "@egjs/children-differ": "^1.0.1",
+    "@scena/dragscroll": "^0.3.1",
+    "@scena/event-emitter": "^1.0.5",
+    "css-styled": "^1.0.0",
+    "framework-utils": "^0.3.4",
+    "gesto": "^1.3.0",
+    "keycon": "^1.1.2",
+    "overlap-area": "^1.0.0"
+  },
+  "peerDependencies": {
+    "framework-utils": ">=0.3.4",
+    "@scena/dragscroll": ">=0.3.1"
   },
   "devDependencies": {
-    "webpack": "^5.10.0",
-    "webpack-cli": "^4.2.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "webpack-dev-server": "^3.11.0",
-    "html-webpack-plugin": "^4.5.0",
-    "typescript": "^4.1.2",
-    "ts-loader": "^8.0.11",
-    "@hot-loader/react-dom": "^17.0.1+4.13.0",
-    "css-loader": "^5.0.1",
-    "stylus-loader": "^4.3.1",
-    "stylus": "^0.54.8",
-    "style-loader": "^2.0.0",
-    "clean-webpack-plugin": "^3.0.0"
+    "@daybrush/builder": "^0.1.2",
+    "@daybrush/jsdoc": "^0.3.8"
+    "@daybrush/release": "^0.2.4",
+    "@types/jest": "^24.0.13",
+    "daybrush-jsdoc-template": "^1.6.0",
+    "jest": "^24.8.0",
+    "print-coveralls": "^1.2.2",
+    "print-sizes": "^0.1.0",
+    "pvu": "^0.4.1",
+    "ts-jest": "^24.0.2",
+    "typescript": "^4.1.3"
   }
 }
 

@@ -1,0 +1,30 @@
+{
+  "name": "react-time-range-selector",
+  "version": "0.0.1",
+  "description": "time range select",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LazierGame/react-time-range-selector.git"
+  },
+  "keywords": [
+    "time-range",
+    "selector"
+  ],
+  "author": "jump_jump",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LazierGame/react-time-range-selector/issues"
+  },
+  "homepage": "https://github.com/LazierGame/react-time-range-selector#readme",
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10"
+  }
+}

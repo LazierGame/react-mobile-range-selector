@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/LazierGame/react-time-range-selector#readme",
   "dependencies": {
+    "@storybook/react": "^6.1.11",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },

@@ -1,17 +1,25 @@
 {
     "compilerOptions": {
-        "outDir": "./dist/",
+        "outDir": "./outjs/",
+        "esModuleInterop": false,
         "sourceMap": true,
-        "strict": true,
-        "noImplicitReturns": true,
-        "noImplicitAny": true,
-        "module": "es6",
-        "moduleResolution": "node",
+        "module": "es2015",
         "target": "es5",
-        "allowJs": true,
-        "jsx": "react"
+        "experimentalDecorators": true,
+        "skipLibCheck": true,
+        "moduleResolution": "node",
+        "lib": [
+            "es2015",
+            "dom"
+        ],
+        "jsx": "react",
+        "jsxFactory": "h"
     },
     "include": [
-        "./src/**/*"
+        "./src/**/*.ts",
+        "src/Selecto.tsx"
+    ],
+    "exclude": [
+        "./storybook"
     ]
 }

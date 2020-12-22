@@ -1,7 +1,9 @@
-import * as React from 'react'
+import React from 'react'
 import { DndProvider } from 'react-dnd'
-import { TouchBackend } from 'react-dnd-touch-backend'
-import styles from './styles.module.css'
+// import { TouchBackend } from 'react-dnd-touch-backend'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { Container } from './Container'
+import { CustomDragLayer } from './CustomDragLayer'
 
 
 interface TimeRangeSelectorProps {
@@ -9,16 +11,17 @@ interface TimeRangeSelectorProps {
 }
 
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
+  const {text} = props
+  console.log(text)
+
   return (
-    <DndProvider backend={TouchBackend}>
-      <div className="ruler horizontal">
-        <div data-styled-id="rCS1z0diox" className="scena-manager scena-horizontal  rCS1z0diox"
-             style="width: 100%; height: 100%;">
-          <div className="scena-guide-origin"></div>
-          <canvas width="2820" height="60" style="left: 30px; width: calc(100% - 30px); height: 100%;"></canvas>
-        </div>
+    <DndProvider backend={HTML5Backend}>
+      <div style={{
+        marginLeft: 300
+      }}>
+        <Container snapToGrid/>
+        <CustomDragLayer snapToGrid/>
       </div>
-      <div className={styles.test}>Example Component: {props.text}</div>
     </DndProvider>
   )
 }

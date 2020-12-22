@@ -25,12 +25,15 @@ function getItemStyles(
     }
   }
 
-  let { x} = currentOffset
+  let {x} = currentOffset
 
   if (isSnapToGrid) {
     x -= initialOffset.x
     ;[x] = snapToGrid(x)
     x += initialOffset.x
+  }
+  if (x <= 0 ) {
+    x = 0
   }
 
   const transform = `translate(${x}px)`

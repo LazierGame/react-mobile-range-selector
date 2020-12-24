@@ -5,14 +5,14 @@ import { snapToGrid as doSnapToGrid } from './snapToGrid'
 import { DragItem, ItemTypes } from './interfaces'
 
 const styles: React.CSSProperties = {
-  width: 300,
-  height: 300,
+  width: 3000,
   border: '1px solid black',
   position: 'relative',
 }
 
 export interface ContainerProps {
-  snapToGrid: boolean
+  snapToGrid: boolean;
+  height: number
 }
 
 interface BoxProps {
@@ -21,7 +21,13 @@ interface BoxProps {
 }
 
 
-export const Container: React.FC<ContainerProps> = ({snapToGrid}) => {
+export const Container: React.FC<ContainerProps> = (
+  {
+    snapToGrid,
+    height
+  }
+) => {
+
   const [currentRange, setCurrentRange] = useState<BoxProps | null>(null)
 
   const moveBox = useCallback(
@@ -42,9 +48,6 @@ export const Container: React.FC<ContainerProps> = ({snapToGrid}) => {
       if (snapToGrid) {
         ;[left] = doSnapToGrid(left)
       }
-      if (left < 0) {
-        left = 0
-      }
       moveBox(left)
       return undefined
     },
@@ -61,7 +64,7 @@ export const Container: React.FC<ContainerProps> = ({snapToGrid}) => {
   }
 
   return (
-    <div ref={drop} style={styles} onClick={handleBoxSet}>
+    <div ref={drop} style={{...styles, height}} onClick={handleBoxSet}>
       {
         currentRange && <DraggableBox
           {...currentRange}

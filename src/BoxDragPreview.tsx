@@ -28,7 +28,7 @@ export const BoxDragPreview: React.FC<BoxDragPreviewProps> = memo(
 
     return (
       <div style={styles}>
-        <Box title={title} yellow={tickTock} />
+        <Box title={title}/>
       </div>
     )
   },

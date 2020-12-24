@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 
 const styles: React.CSSProperties = {
   border: '1px dashed gray',
@@ -7,12 +7,42 @@ const styles: React.CSSProperties = {
 }
 
 export interface BoxProps {
-  title: string;
-  yellow?: boolean;
+  width?: number;
+  title?: string;
 }
 
-export const Box: React.FC<BoxProps> = ({title}) => {
+export const Box: React.FC<BoxProps> = ({title, width: oldWidth = 30}: BoxProps) => {
+
+  const isDown = useRef<boolean>(false)
+
+  const [width, setWidth] = useState(oldWidth)
+
+  const handleDrawMouseDown = (e: any) => {
+    e.stopPropagation();
+    isDown.current = true;
+  }
+
+  const handleDrawMouseUp = () => {
+    console.log('xxx')
+    isDown.current = false
+  }
+
+  const handleDrawMouseMove = (e: any) => {
+    if (!isDown.current) {
+      return
+    }
+    console.log(e)
+    setWidth(width)
+  }
+
   return <div
-    style={{...styles}}
-  >{title}</div>
+    style={{
+      ...styles,
+      width
+    }}
+  >{title}<span
+    onTouchStart={handleDrawMouseDown}
+    onTouchEnd={handleDrawMouseUp}
+    onTouchMove={handleDrawMouseMove}
+  /></div>
 }

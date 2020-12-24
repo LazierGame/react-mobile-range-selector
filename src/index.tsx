@@ -13,11 +13,11 @@ interface TimeRangeSelectorProps {
   /** 时间范围 */
   timeRange?: TimeRange;
   /** 修改 */
-  onChange: (value: TimeRange | null) => void;
+  onChange?: (value: TimeRange | null) => void;
 }
 
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
-  const {disabled, timeRange, onChange} = props
+  const {disabled = true, timeRange, onChange} = props
 
   console.log(disabled, timeRange, onChange)
 

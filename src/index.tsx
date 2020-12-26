@@ -8,6 +8,7 @@ import { TimeRange } from "./interfaces";
 import SelectController from "./components/controller/SelectController";
 // import './static/font_nmaf2cv9zqn/iconfont.css'
 import './index.css'
+
 console.log('xxx')
 
 interface TimeRangeSelectorProps {
@@ -29,7 +30,11 @@ interface TimeRangeSelectorProps {
 
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
-  const {disabled = true, onChange, disabledTimeRanges} = props
+  const {
+    disabled = true,
+    disabledTimeRanges = [[10, 11]],
+    onChange,
+  } = props
 
   console.log(disabled, onChange)
 
@@ -43,9 +48,10 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
 
   return (
-    <div style={{
-      textAlign: 'center'
-    }}>
+    <div>
+      <div>
+
+      </div>
       <DndProvider backend={HTML5Backend}>
         {/*<div style={{*/}
         {/*  width: '100%',*/}

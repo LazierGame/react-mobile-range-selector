@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { TimeRange } from "../../interfaces";
-import { d_flex, justify_content_between } from "../../utils/style";
+import { TimeRange } from "../interfaces";
+import { d_flex, justify_content_between } from "../utils/style";
 
 interface SelectControllerProps {
   timeRange?: TimeRange | null;

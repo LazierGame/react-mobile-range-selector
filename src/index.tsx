@@ -5,7 +5,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 // import { Container } from './Container'
 // import { CustomDragLayer } from './CustomDragLayer'
 import { TimeRange } from "./interfaces";
-import SelectController from "./components/controller/SelectController";
+import SelectController from "./components/SelectController";
 // import './static/font_nmaf2cv9zqn/iconfont.css'
 import './index.css'
 

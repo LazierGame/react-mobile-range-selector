@@ -5,7 +5,8 @@ import { snapToGrid as doSnapToGrid } from './snapToGrid'
 import { DragItem, ItemTypes } from './interfaces'
 
 const styles: React.CSSProperties = {
-  border: '1px solid black',
+  width: '100%',
+  border: '1px solid solid',
   position: 'relative',
 }
 
@@ -37,7 +38,9 @@ export const Container: React.FC<ContainerProps> = (
 
   const [, drop] = useDrop({
     accept: ItemTypes.BOX,
+
     drop(item: DragItem, monitor) {
+      console.log('drop', item)
       const delta = monitor.getDifferenceFromInitialOffset() as {
         x: number
         y: number

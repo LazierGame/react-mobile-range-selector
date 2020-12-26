@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { useDrag, DragSourceMonitor } from 'react-dnd'
-import { getEmptyImage } from 'react-dnd-html5-backend'
 import { ItemTypes } from './interfaces'
 import { Box } from './Box'
 
@@ -39,7 +38,7 @@ export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
   const handleRemove = () => onRemove()
 
   useEffect(() => {
-    preview(getEmptyImage(), {captureDraggingState: true})
+    preview(<div>231</div>, {captureDraggingState: true})
   }, [])
 
   return (

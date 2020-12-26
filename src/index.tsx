@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { DndProvider } from 'react-dnd'
-// import { TouchBackend } from 'react-dnd-touch-backend'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import { TouchBackend } from 'react-dnd-touch-backend'
+// import { HTML5Backend } from 'react-dnd-html5-backend'
 import { Container } from './Container'
 import { CustomDragLayer } from './CustomDragLayer'
 import { TimeRange } from "./interfaces";
@@ -76,16 +76,16 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
               ))
             }
           </ul>
-
-          <DndProvider backend={HTML5Backend}>
-              <Container
-                snapToGrid
-                height={100}
-              />
-              <CustomDragLayer snapToGrid/>
+          <DndProvider backend={TouchBackend}>
+            <Container
+              snapToGrid
+              height={100}
+            />
+            <CustomDragLayer snapToGrid/>
           </DndProvider>
         </div>
       </div>
+
 
       <SelectController
         timeRange={timeRange}

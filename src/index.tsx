@@ -48,7 +48,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   return (
     <div>
-      <div style={{
+      <div id='scroll' style={{
         overflow: 'hidden'
       }}>
         <div style={{
@@ -81,7 +81,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
               snapToGrid
               height={100}
             />
-            <CustomDragLayer snapToGrid/>
+            <CustomDragLayer snapToGrid={false}/>
           </DndProvider>
         </div>
       </div>

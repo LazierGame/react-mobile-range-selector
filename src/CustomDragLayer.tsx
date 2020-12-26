@@ -32,7 +32,7 @@ function getItemStyles(
     ;[x] = snapToGrid(x)
     x += initialOffset.x
   }
-  if (x <= 0 ) {
+  if (x <= 0) {
     x = 0
   }
 
@@ -65,7 +65,7 @@ export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
   function renderItem() {
     switch (itemType) {
       case ItemTypes.BOX:
-        return <BoxDragPreview title={item.title} />
+        return <BoxDragPreview title={item.title}/>
       default:
         return null
     }
@@ -73,6 +73,18 @@ export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
 
   if (!isDragging) {
     return null
+  } else {
+    if (currentOffset?.x) {
+      const leftNumber = currentOffset!.x  + 100
+      console.log('bbb', leftNumber)
+      if (leftNumber > window.innerWidth) {
+        const data = document.getElementById('scroll')
+      }
+    }
+
+    //
+    //
+    // console.log('aaa', window.innerWidth)
   }
   return (
     <div style={layerStyles}>

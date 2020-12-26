@@ -1,4 +1,6 @@
 export function snapToGrid(x: number): [number] {
-  const snappedX = Math.round(x / 32) * 32
+  console.log('sn', x)
+  const snappedX = Math.round(x / 50) * 50
+  console.log('sn', snappedX)
   return [snappedX]
 }

@@ -5,7 +5,6 @@ import { snapToGrid as doSnapToGrid } from './snapToGrid'
 import { DragItem, ItemTypes } from './interfaces'
 
 const styles: React.CSSProperties = {
-  width: 3000,
   border: '1px solid black',
   position: 'relative',
 }

@@ -2,11 +2,10 @@ import React, { useState } from 'react'
 import { DndProvider } from 'react-dnd'
 // import { TouchBackend } from 'react-dnd-touch-backend'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-// import { Container } from './Container'
-// import { CustomDragLayer } from './CustomDragLayer'
+import { Container } from './Container'
+import { CustomDragLayer } from './CustomDragLayer'
 import { TimeRange } from "./interfaces";
 import SelectController from "./components/SelectController";
-// import './static/font_nmaf2cv9zqn/iconfont.css'
 import './index.css'
 
 console.log('xxx')
@@ -49,28 +48,50 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   return (
     <div>
-      <div>
+      <div style={{
+        overflow: 'hidden'
+      }}>
+        <div style={{
+          background: '#eee',
+          /* 文本不会换行，文本会在在同一行上继续 */
+          whiteSpace: 'nowrap',
+          /* 可滑动 */
+          overflowX: 'scroll'
+        }}>
+          <ul style={{
+            listStyle: 'none',
+            margin: 0,
+            padding: 0,
+          }}>
+            {
+              [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23].map(x => (
+                <li
+                  key={x}
+                  style={{
+                    width: x !== 24 ? 100 : 0,
+                    background: '#fff',
+                    display: 'inline-block'
+                  }}
+                >{`${('00' + x).slice(-2)}:00`}</li>
+              ))
+            }
+          </ul>
 
+          <DndProvider backend={HTML5Backend}>
+              <Container
+                snapToGrid
+                height={100}
+              />
+              <CustomDragLayer snapToGrid/>
+          </DndProvider>
+        </div>
       </div>
-      <DndProvider backend={HTML5Backend}>
-        {/*<div style={{*/}
-        {/*  width: '100%',*/}
-        {/*  overflowX: "auto"*/}
-        {/*}}>*/}
-        {/*  <Container*/}
-        {/*    snapToGrid*/}
-        {/*    height={height}*/}
-        {/*  />*/}
-        {/*  <CustomDragLayer snapToGrid/>*/}
-        {/*</div>*/}
-      </DndProvider>
-      {
-        false && <SelectController
-          timeRange={timeRange}
-          disabledTimeRanges={disabledTimeRanges}
-          onChange={handleChange}
-        />
-      }
+
+      <SelectController
+        timeRange={timeRange}
+        disabledTimeRanges={disabledTimeRanges}
+        onChange={handleChange}
+      />
 
     </div>
   )

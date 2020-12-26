@@ -1,14 +1,7 @@
 import React from 'react'
 
-interface TimeScaleProps {
-
-}
-
-function TimeScale(props: TimeScaleProps) {
-  console.log(props)
+function TimeScale() {
   return <>
-    <div>
-    </div>
   </>
 }
 

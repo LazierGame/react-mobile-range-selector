@@ -64,11 +64,14 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
         {/*  <CustomDragLayer snapToGrid/>*/}
         {/*</div>*/}
       </DndProvider>
-      <SelectController
-        timeRange={timeRange}
-        disabledTimeRanges={disabledTimeRanges}
-        onChange={handleChange}
-      />
+      {
+        false && <SelectController
+          timeRange={timeRange}
+          disabledTimeRanges={disabledTimeRanges}
+          onChange={handleChange}
+        />
+      }
+
     </div>
   )
 }

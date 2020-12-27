@@ -78,7 +78,7 @@ export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
       const leftNumber = currentOffset!.x  + 100
       console.log('bbb', leftNumber)
       if (leftNumber > window.innerWidth) {
-        const data = document.getElementById('scroll')
+        // const data = document.getElementById('scroll')
       }
     }
 

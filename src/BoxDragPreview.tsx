@@ -3,7 +3,6 @@ import { Box } from './Box'
 
 const styles = {
   display: 'inline-block',
-  top: 1
 }
 
 export interface BoxDragPreviewProps {

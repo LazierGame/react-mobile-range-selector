@@ -6,7 +6,7 @@ const styles = {
 }
 
 export interface BoxDragPreviewProps {
-  title: string
+  width: number
 }
 
 export interface BoxDragPreviewState {
@@ -14,7 +14,7 @@ export interface BoxDragPreviewState {
 }
 
 export const BoxDragPreview: React.FC<BoxDragPreviewProps> = memo(
-  ({ title }) => {
+  ({width}) => {
     const [tickTock, setTickTock] = useState(false)
 
     useEffect(
@@ -27,7 +27,7 @@ export const BoxDragPreview: React.FC<BoxDragPreviewProps> = memo(
 
     return (
       <div style={styles}>
-        <Box title={title}/>
+        <Box width={width}/>
       </div>
     )
   },

@@ -67,7 +67,7 @@ export const Container: React.FC<ContainerProps> = (
   }
 
   return (
-    <div ref={drop} style={{...styles, height}} onClick={handleBoxSet}>
+    <div ref={drop} style={{...styles, height, background: '#fff'}} onClick={handleBoxSet}>
       {
         currentRange && <DraggableBox
           {...currentRange}

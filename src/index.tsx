@@ -40,19 +40,19 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
   const [timeRange, setTimeRange] = useState<TimeRange | null>([0, 0])
 
   const handleChange = (value: TimeRange | null) => {
-    console.log('value', value)
     setTimeRange(value)
     onChange && onChange(value)
   }
 
 
   return (
-    <div>
+    <div style={{
+      background: '#f6f6f6'
+    }}>
       <div id='scroll' style={{
         overflow: 'hidden'
       }}>
         <div style={{
-          background: '#eee',
           /* 文本不会换行，文本会在在同一行上继续 */
           whiteSpace: 'nowrap',
           /* 可滑动 */
@@ -61,6 +61,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
           <ul style={{
             listStyle: 'none',
             margin: 0,
+            marginBottom: 10,
             padding: 0,
           }}>
             {
@@ -69,7 +70,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
                   key={x}
                   style={{
                     width: x !== 24 ? 100 : 0,
-                    background: '#fff',
                     display: 'inline-block'
                   }}
                 >{`${('00' + x).slice(-2)}:00`}</li>

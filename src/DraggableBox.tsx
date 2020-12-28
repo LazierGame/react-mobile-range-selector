@@ -37,7 +37,6 @@ export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
   })
 
   const handleRemove = () => {
-    console.log('ccccccccccc')
     onRemove()
   }
 

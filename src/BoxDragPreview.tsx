@@ -4,6 +4,7 @@ import { Box } from './components/Box'
 const styles = {
   // display: 'inline-block',
   marginTop: 28
+  //
 }
 
 export interface BoxDragPreviewProps {

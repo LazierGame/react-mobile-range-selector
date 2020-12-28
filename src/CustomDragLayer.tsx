@@ -2,7 +2,7 @@ import React from 'react'
 import { XYCoord, useDragLayer } from 'react-dnd'
 import { ItemTypes } from './interfaces'
 import { BoxDragPreview } from './BoxDragPreview'
-import { snapToGrid } from './snapToGrid'
+import { snapToGrid } from './utils/snapToGrid'
 
 const layerStyles: React.CSSProperties = {
   position: 'fixed',
@@ -29,7 +29,7 @@ function getItemStyles(
 
   if (isSnapToGrid) {
     x -= initialOffset.x
-    ;[x] = snapToGrid(x)
+    x = snapToGrid(x)
     x += initialOffset.x
   }
   if (x <= 0) {

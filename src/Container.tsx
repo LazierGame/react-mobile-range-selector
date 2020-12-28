@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import { useDrop } from 'react-dnd'
 import { DraggableBox } from './DraggableBox'
-import { snapToGrid as doSnapToGrid } from './snapToGrid'
+import { snapToGrid as doSnapToGrid } from './utils/snapToGrid'
 import { DragItem, ItemTypes } from './interfaces'
 
 const styles: React.CSSProperties = {
@@ -52,7 +52,7 @@ export const Container: React.FC<ContainerProps> = (
 
       let left = Math.round(item.left + delta.x)
       if (snapToGrid) {
-        ;[left] = doSnapToGrid(left)
+        left = doSnapToGrid(left)
       }
       moveBox(left)
       return undefined

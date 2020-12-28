@@ -24,8 +24,11 @@ export const Box: React.FC<BoxProps> = ({width: oldWidth = 30, onChange}: BoxPro
   }
 
   return <Resizable
-    style={styles}
-    size={{width, height: 100}}
+    style={{
+      ...styles,
+      background: '#f59b9d'
+    }}
+    size={{width, height: 100,}}
     enable={{
       top: false,
       right: true,

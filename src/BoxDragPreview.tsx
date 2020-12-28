@@ -2,7 +2,8 @@ import React, { useEffect, useState, memo } from 'react'
 import { Box } from './Box'
 
 const styles = {
-  display: 'inline-block',
+  // display: 'inline-block',
+  marginTop: 28
 }
 
 export interface BoxDragPreviewProps {

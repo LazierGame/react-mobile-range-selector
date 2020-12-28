@@ -50,7 +50,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     setBoxWidth(width)
   }
 
-
   return (
     <div style={{
       background: '#f6f6f6'

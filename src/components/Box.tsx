@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React  from 'react'
 import { NumberSize, Resizable } from "re-resizable";
 import { Direction } from "re-resizable/lib/resizer";
 import { snapToGrid as doSnapToGrid } from '../utils/snapToGrid'
@@ -32,11 +32,8 @@ export const Box: React.FC<BoxProps> = (
     onChange,
   }: BoxProps) => {
 
-  const [width, setWidth] = useState(oldWidth)
-
   const handleResizeChange = (_e: TouchEvent, _direction: Direction, _ref: HTMLElement, d: NumberSize) => {
-    const currentWidth = doSnapToGrid(width + d.width)
-    setWidth(currentWidth);
+    const currentWidth = doSnapToGrid(oldWidth + d.width)
     onChange && onChange(currentWidth)
   }
 
@@ -45,7 +42,7 @@ export const Box: React.FC<BoxProps> = (
       ...styles,
       background: getBackgroundColor(isDisable)
     }}
-    size={{width, height: 100,}}
+    size={{width: oldWidth, height: 100,}}
     enable={{
       top: false,
       right: !disabled && !isDisable,

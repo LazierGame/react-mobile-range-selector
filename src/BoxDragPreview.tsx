@@ -1,5 +1,5 @@
 import React, { useEffect, useState, memo } from 'react'
-import { Box } from './Box'
+import { Box } from './components/Box'
 
 const styles = {
   // display: 'inline-block',

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDrag, DragSourceMonitor } from 'react-dnd'
 import { ItemTypes } from './interfaces'
-import { Box } from './Box'
+import { Box } from './components/Box'
 
 function getStyles(
   left: number,

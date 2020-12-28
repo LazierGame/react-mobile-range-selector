@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { NumberSize, Resizable } from "re-resizable";
 import { Direction } from "re-resizable/lib/resizer";
-import { snapToGrid as doSnapToGrid } from './utils/snapToGrid'
+import { snapToGrid as doSnapToGrid } from '../utils/snapToGrid'
 
 const styles: React.CSSProperties = {
   border: '1px solid gray',
@@ -41,5 +41,5 @@ export const Box: React.FC<BoxProps> = ({width: oldWidth = 30, onChange}: BoxPro
       topLeft: false
     }}
     onResizeStop={handleResizeChange}
-  >拖动<span/></Resizable>
+  ><span/></Resizable>
 }

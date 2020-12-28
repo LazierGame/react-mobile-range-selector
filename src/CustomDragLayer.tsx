@@ -45,11 +45,11 @@ function getItemStyles(
 
 export interface CustomDragLayerProps {
   snapToGrid: boolean;
-  width: number;
+  boxWidth: number;
 }
 
 export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
-  const {width, snapToGrid} = props
+  const {boxWidth, snapToGrid} = props
   const {
     itemType,
     isDragging,
@@ -66,7 +66,7 @@ export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
   function renderItem() {
     switch (itemType) {
       case ItemTypes.BOX:
-        return <BoxDragPreview width={width} />
+        return <BoxDragPreview width={boxWidth} />
       default:
         return null
     }

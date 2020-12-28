@@ -20,16 +20,17 @@ function getStyles(
 }
 
 export interface DraggableBoxProps {
-  title: string
-  left: number
-  onRemove: () => void
+  boxWidth: number;
+  left: number;
+  onRemove: () => void;
+  onBoxWidthChange: (width: number) => void;
 }
 
 export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
-  const {title, left, onRemove} = props
+  const {boxWidth, left, onRemove, onBoxWidthChange} = props
 
   const [{isDragging}, drag, preview] = useDrag({
-    item: {type: ItemTypes.BOX, left, top, title},
+    item: {type: ItemTypes.BOX, left, top, width: boxWidth},
     collect: (monitor: DragSourceMonitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -43,7 +44,7 @@ export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
 
   return (
     <div ref={drag} onDoubleClick={handleRemove} style={getStyles(left, isDragging)}>
-      <Box title={title}/>
+      <Box onChange={onBoxWidthChange} width={boxWidth}/>
     </div>
   )
 }

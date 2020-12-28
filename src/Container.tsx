@@ -12,19 +12,23 @@ const styles: React.CSSProperties = {
 
 export interface ContainerProps {
   snapToGrid: boolean;
-  height: number
+  height: number;
+  boxWidth: number;
+  onBoxWidthChange: (width: number) => void
 }
 
 interface BoxProps {
   left: number;
-  title: string
+  width?: number;
 }
 
 
 export const Container: React.FC<ContainerProps> = (
   {
     snapToGrid,
-    height
+    height,
+    onBoxWidthChange,
+    boxWidth
   }
 ) => {
 
@@ -32,7 +36,7 @@ export const Container: React.FC<ContainerProps> = (
 
   const moveBox = useCallback(
     (left: number) => {
-      setCurrentRange({...currentRange, left, title: 'Drag me around'})
+      setCurrentRange({...currentRange, left,})
     }, [currentRange],
   )
 
@@ -50,7 +54,6 @@ export const Container: React.FC<ContainerProps> = (
       if (snapToGrid) {
         ;[left] = doSnapToGrid(left)
       }
-      console.log('left')
       moveBox(left)
       return undefined
     },
@@ -62,7 +65,7 @@ export const Container: React.FC<ContainerProps> = (
     if (currentRange?.left) {
       return
     }
-    setCurrentRange({left: 20, title: '333333'})
+    setCurrentRange({left: 20,})
     console.log(e.clientX, e.currentTarget)
   }
 
@@ -70,7 +73,9 @@ export const Container: React.FC<ContainerProps> = (
     <div ref={drop} style={{...styles, height, background: '#fff'}} onClick={handleBoxSet}>
       {
         currentRange && <DraggableBox
+          boxWidth={boxWidth}
           {...currentRange}
+          onBoxWidthChange={onBoxWidthChange}
           onRemove={handleRemove}
         />
       }

@@ -39,9 +39,15 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   const [timeRange, setTimeRange] = useState<TimeRange | null>([0, 0])
 
+  const [boxWidth, setBoxWidth] = useState(30)
+
   const handleChange = (value: TimeRange | null) => {
     setTimeRange(value)
     onChange && onChange(value)
+  }
+
+  const onBoxWidthChange = (width: number) => {
+    setBoxWidth(width)
   }
 
 
@@ -80,8 +86,13 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
             <Container
               snapToGrid
               height={100}
+              boxWidth={boxWidth}
+              onBoxWidthChange={onBoxWidthChange}
             />
-            <CustomDragLayer snapToGrid={false}/>
+            <CustomDragLayer
+              snapToGrid={false}
+              boxWidth={boxWidth}
+            />
           </DndProvider>
         </div>
       </div>

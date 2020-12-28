@@ -36,7 +36,10 @@ export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
     }),
   })
 
-  const handleRemove = () => onRemove()
+  const handleRemove = () => {
+    console.log('ccccccccccc')
+    onRemove()
+  }
 
   useEffect(() => {
     preview(<div>231</div>, {captureDraggingState: true})

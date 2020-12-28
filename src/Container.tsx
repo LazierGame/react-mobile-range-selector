@@ -62,21 +62,21 @@ export const Container: React.FC<ContainerProps> = (
   const handleRemove = () => setCurrentRange(null)
 
   const handleBoxSet = (e: any) => {
+
     if (currentRange?.left) {
+      console.log('xxxxx')
       return
     }
     setCurrentRange({left: 20,})
     console.log(e.clientX, e.currentTarget)
   }
 
-  const handleBoxDelete = () => setCurrentRange(null)
 
   return (
     <div
       ref={drop}
       style={{...styles, height, background: '#fff'}}
       onClick={handleBoxSet}
-      onDoubleClick={handleBoxDelete}
     >
       {
         currentRange && <DraggableBox

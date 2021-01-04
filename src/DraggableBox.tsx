@@ -42,8 +42,7 @@ export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
 
   const doubleTouchRef = useRef<boolean>(false)
 
-  const handleTouch = (e: any) => {
-    console.log(e)
+  const handleTouch = () => {
     setTimeout(() => {
       doubleTouchRef.current  = false
     }, 750)
@@ -61,7 +60,7 @@ export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
   }, [])
 
   return (
-    <div ref={drag} onTouchStart={handleTouch} style={getStyles(left, isDragging)}>
+    <div ref={drag} onTouchEnd={handleTouch} style={getStyles(left, isDragging)}>
       <Box onChange={onBoxWidthChange} width={boxWidth}/>
     </div>
   )

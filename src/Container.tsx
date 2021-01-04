@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useDrop } from 'react-dnd'
 import { DraggableBox } from './DraggableBox'
 import { snapToGrid as doSnapToGrid } from './utils/snapToGrid'
 import { DragItem, ItemTypes } from './interfaces'
 
 const styles: React.CSSProperties = {
-  width: '100%',
+  width: 2300,
   border: '1px solid solid',
   position: 'relative',
 }
@@ -67,18 +67,12 @@ export const Container: React.FC<ContainerProps> = (
     onBoxWidthChange(0)
   }
 
-  useEffect(() => {
-    console.log('cccc', currentRange, boxWidth)
-  }, [currentRange, boxWidth])
-
   const handleBoxSet = (e: any) => {
-
     if (currentRange?.left) {
-      console.log('xxxxx')
       return
     }
+    console.log('xxxx', e.left, e.clientX, e.currentTarget.left)
     setCurrentRange({left: 20,})
-    console.log(e.clientX, e.currentTarget)
   }
 
 
@@ -86,7 +80,7 @@ export const Container: React.FC<ContainerProps> = (
     <div
       ref={drop}
       style={{...styles, height, background: '#fff'}}
-      onTouchStart={handleBoxSet}
+      onTouchEnd={handleBoxSet}
     >
       {
         currentRange && <DraggableBox

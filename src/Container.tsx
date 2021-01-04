@@ -28,7 +28,7 @@ export const Container: React.FC<ContainerProps> = (
     snapToGrid,
     height,
     onBoxWidthChange,
-    boxWidth
+    boxWidth,
   }
 ) => {
 
@@ -71,7 +71,7 @@ export const Container: React.FC<ContainerProps> = (
     if (currentRange?.left) {
       return
     }
-    console.log('xxxx', e.left, e.clientX, e.currentTarget.left)
+    console.log('xxxx', e.currentTarget)
     setCurrentRange({left: 20,})
   }
 

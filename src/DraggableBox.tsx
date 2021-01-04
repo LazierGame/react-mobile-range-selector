@@ -36,6 +36,8 @@ export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
     }),
   })
 
+
+
   const handleRemove = () => {
     onRemove()
   }
@@ -52,6 +54,14 @@ export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
     doubleTouchRef.current = true
   }
 
+  console.log('sfsfdsfsff', isDragging)
+
+  useEffect(() => {
+    console.log('sfsfdsfsff', isDragging)
+    if (isDragging) {
+      doubleTouchRef.current = false
+    }
+  }, [isDragging])
 
 
 
@@ -60,7 +70,7 @@ export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
   }, [])
 
   return (
-    <div ref={drag} onTouchEnd={handleTouch} style={getStyles(left, isDragging)}>
+    <div ref={drag} onTouchStart={handleTouch} style={getStyles(left, isDragging)}>
       <Box onChange={onBoxWidthChange} width={boxWidth}/>
     </div>
   )

@@ -1,4 +1,4 @@
-import React from 'react'
+import React  from 'react'
 import { XYCoord, useDragLayer } from 'react-dnd'
 import { ItemTypes } from './interfaces'
 import { BoxDragPreview } from './BoxDragPreview'
@@ -67,7 +67,7 @@ export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
   function renderItem() {
     switch (itemType) {
       case ItemTypes.BOX:
-        return <BoxDragPreview width={boxWidth} />
+        return <BoxDragPreview width={boxWidth}/>
       default:
         return null
     }
@@ -77,7 +77,7 @@ export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
     return null
   } else {
     if (currentOffset?.x) {
-      const leftNumber = currentOffset!.x  + 100
+      const leftNumber = currentOffset!.x + 100
       console.log('bbb', leftNumber)
       if (leftNumber > window.innerWidth) {
         // const data = document.getElementById('scroll')

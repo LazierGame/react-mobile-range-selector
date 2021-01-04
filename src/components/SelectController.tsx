@@ -14,7 +14,9 @@ interface SelectControllerProps {
 const controllerStyle: React.CSSProperties = {
   ...d_flex,
   ...justify_content_between,
-  padding: '6px 12px'
+  padding: '6px 12px',
+  boxSizing: 'border-box',
+  width: '100%'
 }
 
 function getParseTime(time: number): string {

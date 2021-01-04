@@ -1,14 +1,11 @@
 import React, { useState } from 'react'
 import { DndProvider } from 'react-dnd'
 import { TouchBackend } from 'react-dnd-touch-backend'
-// import { HTML5Backend } from 'react-dnd-html5-backend'
 import { Container } from './Container'
 import { CustomDragLayer } from './CustomDragLayer'
 import { TimeRange } from "./interfaces";
 import SelectController from "./components/SelectController";
 import './index.css'
-
-console.log('xxx')
 
 interface TimeRangeSelectorProps {
   /** 当前滑动条的高度 */

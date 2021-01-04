@@ -51,7 +51,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     <div style={{
       background: '#f6f6f6'
     }}>
-      <div id='scroll' style={{
+      <div  style={{
         overflow: 'hidden',
         position: 'relative'
       }}>
@@ -61,7 +61,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
           /* 可滑动 */
           overflowX: 'scroll'
         }}>
-          <ul style={{
+          <ul id='scroll' style={{
             listStyle: 'none',
             margin: 0,
             marginBottom: 10,

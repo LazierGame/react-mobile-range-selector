@@ -54,10 +54,8 @@ export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
     doubleTouchRef.current = true
   }
 
-  console.log('sfsfdsfsff', isDragging)
-
+  // 如果当前滚动了，去除双次点击
   useEffect(() => {
-    console.log('sfsfdsfsff', isDragging)
     if (isDragging) {
       doubleTouchRef.current = false
     }

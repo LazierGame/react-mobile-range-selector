@@ -85,6 +85,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
               height={100}
               boxWidth={boxWidth}
               onBoxWidthChange={onBoxWidthChange}
+
             />
             <CustomDragLayer
               snapToGrid={false}

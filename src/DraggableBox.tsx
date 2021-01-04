@@ -42,7 +42,8 @@ export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
 
   const doubleTouchRef = useRef<boolean>(false)
 
-  const handleTouch = () => {
+  const handleTouch = (e: any) => {
+    console.log(e)
     setTimeout(() => {
       doubleTouchRef.current  = false
     }, 750)

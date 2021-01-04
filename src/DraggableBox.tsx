@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useDrag, DragSourceMonitor } from 'react-dnd'
 import { ItemTypes } from './interfaces'
 import { Box } from './components/Box'
@@ -7,13 +7,13 @@ function getStyles(
   left: number,
   isDragging: boolean,
 ): React.CSSProperties {
+
   const transform = `translateX(${left}px)`
+
   return {
     position: 'absolute',
     transform,
     WebkitTransform: transform,
-    // IE fallback: hide the real node using CSS when dragging
-    // because IE will ignore our custom "empty image" drag preview.
     opacity: isDragging ? 0 : 1,
     height: isDragging ? 0 : '',
   }
@@ -40,12 +40,27 @@ export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
     onRemove()
   }
 
+  const doubleTouchRef = useRef<boolean>(false)
+
+  const handleTouch = () => {
+    setTimeout(() => {
+      doubleTouchRef.current  = false
+    }, 750)
+    if (doubleTouchRef.current) {
+      handleRemove()
+    }
+    doubleTouchRef.current = true
+  }
+
+
+
+
   useEffect(() => {
     preview(<div>231</div>, {captureDraggingState: true})
   }, [])
 
   return (
-    <div ref={drag} onDoubleClick={handleRemove} style={getStyles(left, isDragging)}>
+    <div ref={drag} onTouchStart={handleTouch} style={getStyles(left, isDragging)}>
       <Box onChange={onBoxWidthChange} width={boxWidth}/>
     </div>
   )

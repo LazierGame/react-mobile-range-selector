@@ -52,8 +52,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   return (
     <div style={{
-      background: '#f6f6f6',
-      marginTop: 100
+      background: '#f6f6f6'
     }}>
       <div id='scroll' style={{
         overflow: 'hidden',

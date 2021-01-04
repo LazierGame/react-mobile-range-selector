@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { TimeRange } from "../interfaces";
 import { d_flex, justify_content_between } from "../utils/style";
+import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons'
+
 
 interface SelectControllerProps {
   timeRange?: TimeRange | null;
@@ -82,7 +84,9 @@ function SelectController(props: SelectControllerProps) {
   return <div
     style={controllerStyle}
   >
-    <span onClick={handleChange('prev')}> - </span>
+    <span onClick={handleChange('prev')}>
+    <MinusCircleOutlined/>
+    </span>
     <div>
       {
         leftTime && rightTime &&
@@ -90,7 +94,9 @@ function SelectController(props: SelectControllerProps) {
       }
       <span>{minute} 分钟</span>
     </div>
-    <span onClick={handleChange('next')}> + </span>
+    <span onClick={handleChange('next')}>
+      <PlusCircleOutlined/>
+    </span>
   </div>
 }
 

@@ -5,7 +5,8 @@ import { BoxDragPreview } from './BoxDragPreview'
 import { snapToGrid } from './utils/snapToGrid'
 
 const layerStyles: React.CSSProperties = {
-  position: 'fixed',
+  marginTop: 28,
+  position: 'absolute',
   pointerEvents: 'none',
   zIndex: 100,
   left: 0,
@@ -90,7 +91,9 @@ export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
   return (
     <div style={layerStyles}>
       <div
-        style={getItemStyles(initialOffset, currentOffset, snapToGrid)}
+        style={
+          getItemStyles(initialOffset, currentOffset, snapToGrid)
+        }
       >
         {renderItem()}
       </div>

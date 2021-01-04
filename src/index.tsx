@@ -52,10 +52,12 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   return (
     <div style={{
-      background: '#f6f6f6'
+      background: '#f6f6f6',
+      marginTop: 100
     }}>
       <div id='scroll' style={{
-        overflow: 'hidden'
+        overflow: 'hidden',
+        position: 'relative'
       }}>
         <div style={{
           /* 文本不会换行，文本会在在同一行上继续 */

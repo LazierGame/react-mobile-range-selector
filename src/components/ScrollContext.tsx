@@ -1,7 +1,7 @@
-import React, { useState, memo, useEffect } from "react";
+import React, { memo } from "react";
 import { DndProvider } from "react-dnd";
 import { TouchBackend } from "react-dnd-touch-backend";
-import { Container } from "./Container";
+import Container from "./Container";
 import { CustomDragLayer } from "./CustomDragLayer";
 import { TimeRange } from "../interfaces";
 
@@ -13,16 +13,6 @@ interface ScrollContextProps {
 
 function ScrollContext(props: ScrollContextProps) {
   const {value, onChange} = props
-
-  const [boxWidth, setBoxWidth] = useState(0)
-
-  useEffect(() => {
-    let currentBoxWidth: number = 0
-    if (Array.isArray(value) && value.length === 2){
-      currentBoxWidth = (value[1] - value[0]) * 100
-    }
-    setBoxWidth(currentBoxWidth)
-  }, [value])
 
   return <div style={{
     overflow: 'hidden',
@@ -59,12 +49,12 @@ function ScrollContext(props: ScrollContextProps) {
         <Container
           snapToGrid
           height={100}
-          boxWidth={boxWidth}
+          value={value}
           onChange={onChange}
         />
         <CustomDragLayer
           snapToGrid={false}
-          boxWidth={boxWidth}
+          value={value}
         />
       </DndProvider>
     </div>

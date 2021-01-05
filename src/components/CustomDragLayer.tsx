@@ -1,8 +1,9 @@
 import React  from 'react'
 import { XYCoord, useDragLayer } from 'react-dnd'
-import { ItemTypes } from '../interfaces'
+import { ItemTypes, TimeRange } from '../interfaces'
 import { BoxDragPreview } from './BoxDragPreview'
 import { snapToGrid } from '../utils/snapToGrid'
+import { useBoxWidth } from "../utils/useBoxWidth";
 
 const layerStyles: React.CSSProperties = {
   marginTop: 28,
@@ -44,11 +45,14 @@ function getItemStyles(
 
 export interface CustomDragLayerProps {
   snapToGrid: boolean;
-  boxWidth: number;
+  value: TimeRange | null;
 }
 
 export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
-  const {boxWidth, snapToGrid} = props
+  const {value, snapToGrid} = props
+
+  const boxWidth: number = useBoxWidth(value)
+
   const {
     itemType,
     isDragging,
@@ -89,10 +93,6 @@ export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
 
       }
     }
-
-    //
-    //
-    // console.log('aaa', window.innerWidth)
   }
   return (
     <div style={layerStyles}>

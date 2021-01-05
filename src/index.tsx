@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react'
 import { TimeRange } from "./interfaces";
-import SelectController from "./components/SelectController";
 import './index.css'
 import ScrollContext from "./components/ScrollContext";
 
@@ -29,6 +28,8 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     onChange,
   } = props
 
+  console.log(disabled, disabledTimeRanges)
+
 
   const [timeRange, setTimeRange] = useState<TimeRange | null>(null)
 
@@ -45,13 +46,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
       <ScrollContext
         value={timeRange}
         onChange={handleChange}
-
-      />
-      <SelectController
-        timeRange={timeRange}
-        disabledTimeRanges={disabledTimeRanges}
-        onChange={handleChange}
-        disabled={disabled}
       />
     </div>
   )

@@ -1,8 +1,9 @@
-import React, { useCallback, useState } from 'react'
+import React, { memo } from 'react'
 import { useDrop } from 'react-dnd'
 import { DraggableBox } from './DraggableBox'
-import { snapToGrid as doSnapToGrid,  snapToFloor as doSnapToFloor } from '../utils/snapToGrid'
+import { snapToGrid as doSnapToGrid, snapToFloor as doSnapToFloor } from '../utils/snapToGrid'
 import { DragItem, ItemTypes, TimeRange } from '../interfaces'
+import { useBoxWidth } from "../utils/useBoxWidth";
 
 const styles: React.CSSProperties = {
   width: 2300,
@@ -13,38 +14,26 @@ const styles: React.CSSProperties = {
 export interface ContainerProps {
   snapToGrid: boolean;
   height: number;
-  boxWidth: number;
+  value: TimeRange | null;
   onChange: (value: TimeRange | null) => void;
 }
 
-interface BoxProps {
-  left: number;
-  width?: number;
-}
 
-
-export const Container: React.FC<ContainerProps> = (
+const Container: React.FC<ContainerProps> = (
   {
     snapToGrid,
     height,
     onChange,
-    boxWidth,
+    value,
   }
 ) => {
 
-  const [currentRange, setCurrentRange] = useState<BoxProps | null>(null)
-
-  const moveBox = useCallback(
-    (left: number) => {
-      setCurrentRange({...currentRange, left,})
-    }, [currentRange],
-  )
+  const boxWidth = useBoxWidth(value)
 
   const [, drop] = useDrop({
     accept: ItemTypes.BOX,
 
     drop(item: DragItem, monitor) {
-      console.log('drop', item)
       const delta = monitor.getDifferenceFromInitialOffset() as {
         x: number
         y: number
@@ -59,41 +48,55 @@ export const Container: React.FC<ContainerProps> = (
       if (left <= 0) {
         left = 0
       }
-      moveBox(left)
+      onChange([left / 100, ((left + boxWidth) / 100)])
       return undefined
     },
   })
 
-  const handleRemove = () => {
-    setCurrentRange(null)
-    onChange(null)
-  }
+  const handleRemove = () => onChange(null)
 
   const handleBoxSet = (e: any) => {
-    const clientX: number = e.changedTouches['0'].clientX
-    console.log('xxxx',clientX)
-    console.log(doSnapToFloor(clientX))
-    if (currentRange?.left) {
+    if (boxWidth) {
       return
     }
-    setCurrentRange({left: doSnapToFloor(clientX),})
+    const clientX: number = e.changedTouches['0'].clientX
+    const currentTimeLeft = (doSnapToFloor(clientX) / 100)
+    const currentTimeRange: TimeRange = [currentTimeLeft, currentTimeLeft + 0.5]
+    onChange(currentTimeRange)
+  }
+
+  const handleBoxChange = (currentBoxWidth: number) => {
+    const currentTimeRange: TimeRange = [value![0], value![1] + (currentBoxWidth / 100)]
+    onChange(currentTimeRange)
   }
 
 
   return (
-    <div
-      ref={drop}
-      style={{...styles, height, background: '#fff'}}
-      onTouchEnd={handleBoxSet}
-    >
-      {
-        currentRange && <DraggableBox
-          boxWidth={boxWidth}
-          {...currentRange}
-          onBoxWidthChange={onBoxWidthChange}
-          onRemove={handleRemove}
-        />
-      }
+    <div style={{
+      background: '#fff',
+    }}>
+      <div
+        ref={drop}
+        style={{
+          ...styles,
+          height,
+          background: 'linear-gradient(45deg,rgba(0, 153, 68, .5) 0, rgba(0, 153, 68, .5) 25%, transparent 25%, transparent 50%,rgba(0, 153, 68, .5) 50%, rgba(0, 153, 68, .5) 75%, transparent 75%, transparent)',
+          backgroundSize: '8px 8px'
+        }}
+        onTouchEnd={handleBoxSet}
+      >
+        {
+          boxWidth && <DraggableBox
+            boxWidth={boxWidth}
+            left={value![0] * 50}
+            onBoxWidthChange={handleBoxChange}
+            onRemove={handleRemove}
+          />
+        }
+      </div>
     </div>
+
   )
 }
+
+export default memo(Container)

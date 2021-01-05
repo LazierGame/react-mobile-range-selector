@@ -8,10 +8,10 @@ interface BanBoxProps {
  * 禁用的区域
  * @constructor
  */
-function BanBox(props: BanBoxProps) {
+function BanBlock(props: BanBoxProps) {
   console.log(props)
   return <>
   </>
 }
 
-export default BanBox
+export default BanBlock

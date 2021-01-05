@@ -33,11 +33,9 @@ function getItemStyles(
     x = snapToGrid(x)
     x += initialOffset.x
   }
-  if (x <= 0) {
-    x = 0
-  }
 
   const transform = `translate(${x}px)`
+
   return {
     transform,
     WebkitTransform: transform,

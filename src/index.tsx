@@ -49,7 +49,8 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   return (
     <div style={{
-      background: '#f6f6f6'
+      background: '#f6f6f6',
+      marginTop: 100
     }}>
       <div  style={{
         overflow: 'hidden',

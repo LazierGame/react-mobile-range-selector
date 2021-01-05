@@ -54,10 +54,8 @@ export const Container: React.FC<ContainerProps> = (
       if (snapToGrid) {
         left = doSnapToGrid(left)
       }
-      console.log(left)
-      if (left < 0) {
-        left = 0
-      }
+      console.log('left', left)
+
       moveBox(left)
       return undefined
     },

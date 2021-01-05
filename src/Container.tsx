@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import { useDrop } from 'react-dnd'
 import { DraggableBox } from './DraggableBox'
-import { snapToGrid as doSnapToGrid } from './utils/snapToGrid'
+import { snapToGrid as doSnapToGrid,  snapToFloor as doSnapToFloor } from './utils/snapToGrid'
 import { DragItem, ItemTypes } from './interfaces'
 
 const styles: React.CSSProperties = {
@@ -69,11 +69,13 @@ export const Container: React.FC<ContainerProps> = (
   }
 
   const handleBoxSet = (e: any) => {
+    const clientX: number = e.changedTouches['0'].clientX
+    console.log('xxxx',clientX)
+    console.log(doSnapToFloor(clientX))
     if (currentRange?.left) {
       return
     }
-    console.log('xxxx', e.currentTarget)
-    setCurrentRange({left: 20,})
+    setCurrentRange({left: doSnapToFloor(clientX),})
   }
 
 

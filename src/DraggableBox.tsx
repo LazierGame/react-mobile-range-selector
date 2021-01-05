@@ -29,13 +29,12 @@ export interface DraggableBoxProps {
 export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
   const {boxWidth, left, onRemove, onBoxWidthChange} = props
 
-  const [{isDragging}, drag, preview] = useDrag({
+  const [{isDragging}, drag] = useDrag({
     item: {type: ItemTypes.BOX, left, top, width: boxWidth},
     collect: (monitor: DragSourceMonitor) => ({
       isDragging: monitor.isDragging(),
     }),
   })
-
 
 
   const handleRemove = () => {
@@ -46,7 +45,7 @@ export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
 
   const handleTouch = () => {
     setTimeout(() => {
-      doubleTouchRef.current  = false
+      doubleTouchRef.current = false
     }, 750)
     if (doubleTouchRef.current) {
       handleRemove()
@@ -54,7 +53,7 @@ export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
     doubleTouchRef.current = true
   }
 
-  // 如果当前滚动了，去除双次点击
+  // 如果当前滚动了，去除双次点击 ref
   useEffect(() => {
     if (isDragging) {
       doubleTouchRef.current = false
@@ -62,14 +61,16 @@ export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
   }, [isDragging])
 
 
-
-  useEffect(() => {
-    preview(<div>231</div>, {captureDraggingState: true})
-  }, [])
-
   return (
-    <div ref={drag} onTouchStart={handleTouch} style={getStyles(left, isDragging)}>
-      <Box onChange={onBoxWidthChange} width={boxWidth}/>
+    <div
+      ref={drag}
+      style={getStyles(left, isDragging)}
+      onTouchStart={handleTouch}
+    >
+      <Box
+        width={boxWidth}
+        onChange={onBoxWidthChange}
+      />
     </div>
   )
 }

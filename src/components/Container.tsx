@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { useDrop } from 'react-dnd'
 import { DraggableBox } from './DraggableBox'
 import { snapToGrid as doSnapToGrid,  snapToFloor as doSnapToFloor } from '../utils/snapToGrid'
-import { DragItem, ItemTypes } from '../interfaces'
+import { DragItem, ItemTypes, TimeRange } from '../interfaces'
 
 const styles: React.CSSProperties = {
   width: 2300,
@@ -14,7 +14,7 @@ export interface ContainerProps {
   snapToGrid: boolean;
   height: number;
   boxWidth: number;
-  onBoxWidthChange: (width: number) => void
+  onChange: (value: TimeRange | null) => void;
 }
 
 interface BoxProps {
@@ -27,7 +27,7 @@ export const Container: React.FC<ContainerProps> = (
   {
     snapToGrid,
     height,
-    onBoxWidthChange,
+    onChange,
     boxWidth,
   }
 ) => {
@@ -66,7 +66,7 @@ export const Container: React.FC<ContainerProps> = (
 
   const handleRemove = () => {
     setCurrentRange(null)
-    onBoxWidthChange(0)
+    onChange(null)
   }
 
   const handleBoxSet = (e: any) => {

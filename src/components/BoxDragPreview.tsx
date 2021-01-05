@@ -1,5 +1,5 @@
 import React, { useEffect, useState, memo } from 'react'
-import { Box } from './components/Box'
+import { Box } from './Box'
 
 const styles = {
   // marginTop: 28

@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react'
 import { useDrop } from 'react-dnd'
 import { DraggableBox } from './DraggableBox'
-import { snapToGrid as doSnapToGrid,  snapToFloor as doSnapToFloor } from './utils/snapToGrid'
-import { DragItem, ItemTypes } from './interfaces'
+import { snapToGrid as doSnapToGrid,  snapToFloor as doSnapToFloor } from '../utils/snapToGrid'
+import { DragItem, ItemTypes } from '../interfaces'
 
 const styles: React.CSSProperties = {
   width: 2300,

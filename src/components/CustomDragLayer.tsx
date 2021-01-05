@@ -1,8 +1,8 @@
 import React  from 'react'
 import { XYCoord, useDragLayer } from 'react-dnd'
-import { ItemTypes } from './interfaces'
+import { ItemTypes } from '../interfaces'
 import { BoxDragPreview } from './BoxDragPreview'
-import { snapToGrid } from './utils/snapToGrid'
+import { snapToGrid } from '../utils/snapToGrid'
 
 const layerStyles: React.CSSProperties = {
   marginTop: 28,

@@ -7,13 +7,12 @@ const styles: React.CSSProperties = {
   border: '1px solid gray',
   padding: '0.5rem 1rem',
   cursor: 'move',
+  position: "relative"
 }
 
 export interface BoxProps {
   /** 当前为禁用项 */
   disabled?: boolean
-  /** 是否为禁用时间 */
-  isDisable?: boolean;
   /** 当前宽度 */
   width?: number;
   /** 修改宽度 */
@@ -28,7 +27,6 @@ export const Box: React.FC<BoxProps> = (
   {
     width: oldWidth = 30,
     disabled = false,
-    isDisable = false,
     onChange,
   }: BoxProps) => {
 
@@ -37,22 +35,43 @@ export const Box: React.FC<BoxProps> = (
     onChange && onChange(currentWidth)
   }
 
-  return <Resizable
-    style={{
-      ...styles,
-      background: getBackgroundColor(isDisable)
-    }}
-    size={{width: oldWidth, height: 100,}}
-    enable={{
-      top: false,
-      right: !disabled && !isDisable,
-      bottom: false,
-      left: false,
-      topRight: false,
-      bottomRight: false,
-      bottomLeft: false,
-      topLeft: false
-    }}
-    onResizeStop={handleResizeChange}
-  ><span/></Resizable>
+  const currentColor = getBackgroundColor(false)
+
+  return<Resizable
+      style={{
+        ...styles,
+        borderColor: currentColor,
+        background: currentColor
+      }}
+      size={{width: oldWidth, height: 100,}}
+      enable={{
+        top: false,
+        right: !disabled,
+        bottom: false,
+        left: false,
+        topRight: false,
+        bottomRight: false,
+        bottomLeft: false,
+        topLeft: false
+      }}
+      onResizeStop={handleResizeChange}
+    >
+      {
+        !disabled && <span
+          style={{
+            position: 'absolute',
+            left: '100%',
+            top: '50%',
+            background: '#fff',
+            transform: 'translate(-50%, -50%)',
+            display: 'block',
+            border: '2px solid #f0f0f0',
+            borderColor: currentColor,
+            width: 16,
+            height: 16,
+            borderRadius: '50%'
+          }}
+        />
+      }
+    </Resizable>
 }

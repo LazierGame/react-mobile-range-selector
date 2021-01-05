@@ -12,6 +12,7 @@ const styles: React.CSSProperties = {
 }
 
 export interface ContainerProps {
+  removeByDbClick: boolean;
   snapToGrid: boolean;
   height: number;
   value: TimeRange | null;
@@ -25,6 +26,7 @@ const Container: React.FC<ContainerProps> = (
     height,
     onChange,
     value,
+    removeByDbClick
   }
 ) => {
 
@@ -53,7 +55,11 @@ const Container: React.FC<ContainerProps> = (
     },
   })
 
-  const handleRemove = () => onChange(null)
+  const handleRemove = () => {
+    if (removeByDbClick) {
+      onChange(null)
+    }
+  }
 
   const handleBoxSet = (e: any) => {
     if (boxWidth) {
@@ -80,8 +86,8 @@ const Container: React.FC<ContainerProps> = (
         style={{
           ...styles,
           height,
-          background: 'linear-gradient(45deg,rgba(0, 153, 68, .5) 0, rgba(0, 153, 68, .5) 25%, transparent 25%, transparent 50%,rgba(0, 153, 68, .5) 50%, rgba(0, 153, 68, .5) 75%, transparent 75%, transparent)',
-          backgroundSize: '8px 8px'
+          // background: 'linear-gradient(45deg,rgba(0, 153, 68, .5) 0, rgba(0, 153, 68, .5) 25%, transparent 25%, transparent 50%,rgba(0, 153, 68, .5) 50%, rgba(0, 153, 68, .5) 75%, transparent 75%, transparent)',
+          // backgroundSize: '8px 8px'
         }}
         onTouchEnd={handleBoxSet}
       >

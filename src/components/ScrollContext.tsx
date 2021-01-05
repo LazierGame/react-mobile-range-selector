@@ -7,12 +7,13 @@ import { TimeRange } from "../interfaces";
 
 
 interface ScrollContextProps {
+  removeByDbClick: boolean;
   value: TimeRange | null;
   onChange: (value: TimeRange | null) => void;
 }
 
 function ScrollContext(props: ScrollContextProps) {
-  const {value, onChange} = props
+  const {value, onChange, removeByDbClick} = props
 
   return <div style={{
     overflow: 'hidden',
@@ -47,6 +48,7 @@ function ScrollContext(props: ScrollContextProps) {
       </ul>
       <DndProvider backend={TouchBackend}>
         <Container
+          removeByDbClick={removeByDbClick}
           snapToGrid
           height={100}
           value={value}

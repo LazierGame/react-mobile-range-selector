@@ -17,7 +17,9 @@ interface TimeRangeSelectorProps {
   /** 修改 */
   onChange?: (value: TimeRange | null) => void;
   /** 每次移动时候跳针的宽度 */
-  snap?: number
+  snap?: number;
+  /** 具有双击去除 */
+  removeByDbClick?: boolean;
 }
 
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
@@ -26,6 +28,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     disabled = false,
     disabledTimeRanges = [],
     onChange,
+    removeByDbClick = false
   } = props
 
   console.log(disabled, disabledTimeRanges)
@@ -41,10 +44,13 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
   return (
     <div style={{
       background: '#f6f6f6',
-      marginTop: 100
+      marginTop: 100,
+      borderTop: '1px solid rgba(0,0,0,.08)',
+      borderBottom: '1px solid rgba(0,0,0,.08)'
     }}>
       <ScrollContext
         value={timeRange}
+        removeByDbClick={removeByDbClick}
         onChange={handleChange}
       />
     </div>

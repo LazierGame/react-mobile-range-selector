@@ -99,6 +99,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
         timeRange={timeRange}
         disabledTimeRanges={disabledTimeRanges}
         onChange={handleChange}
+        disabled={disabled}
       />
 
     </div>

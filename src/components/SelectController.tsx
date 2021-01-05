@@ -6,6 +6,8 @@ import MinusCircleOutlined from '@ant-design/icons/lib/icons/MinusCircleOutlined
 
 
 interface SelectControllerProps {
+  /** 是否禁用 */
+  disabled?: boolean;
   timeRange?: TimeRange | null;
   disabledTimeRanges?: TimeRange[];
   onChange: (value: TimeRange | null) => void;
@@ -25,7 +27,7 @@ function getParseTime(time: number): string {
 }
 
 function SelectController(props: SelectControllerProps) {
-  const {timeRange, disabledTimeRanges, onChange} = props
+  const {timeRange, disabledTimeRanges, onChange, disabled} = props
 
   let leftTime: string = '';
   let rightTime: string = '';
@@ -65,10 +67,11 @@ function SelectController(props: SelectControllerProps) {
 
   }, [disabledTimeRanges, timeRange])
 
-  console.log(prevClickable)
-  console.log(nextClickable)
 
   const handleChange = (identification: string) => () => {
+    if (disabled) {
+      return;
+    }
     if (!Array.isArray(timeRange)) {
       return
     }
@@ -87,9 +90,14 @@ function SelectController(props: SelectControllerProps) {
   return <div
     style={controllerStyle}
   >
-    <span onClick={handleChange('prev')}>
-    <MinusCircleOutlined />
-    </span>
+    {
+      disabled ? <span/> : (
+        <span onClick={handleChange('prev')}>
+          <MinusCircleOutlined/>
+        </span>
+      )
+    }
+
     <div>
       {
         leftTime && rightTime &&
@@ -97,9 +105,15 @@ function SelectController(props: SelectControllerProps) {
       }
       <span>{minute} 分钟</span>
     </div>
-    <span onClick={handleChange('next')}>
-      <PlusCircleOutlined/>
-    </span>
+
+    {
+      disabled ? <span/> : (
+        <span onClick={handleChange('next')}>
+          <PlusCircleOutlined/>
+        </span>
+      )
+    }
+
   </div>
 }
 

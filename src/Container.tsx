@@ -54,8 +54,11 @@ export const Container: React.FC<ContainerProps> = (
       if (snapToGrid) {
         left = doSnapToGrid(left)
       }
-      console.log('left', left)
 
+      // 如果 left 左边小于 0，强制为 0
+      if (left <= 0) {
+        left = 0
+      }
       moveBox(left)
       return undefined
     },

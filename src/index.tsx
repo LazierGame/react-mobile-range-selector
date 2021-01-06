@@ -29,7 +29,7 @@ interface TimeRangeSelectorProps {
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
   const {
     value = null,
-    height = 80,
+    height = 100,
     disabled = false,
     disabledTimeRanges = [[0, 9], [20, 24]],
     onChange,
@@ -89,10 +89,11 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
           <ul
             id='scroll'
             style={{
+              paddingTop: 6,
+              height: 30,
               width: 2400,
               listStyle: 'none',
               margin: 0,
-              marginBottom: 10,
               padding: 0,
             }}
           >

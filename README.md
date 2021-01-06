@@ -1,6 +1,6 @@
 # react-time-range-selector
 
-Read this in other languages: [简体中文](https://github.com/LazierGame/react-time-range-selector/blob/master/README.zh-CN.md)
+Read this in other languages: [简体中文](https://github.com/LazierGame/react-time-range-selector/blob/main/README.zh-CN.md)
 
 Mobile range selector built on React。
 

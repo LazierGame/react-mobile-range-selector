@@ -26,9 +26,9 @@ yarn add react-time-range-selector
 
 
 
-### 0.0.5
-
-- todo Pull out time? Becomes range selector
+### 0.0.6(todo)
+- Pull out time? Becomes range selector
+- test
 
 ### 0.0.5
 - Listen for external value modification and modify it.

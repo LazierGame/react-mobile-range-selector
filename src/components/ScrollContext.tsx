@@ -35,6 +35,9 @@ function ScrollContext(props: ScrollContextProps) {
   const boxWidth: number = Array.isArray(value) && value.length === 2 ? (value[1] - value[0]) * 100 : 0
 
 
+  useEffect(() => {
+    console.log('value', boxWidth, value)
+  }, [value])
   return <div style={{
     overflow: 'hidden',
     position: 'relative'

@@ -75,7 +75,7 @@ const Container: React.FC<ContainerProps> = (
   }
 
   const handleBoxChange = (currentBoxWidth: number) => {
-    const currentTimeRange: TimeRange = [value![0], value![1] + (currentBoxWidth / 100)]
+    const currentTimeRange: TimeRange = [value![0], value![0] + (currentBoxWidth / 100)]
     onChange(currentTimeRange)
   }
 
@@ -94,7 +94,7 @@ const Container: React.FC<ContainerProps> = (
       >
         {
           disabledTimeRanges.map(x => (
-            <BanBlock range={x}/>
+            <BanBlock key={x[0]} range={x}/>
           ))
         }
         {

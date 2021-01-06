@@ -18,6 +18,8 @@ interface TimeRangeSelectorProps {
   onChange?: (value: TimeRange | null) => void;
   /** 每次移动时候跳针的宽度 */
   snap?: number;
+  /** 点击时候添加时间块 */
+  addByClick: boolean;
   /** 具有双击去除 */
   removeByDbClick?: boolean;
 }
@@ -25,7 +27,7 @@ interface TimeRangeSelectorProps {
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
   const {
     height = 80,
-    disabled = true,
+    disabled = false,
     disabledTimeRanges = [[0, 9], [20, 24]],
     onChange,
     removeByDbClick = false

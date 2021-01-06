@@ -19,7 +19,7 @@ interface TimeRangeSelectorProps {
   /** 每次移动时候跳针的宽度 */
   snap?: number;
   /** 点击时候添加时间块 */
-  addByClick: boolean;
+  addByClick?: boolean;
   /** 具有双击去除 */
   removeByDbClick?: boolean;
 }

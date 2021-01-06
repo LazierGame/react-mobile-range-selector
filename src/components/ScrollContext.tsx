@@ -41,6 +41,7 @@ function ScrollContext(props: ScrollContextProps) {
   const boxWidth: number = Array.isArray(value) && value.length === 2 ? (value[1] - value[0]) * 100 : 0
 
 
+
   return <div style={{
     overflow: 'hidden',
     position: 'relative'
@@ -54,6 +55,7 @@ function ScrollContext(props: ScrollContextProps) {
       <ul
         id='scroll'
         style={{
+          width: 2400,
           listStyle: 'none',
           margin: 0,
           marginBottom: 10,

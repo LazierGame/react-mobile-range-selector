@@ -26,18 +26,18 @@ function ScrollContext(props: ScrollContextProps) {
       return
     }
     const isDisable: boolean = disabledTimeRanges.some(x => {
-      return x[1] > value[0] || x[0] < value[1]
+      const maxNum = Math.max(...[value[0], value[1], x[0], x[1]])
+      const minNum = Math.min(...[value[0], value[1], x[0], x[1]])
+      return maxNum - minNum < (value[1] - value[0]) + (x[1] - x[0])
     })
     setIsDisableTimeRange(isDisable)
+    console.log('isDisable', isDisable)
   }, [disabledTimeRanges, value])
 
 
   const boxWidth: number = Array.isArray(value) && value.length === 2 ? (value[1] - value[0]) * 100 : 0
 
 
-  useEffect(() => {
-    console.log('value', boxWidth, value)
-  }, [value])
   return <div style={{
     overflow: 'hidden',
     position: 'relative'

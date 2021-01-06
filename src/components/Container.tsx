@@ -53,7 +53,6 @@ const Container: React.FC<ContainerProps> = (
       if (left <= 0) {
         left = 0
       }
-      console.log('pgone', left / 100, ((left + boxWidth) / 100))
       onChange([left / 100, ((left + boxWidth) / 100)])
       return undefined
     },

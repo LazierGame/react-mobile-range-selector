@@ -36,9 +36,7 @@ export const Box: React.FC<BoxProps> = (
   }: BoxProps) => {
 
   const handleResizeChange = (_e: TouchEvent, _direction: Direction, _ref: HTMLElement, d: NumberSize) => {
-    console.log('oldWidth', oldWidth, d.width)
     const currentWidth = doSnapToGrid(oldWidth + d.width)
-    console.log('oldWidth2', currentWidth)
     onChange && onChange(currentWidth)
   }
 

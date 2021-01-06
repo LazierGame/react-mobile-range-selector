@@ -26,7 +26,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   const {
     // disabled = false,
-    disabledTimeRanges = [[0, 9], [19, 24]],
+    disabledTimeRanges = [[0, 9], [19, 23]],
     onChange,
     removeByDbClick = false
   } = props
@@ -41,7 +41,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   return (
     <div style={{
-      background: '#f6f6f6',
       marginTop: 100,
       borderTop: '1px solid rgba(0,0,0,.08)',
       borderBottom: '1px solid rgba(0,0,0,.08)'

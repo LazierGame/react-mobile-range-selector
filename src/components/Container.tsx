@@ -98,7 +98,7 @@ const Container: React.FC<ContainerProps> = (
           ))
         }
         {
-          boxWidth && <DraggableBox
+          !!boxWidth && <DraggableBox
             isDisableTimeRange={isDisableTimeRange}
             boxWidth={boxWidth}
             left={value![0] * 100}

@@ -53,6 +53,7 @@ const Container: React.FC<ContainerProps> = (
       if (left <= 0) {
         left = 0
       }
+      console.log('pgone', left / 100, ((left + boxWidth) / 100))
       onChange([left / 100, ((left + boxWidth) / 100)])
       return undefined
     },
@@ -101,7 +102,7 @@ const Container: React.FC<ContainerProps> = (
           boxWidth && <DraggableBox
             isDisableTimeRange={isDisableTimeRange}
             boxWidth={boxWidth}
-            left={value![0] * 50}
+            left={value![0] * 100}
             onBoxWidthChange={handleBoxChange}
             onRemove={handleRemove}
           />

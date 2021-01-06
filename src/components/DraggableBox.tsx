@@ -20,6 +20,7 @@ function getStyles(
 }
 
 export interface DraggableBoxProps {
+  isDisableTimeRange: boolean;
   boxWidth: number;
   left: number;
   onRemove: () => void;
@@ -27,7 +28,7 @@ export interface DraggableBoxProps {
 }
 
 export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
-  const {boxWidth, left, onRemove, onBoxWidthChange} = props
+  const {boxWidth, left, isDisableTimeRange,onRemove, onBoxWidthChange} = props
 
   const [{isDragging}, drag] = useDrag({
     item: {type: ItemTypes.BOX, left, top, width: boxWidth},
@@ -68,6 +69,7 @@ export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
       onTouchStart={handleTouch}
     >
       <Box
+        isDisableTimeRange={isDisableTimeRange}
         width={boxWidth}
         onChange={onBoxWidthChange}
       />

@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { useDrop } from 'react-dnd'
 import { DraggableBox } from './DraggableBox'
 import { snapToGrid as doSnapToGrid, snapToFloor as doSnapToFloor } from '../utils/snapToGrid'
@@ -58,6 +58,20 @@ const Container: React.FC<ContainerProps> = (
     },
   })
 
+  // 是否是不可用时间段，即不可用时间
+  const [isDisableTimeRange, setIsDisableTimeRange] = useState(false)
+
+  useEffect(() => {
+    if (!Array.isArray(value) || value.length !==2) {
+      setIsDisableTimeRange(false)
+      return
+    }
+    const isDisable: boolean = disabledTimeRanges.some(x => {
+      return x[1] > value[0] || x[0] < value[1]
+    })
+    setIsDisableTimeRange(isDisable)
+  }, [disabledTimeRanges, value])
+
   const handleRemove = () => {
     if (removeByDbClick) {
       onChange(null)
@@ -99,6 +113,7 @@ const Container: React.FC<ContainerProps> = (
         }
         {
           boxWidth && <DraggableBox
+            isDisableTimeRange={isDisableTimeRange}
             boxWidth={boxWidth}
             left={value![0] * 50}
             onBoxWidthChange={handleBoxChange}

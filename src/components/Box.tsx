@@ -11,6 +11,7 @@ const styles: React.CSSProperties = {
 }
 
 export interface BoxProps {
+  isDisableTimeRange: boolean;
   /** 当前为禁用项 */
   disabled?: boolean;
   /** 当前时间可使用? */
@@ -29,8 +30,8 @@ function getBackgroundColor(isDisable: boolean) {
 export const Box: React.FC<BoxProps> = (
   {
     width: oldWidth = 30,
+    isDisableTimeRange,
     disabled = false,
-    canUse = false,
     onChange,
   }: BoxProps) => {
 
@@ -39,7 +40,7 @@ export const Box: React.FC<BoxProps> = (
     onChange && onChange(currentWidth)
   }
 
-  const currentColor = getBackgroundColor(canUse)
+  const currentColor = getBackgroundColor(isDisableTimeRange)
 
   return <Resizable
     style={{
@@ -48,7 +49,7 @@ export const Box: React.FC<BoxProps> = (
       borderRightColor: currentColor,
       borderTop: currentColor,
       borderBottom: currentColor,
-      background: canUse ? currentColor : 'rgba(245,155,157,0.3)',
+      background: isDisableTimeRange ? currentColor : 'rgba(245,155,157,0.3)',
     }}
     size={{width: oldWidth, height: 100,}}
     enable={{

@@ -25,13 +25,14 @@ function ScrollContext(props: ScrollContextProps) {
       setIsDisableTimeRange(false)
       return
     }
+
     const isDisable: boolean = disabledTimeRanges.some(x => {
       const maxNum = Math.max(...[value[0], value[1], x[0], x[1]])
       const minNum = Math.min(...[value[0], value[1], x[0], x[1]])
       return maxNum - minNum < (value[1] - value[0]) + (x[1] - x[0])
     })
+
     setIsDisableTimeRange(isDisable)
-    console.log('isDisable', isDisable)
   }, [disabledTimeRanges, value])
 
 

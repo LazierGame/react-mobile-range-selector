@@ -21,7 +21,7 @@ function ScrollContext(props: ScrollContextProps) {
   const [isDisableTimeRange, setIsDisableTimeRange] = useState(false)
 
   useEffect(() => {
-    if (!Array.isArray(value) || value.length !==2) {
+    if (!Array.isArray(value) || value.length !== 2) {
       setIsDisableTimeRange(false)
       return
     }
@@ -30,7 +30,10 @@ function ScrollContext(props: ScrollContextProps) {
     })
     setIsDisableTimeRange(isDisable)
   }, [disabledTimeRanges, value])
-  console.log('xxxx', isDisableTimeRange)
+
+
+  const boxWidth: number = Array.isArray(value) && value.length === 2 ? (value[1] - value[0]) * 100 : 0
+
 
   return <div style={{
     overflow: 'hidden',
@@ -70,13 +73,14 @@ function ScrollContext(props: ScrollContextProps) {
           snapToGrid
           height={100}
           value={value}
+          boxWidth={boxWidth}
           onChange={onChange}
           removeByDbClick={removeByDbClick}
         />
         <CustomDragLayer
           isDisableTimeRange={isDisableTimeRange}
           snapToGrid={false}
-          value={value}
+          boxWidth={boxWidth}
         />
       </DndProvider>
     </div>

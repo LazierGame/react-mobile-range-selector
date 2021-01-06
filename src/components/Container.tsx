@@ -3,7 +3,6 @@ import { useDrop } from 'react-dnd'
 import { DraggableBox } from './DraggableBox'
 import { snapToGrid as doSnapToGrid, snapToFloor as doSnapToFloor } from '../utils/snapToGrid'
 import { DragItem, ItemTypes, TimeRange } from '../interfaces'
-import { useBoxWidth } from "../utils/useBoxWidth";
 import BanBlock from "./BanBlock";
 
 const styles: React.CSSProperties = {
@@ -13,6 +12,7 @@ const styles: React.CSSProperties = {
 }
 
 export interface ContainerProps {
+  boxWidth: number;
   removeByDbClick: boolean;
   snapToGrid: boolean;
   height: number;
@@ -31,12 +31,10 @@ const Container: React.FC<ContainerProps> = (
     value,
     removeByDbClick,
     disabledTimeRanges,
-    isDisableTimeRange
+    isDisableTimeRange,
+    boxWidth
   }
 ) => {
-
-  const boxWidth = useBoxWidth(value)
-
   const [, drop] = useDrop({
     accept: ItemTypes.BOX,
 
@@ -96,7 +94,7 @@ const Container: React.FC<ContainerProps> = (
       >
         {
           disabledTimeRanges.map(x => (
-            <BanBlock range={x} />
+            <BanBlock range={x}/>
           ))
         }
         {

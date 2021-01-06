@@ -1,9 +1,8 @@
 import React  from 'react'
 import { XYCoord, useDragLayer } from 'react-dnd'
-import { ItemTypes, TimeRange } from '../interfaces'
+import { ItemTypes } from '../interfaces'
 import { BoxDragPreview } from './BoxDragPreview'
 import { snapToGrid } from '../utils/snapToGrid'
-import { useBoxWidth } from "../utils/useBoxWidth";
 
 const layerStyles: React.CSSProperties = {
   marginTop: 28,
@@ -45,14 +44,12 @@ function getItemStyles(
 
 export interface CustomDragLayerProps {
   snapToGrid: boolean;
-  value: TimeRange | null;
+  boxWidth: number;
   isDisableTimeRange: boolean;
 }
 
 export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
-  const {value, snapToGrid, isDisableTimeRange} = props
-
-  const boxWidth: number = useBoxWidth(value)
+  const {boxWidth,snapToGrid, isDisableTimeRange} = props
 
   const {
     itemType,
@@ -81,9 +78,7 @@ export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
   } else {
     if (currentOffset?.x) {
       const leftNumber = currentOffset!.x + boxWidth
-      console.log('bbb', leftNumber)
       if (leftNumber + 20 > window.innerWidth) {
-
         const data = document.getElementById('scroll')
         console.log('data', data?.scrollWidth)
         if (data?.scrollLeft) {

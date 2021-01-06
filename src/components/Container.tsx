@@ -4,6 +4,7 @@ import { DraggableBox } from './DraggableBox'
 import { snapToGrid as doSnapToGrid, snapToFloor as doSnapToFloor } from '../utils/snapToGrid'
 import { DragItem, ItemTypes, TimeRange } from '../interfaces'
 import { useBoxWidth } from "../utils/useBoxWidth";
+import BanBlock from "./BanBlock";
 
 const styles: React.CSSProperties = {
   width: 2300,
@@ -15,6 +16,7 @@ export interface ContainerProps {
   removeByDbClick: boolean;
   snapToGrid: boolean;
   height: number;
+  disabledTimeRanges: TimeRange[];
   value: TimeRange | null;
   onChange: (value: TimeRange | null) => void;
 }
@@ -26,7 +28,8 @@ const Container: React.FC<ContainerProps> = (
     height,
     onChange,
     value,
-    removeByDbClick
+    removeByDbClick,
+    disabledTimeRanges
   }
 ) => {
 
@@ -86,11 +89,14 @@ const Container: React.FC<ContainerProps> = (
         style={{
           ...styles,
           height,
-          // background: 'linear-gradient(45deg,rgba(0, 153, 68, .5) 0, rgba(0, 153, 68, .5) 25%, transparent 25%, transparent 50%,rgba(0, 153, 68, .5) 50%, rgba(0, 153, 68, .5) 75%, transparent 75%, transparent)',
-          // backgroundSize: '8px 8px'
         }}
         onTouchEnd={handleBoxSet}
       >
+        {
+          disabledTimeRanges.map(x => (
+            <BanBlock range={x} />
+          ))
+        }
         {
           boxWidth && <DraggableBox
             boxWidth={boxWidth}

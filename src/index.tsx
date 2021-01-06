@@ -25,14 +25,11 @@ interface TimeRangeSelectorProps {
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   const {
-    disabled = false,
-    disabledTimeRanges = [],
+    // disabled = false,
+    disabledTimeRanges = [[0, 9], [19, 24]],
     onChange,
     removeByDbClick = false
   } = props
-
-  console.log(disabled, disabledTimeRanges)
-
 
   const [timeRange, setTimeRange] = useState<TimeRange | null>(null)
 
@@ -50,6 +47,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     }}>
       <ScrollContext
         value={timeRange}
+        disabledTimeRanges={disabledTimeRanges}
         removeByDbClick={removeByDbClick}
         onChange={handleChange}
       />

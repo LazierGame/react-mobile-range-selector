@@ -17,7 +17,7 @@ function BanBlock(props: BanBoxProps) {
     style={{
       width,
       height: 100,
-      background: 'linear-gradient(45deg,rgba(0, 153, 68, .5) 0, rgba(0, 153, 68, .5) 25%, transparent 25%, transparent 50%,rgba(0, 153, 68, .5) 50%, rgba(0, 153, 68, .5) 75%, transparent 75%, transparent)',
+      background: 'linear-gradient(45deg,rgba(200, 200, 200, .5) 0, rgba(200, 200, 200, .5) 25%, transparent 25%, transparent 50%,rgba(200, 200, 200, .5) 50%, rgba(200, 200, 200, .5) 75%, transparent 75%, transparent)',
       backgroundSize: '8px 8px',
       position: 'absolute',
       transform: `translateX(${range[0] * 100}px)`,

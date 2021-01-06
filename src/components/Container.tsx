@@ -13,6 +13,7 @@ const styles: React.CSSProperties = {
 
 export interface ContainerProps {
   boxWidth: number;
+  left: number;
   removeByDbClick: boolean;
   snapToGrid: boolean;
   disabled: boolean,
@@ -26,6 +27,7 @@ export interface ContainerProps {
 
 const Container: React.FC<ContainerProps> = (
   {
+    left,
     snapToGrid,
     height,
     onChange,
@@ -85,6 +87,8 @@ const Container: React.FC<ContainerProps> = (
   return (
     <div style={{
       background: '#fff',
+      position:'relative',
+      left
     }}>
       <div
         ref={drop}

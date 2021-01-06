@@ -41,21 +41,34 @@ function ScrollContext(props: ScrollContextProps) {
   const boxWidth: number = Array.isArray(value) && value.length === 2 ? (value[1] - value[0]) * 100 : 0
 
 
+  const [contextLeft, setContextLeft] = useState<number>(0)
+
+  const handleTouchStart = (e: any) => {
+    console.log(e)
+  }
+
+  const handleTouchMove = (e: any) => {
+    console.log(e)
+    setContextLeft(0)
+  }
 
   return <div style={{
     overflow: 'hidden',
     position: 'relative'
   }}>
     <div style={{
+      width: 2400,
       /* 文本不会换行，文本会在在同一行上继续 */
       whiteSpace: 'nowrap',
       /* 可滑动 */
       overflowX: 'scroll'
     }}>
       <ul
-        id='scroll'
+        onTouchStartCapture={handleTouchStart}
+        onTouchMoveCapture={handleTouchMove}
         style={{
-          width: 2400,
+          position:'relative',
+          left: contextLeft,
           listStyle: 'none',
           margin: 0,
           marginBottom: 10,
@@ -76,6 +89,7 @@ function ScrollContext(props: ScrollContextProps) {
       </ul>
       <DndProvider backend={TouchBackend}>
         <Container
+          left={contextLeft}
           disabled={disabled}
           disabledTimeRanges={disabledTimeRanges}
           isDisableTimeRange={isDisableTimeRange}

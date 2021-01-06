@@ -1,6 +1,6 @@
 {
   "name": "react-time-range-selector",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "time range selector",
   "author": "wsafight",
   "license": "MIT",
@@ -27,7 +27,6 @@
     "type": "git",
     "url": "git+https://github.com/LazierGame/react-time-range-selector.git"
   },
-
   "keywords": [
     "time-range",
     "selector"
@@ -37,9 +36,9 @@
   },
   "homepage": "https://github.com/LazierGame/react-time-range-selector#readme",
   "dependencies": {
+    "re-resizable": "^6.9.0",
     "react-dnd": "^11.1.3",
-    "react-dnd-touch-backend": "^11.1.3",
-    "re-resizable": "^6.9.0"
+    "react-dnd-touch-backend": "^11.1.3"
   },
   "peerDependencies": {
     "react": "^16.0.0"
@@ -54,7 +53,6 @@
     "@types/react-dom": "^16.9.7",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
-    "microbundle-crl": "^0.13.11",
     "babel-eslint": "^10.0.3",
     "cross-env": "^7.0.2",
     "eslint": "^7.16.0",
@@ -68,6 +66,7 @@
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-standard": "^4.0.1",
     "gh-pages": "^3.1.0",
+    "microbundle-crl": "^0.13.11",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.2.1",
     "react": "^16.13.1",
@@ -79,5 +78,3 @@
     "dist"
   ]
 }
-
-

@@ -17,6 +17,10 @@ or
 yarn add react-time-range-selector
 ```
 
+0.0.4
+---
+头部高度固定以免出现问题
+
 0.0.3
 ---
 设置  DndContext 为单例模式

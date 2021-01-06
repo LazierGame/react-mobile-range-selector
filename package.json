@@ -5,6 +5,7 @@
   "author": "wsafight",
   "license": "MIT",
   "main": "dist/index.js",
+  "private": false,
   "module": "dist/index.modern.js",
   "source": "src/index.tsx",
   "engines": {

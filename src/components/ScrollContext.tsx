@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { TouchBackend } from "react-dnd-touch-backend";
 import Container from "./Container";
@@ -15,6 +15,22 @@ interface ScrollContextProps {
 
 function ScrollContext(props: ScrollContextProps) {
   const {value, onChange, removeByDbClick, disabledTimeRanges} = props
+
+
+  // 是否是不可用时间段，即不可用时间
+  const [isDisableTimeRange, setIsDisableTimeRange] = useState(false)
+
+  useEffect(() => {
+    if (!Array.isArray(value) || value.length !==2) {
+      setIsDisableTimeRange(false)
+      return
+    }
+    const isDisable: boolean = disabledTimeRanges.some(x => {
+      return x[1] > value[0] || x[0] < value[1]
+    })
+    setIsDisableTimeRange(isDisable)
+  }, [disabledTimeRanges, value])
+  console.log('xxxx', isDisableTimeRange)
 
   return <div style={{
     overflow: 'hidden',
@@ -50,6 +66,7 @@ function ScrollContext(props: ScrollContextProps) {
       <DndProvider backend={TouchBackend}>
         <Container
           disabledTimeRanges={disabledTimeRanges}
+          isDisableTimeRange={isDisableTimeRange}
           snapToGrid
           height={100}
           value={value}
@@ -57,6 +74,7 @@ function ScrollContext(props: ScrollContextProps) {
           removeByDbClick={removeByDbClick}
         />
         <CustomDragLayer
+          isDisableTimeRange={isDisableTimeRange}
           snapToGrid={false}
           value={value}
         />

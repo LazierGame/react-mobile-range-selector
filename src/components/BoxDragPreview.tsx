@@ -6,15 +6,17 @@ const styles = {
 }
 
 export interface BoxDragPreviewProps {
-  width: number
+  width: number;
+  isDisableTimeRange: boolean;
 }
 
 export interface BoxDragPreviewState {
   tickTock: any
+
 }
 
 export const BoxDragPreview: React.FC<BoxDragPreviewProps> = memo(
-  ({width}) => {
+  ({width, isDisableTimeRange}) => {
     const [tickTock, setTickTock] = useState(false)
 
     useEffect(
@@ -27,7 +29,7 @@ export const BoxDragPreview: React.FC<BoxDragPreviewProps> = memo(
 
     return (
       <div style={styles}>
-        <Box width={width}/>
+        <Box isDisableTimeRange={isDisableTimeRange} width={width}/>
       </div>
     )
   },

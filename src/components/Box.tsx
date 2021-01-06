@@ -23,7 +23,7 @@ export interface BoxProps {
 }
 
 function getBackgroundColor(isDisable: boolean) {
-  return isDisable ? '#389e0d' : '#f59b9d'
+  return isDisable ? '#f59b9d' : '#389e0d'
 }
 
 
@@ -49,7 +49,7 @@ export const Box: React.FC<BoxProps> = (
       borderRightColor: currentColor,
       borderTop: currentColor,
       borderBottom: currentColor,
-      background: isDisableTimeRange ? currentColor : 'rgba(245,155,157,0.3)',
+      background: isDisableTimeRange ? 'rgba(245,155,157,0.3)' : currentColor,
     }}
     size={{width: oldWidth, height: 100,}}
     enable={{

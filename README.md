@@ -16,3 +16,11 @@ or
 ```bash
 yarn add react-time-range-selector
 ```
+
+0.0.3
+---
+设置  DndContext 为单例模式
+
+0.0.2
+---
+默认值

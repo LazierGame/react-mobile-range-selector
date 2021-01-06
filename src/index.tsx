@@ -1,10 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { TimeRange } from "./interfaces";
 import './index.css'
-import { DndProvider } from "react-dnd";
-import { TouchBackend } from "react-dnd-touch-backend";
 import Container from "./components/Container";
 import { CustomDragLayer } from "./components/CustomDragLayer";
+import DragAndDrop from "./utils/SingleContext";
 
 interface TimeRangeSelectorProps {
   /** 当前滑动条的高度 */
@@ -109,26 +108,26 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
               ))
             }
           </ul>
-          <DndProvider backend={TouchBackend}>
-            <Container
-              disabled={disabled}
-              disabledTimeRanges={disabledTimeRanges}
-              isDisableTimeRange={isDisableTimeRange}
-              snapToGrid
-              height={height}
-              value={timeRange}
-              boxWidth={boxWidth}
-              onChange={handleChange}
-              removeByDbClick={removeByDbClick}
-            />
-            <CustomDragLayer
-              height={height}
-              disabled={disabled}
-              isDisableTimeRange={isDisableTimeRange}
-              snapToGrid={false}
-              boxWidth={boxWidth}
-            />
-          </DndProvider>
+            <DragAndDrop>
+              <Container
+                disabled={disabled}
+                disabledTimeRanges={disabledTimeRanges}
+                isDisableTimeRange={isDisableTimeRange}
+                snapToGrid
+                height={height}
+                value={timeRange}
+                boxWidth={boxWidth}
+                onChange={handleChange}
+                removeByDbClick={removeByDbClick}
+              />
+              <CustomDragLayer
+                height={height}
+                disabled={disabled}
+                isDisableTimeRange={isDisableTimeRange}
+                snapToGrid={false}
+                boxWidth={boxWidth}
+              />
+            </DragAndDrop>
         </div>
       </div>
     </div>

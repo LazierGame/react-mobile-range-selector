@@ -24,9 +24,9 @@ interface TimeRangeSelectorProps {
 
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
   const {
-    height = 30,
+    height = 80,
     disabled = true,
-    disabledTimeRanges = [[0, 9], [19, 23]],
+    disabledTimeRanges = [[0, 9], [20, 24]],
     onChange,
     removeByDbClick = false
   } = props

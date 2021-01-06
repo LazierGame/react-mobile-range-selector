@@ -23,13 +23,14 @@ export interface DraggableBoxProps {
   isDisableTimeRange: boolean;
   disabled: boolean
   boxWidth: number;
+  height: number;
   left: number;
   onRemove: () => void;
   onBoxWidthChange: (width: number) => void;
 }
 
 export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
-  const {boxWidth, left, disabled, isDisableTimeRange, onRemove, onBoxWidthChange} = props
+  const {boxWidth, left,height, disabled, isDisableTimeRange, onRemove, onBoxWidthChange} = props
 
   const [{isDragging}, drag] = useDrag({
     item: {type: ItemTypes.BOX, left, top, width: boxWidth},
@@ -70,6 +71,7 @@ export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
       onTouchStart={handleTouch}
     >
       <Box
+        height={height}
         disabled={disabled}
         isDisableTimeRange={isDisableTimeRange}
         width={boxWidth}

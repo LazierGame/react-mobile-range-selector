@@ -96,11 +96,12 @@ const Container: React.FC<ContainerProps> = (
       >
         {
           disabledTimeRanges.map(x => (
-            <BanBlock key={x[0]} range={x}/>
+            <BanBlock height={height} key={x[0]} range={x}/>
           ))
         }
         {
           !!boxWidth && <DraggableBox
+            height={height}
             disabled={disabled}
             isDisableTimeRange={isDisableTimeRange}
             boxWidth={boxWidth}

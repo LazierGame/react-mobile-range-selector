@@ -16,6 +16,7 @@ export interface BoxProps {
   disabled?: boolean;
   /** 当前时间可使用? */
   canUse?: boolean;
+  height: number;
   /** 当前宽度 */
   width?: number;
   /** 修改宽度 */
@@ -29,7 +30,8 @@ function getBackgroundColor(isDisable: boolean) {
 
 export const Box: React.FC<BoxProps> = (
   {
-    width: oldWidth = 30,
+    height,
+    width: oldWidth = 50,
     isDisableTimeRange,
     disabled = false,
     onChange,
@@ -51,7 +53,7 @@ export const Box: React.FC<BoxProps> = (
       borderBottom: currentColor,
       background: isDisableTimeRange ? 'rgba(245,155,157,0.3)' : currentColor,
     }}
-    size={{width: oldWidth, height: 100,}}
+    size={{width: oldWidth, height,}}
     enable={{
       top: false,
       right: !disabled,

@@ -1,13 +1,11 @@
 import React, { useEffect, useState, memo } from 'react'
 import { Box } from './Box'
 
-const styles = {
-  // marginTop: 28
-}
 
 export interface BoxDragPreviewProps {
   width: number;
   disabled: boolean
+  height: number;
   isDisableTimeRange: boolean;
 }
 
@@ -17,7 +15,7 @@ export interface BoxDragPreviewState {
 }
 
 export const BoxDragPreview: React.FC<BoxDragPreviewProps> = memo(
-  ({width, isDisableTimeRange, disabled}) => {
+  ({width, isDisableTimeRange, height, disabled}) => {
     const [tickTock, setTickTock] = useState(false)
 
     useEffect(
@@ -29,8 +27,12 @@ export const BoxDragPreview: React.FC<BoxDragPreviewProps> = memo(
     )
 
     return (
-      <div style={styles}>
-        <Box isDisableTimeRange={isDisableTimeRange} disabled={disabled} width={width}/>
+      <div>
+        <Box
+          height={height}
+          isDisableTimeRange={isDisableTimeRange}
+          disabled={disabled} width={width}
+        />
       </div>
     )
   },

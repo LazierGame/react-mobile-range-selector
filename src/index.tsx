@@ -23,8 +23,8 @@ interface TimeRangeSelectorProps {
 }
 
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
-
   const {
+    height = 30,
     disabled = true,
     disabledTimeRanges = [[0, 9], [19, 23]],
     onChange,
@@ -44,13 +44,13 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   return (
     <div style={{
-      marginTop: 100,
       borderTop: '1px solid rgba(0,0,0,.08)',
       borderBottom: '1px solid rgba(0,0,0,.08)'
     }}>
       <ScrollContext
         disabled={disabled}
         value={timeRange}
+        height={height}
         disabledTimeRanges={disabledTimeRanges}
         removeByDbClick={removeByDbClick}
         onChange={handleChange}

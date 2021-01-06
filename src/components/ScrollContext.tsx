@@ -7,6 +7,7 @@ import { TimeRange } from "../interfaces";
 
 
 interface ScrollContextProps {
+  height: number;
   disabledTimeRanges: TimeRange[]
   removeByDbClick: boolean;
   disabled: boolean;
@@ -15,7 +16,7 @@ interface ScrollContextProps {
 }
 
 function ScrollContext(props: ScrollContextProps) {
-  const {value,disabled, onChange, removeByDbClick, disabledTimeRanges} = props
+  const {value,disabled, onChange, removeByDbClick, disabledTimeRanges, height} = props
 
 
   // 是否是不可用时间段，即不可用时间
@@ -77,13 +78,14 @@ function ScrollContext(props: ScrollContextProps) {
           disabledTimeRanges={disabledTimeRanges}
           isDisableTimeRange={isDisableTimeRange}
           snapToGrid
-          height={100}
+          height={height}
           value={value}
           boxWidth={boxWidth}
           onChange={onChange}
           removeByDbClick={removeByDbClick}
         />
         <CustomDragLayer
+          height={height}
           disabled={disabled}
           isDisableTimeRange={isDisableTimeRange}
           snapToGrid={false}

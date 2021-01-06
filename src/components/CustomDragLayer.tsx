@@ -1,4 +1,4 @@
-import React  from 'react'
+import React from 'react'
 import { XYCoord, useDragLayer } from 'react-dnd'
 import { ItemTypes } from '../interfaces'
 import { BoxDragPreview } from './BoxDragPreview'
@@ -46,11 +46,12 @@ export interface CustomDragLayerProps {
   snapToGrid: boolean;
   boxWidth: number;
   disabled: boolean;
+  height: number;
   isDisableTimeRange: boolean;
 }
 
 export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
-  const {boxWidth,snapToGrid, disabled,isDisableTimeRange} = props
+  const {boxWidth, snapToGrid, height, disabled, isDisableTimeRange} = props
 
   const {
     itemType,
@@ -68,7 +69,12 @@ export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
   function renderItem() {
     switch (itemType) {
       case ItemTypes.BOX:
-        return <BoxDragPreview isDisableTimeRange={isDisableTimeRange} disabled={disabled} width={boxWidth}/>
+        return <BoxDragPreview
+          height={height}
+          isDisableTimeRange={isDisableTimeRange}
+          disabled={disabled}
+          width={boxWidth}
+        />
       default:
         return null
     }

@@ -9,12 +9,13 @@ import { TimeRange } from "../interfaces";
 interface ScrollContextProps {
   disabledTimeRanges: TimeRange[]
   removeByDbClick: boolean;
+  disabled: boolean;
   value: TimeRange | null;
   onChange: (value: TimeRange | null) => void;
 }
 
 function ScrollContext(props: ScrollContextProps) {
-  const {value, onChange, removeByDbClick, disabledTimeRanges} = props
+  const {value,disabled, onChange, removeByDbClick, disabledTimeRanges} = props
 
 
   // 是否是不可用时间段，即不可用时间
@@ -72,6 +73,7 @@ function ScrollContext(props: ScrollContextProps) {
       </ul>
       <DndProvider backend={TouchBackend}>
         <Container
+          disabled={disabled}
           disabledTimeRanges={disabledTimeRanges}
           isDisableTimeRange={isDisableTimeRange}
           snapToGrid
@@ -82,6 +84,7 @@ function ScrollContext(props: ScrollContextProps) {
           removeByDbClick={removeByDbClick}
         />
         <CustomDragLayer
+          disabled={disabled}
           isDisableTimeRange={isDisableTimeRange}
           snapToGrid={false}
           boxWidth={boxWidth}

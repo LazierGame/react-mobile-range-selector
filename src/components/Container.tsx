@@ -15,6 +15,7 @@ export interface ContainerProps {
   boxWidth: number;
   removeByDbClick: boolean;
   snapToGrid: boolean;
+  disabled: boolean,
   height: number;
   isDisableTimeRange: boolean;
   disabledTimeRanges: TimeRange[];
@@ -28,6 +29,7 @@ const Container: React.FC<ContainerProps> = (
     snapToGrid,
     height,
     onChange,
+    disabled,
     value,
     removeByDbClick,
     disabledTimeRanges,
@@ -99,6 +101,7 @@ const Container: React.FC<ContainerProps> = (
         }
         {
           !!boxWidth && <DraggableBox
+            disabled={disabled}
             isDisableTimeRange={isDisableTimeRange}
             boxWidth={boxWidth}
             left={value![0] * 100}

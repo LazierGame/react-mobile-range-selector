@@ -45,11 +45,12 @@ function getItemStyles(
 export interface CustomDragLayerProps {
   snapToGrid: boolean;
   boxWidth: number;
+  disabled: boolean;
   isDisableTimeRange: boolean;
 }
 
 export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
-  const {boxWidth,snapToGrid, isDisableTimeRange} = props
+  const {boxWidth,snapToGrid, disabled,isDisableTimeRange} = props
 
   const {
     itemType,
@@ -67,7 +68,7 @@ export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
   function renderItem() {
     switch (itemType) {
       case ItemTypes.BOX:
-        return <BoxDragPreview isDisableTimeRange={isDisableTimeRange} width={boxWidth}/>
+        return <BoxDragPreview isDisableTimeRange={isDisableTimeRange} disabled={disabled} width={boxWidth}/>
       default:
         return null
     }

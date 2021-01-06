@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { TimeRange } from "./interfaces";
-import './index.css'
 import Container from "./components/Container";
 import { CustomDragLayer } from "./components/CustomDragLayer";
 import DragAndDrop from "./utils/SingleContext";
+import './index.css'
 
 interface TimeRangeSelectorProps {
   /** 当前滑动条的高度 */
@@ -38,6 +38,10 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   const [timeRange, setTimeRange] = useState<TimeRange | null>(value)
 
+  useEffect(() => {
+    setTimeRange(value)
+  }, [value])
+
   const handleChange = useCallback((value: TimeRange | null) => {
     if (disabled) {
       return
@@ -66,10 +70,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     setIsDisableTimeRange(isDisable)
   }, [disabledTimeRanges, timeRange])
 
-
   const boxWidth: number = Array.isArray(timeRange) && timeRange.length === 2 ? (timeRange[1] - timeRange[0]) * 100 : 0
-
-
 
   return (
     <div style={{

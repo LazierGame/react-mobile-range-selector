@@ -31,7 +31,7 @@ yarn add react-time-range-selector
 - todo Pull out time? Becomes range selector
 
 ### 0.0.5
-- 外部数值修改
+- Listen for external value modification and modify it.
 
 ### 0.0.4
 - Fixed head height

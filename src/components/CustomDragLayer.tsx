@@ -5,7 +5,7 @@ import { BoxDragPreview } from './BoxDragPreview'
 import { snapToGrid } from '../utils/snapToGrid'
 
 const layerStyles: React.CSSProperties = {
-  marginTop: 28,
+  marginTop: 32,
   position: 'absolute',
   pointerEvents: 'none',
   zIndex: 100,

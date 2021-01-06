@@ -14,7 +14,7 @@ interface TimeRangeSelectorProps {
   /** 是否禁用 */
   disabled?: boolean;
   /** 时间范围 */
-  timeRange?: TimeRange;
+  value?: TimeRange;
   /** 禁用的时间范围 */
   disabledTimeRanges?: TimeRange[];
   /** 修改 */
@@ -29,6 +29,7 @@ interface TimeRangeSelectorProps {
 
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
   const {
+    value = null,
     height = 80,
     disabled = false,
     disabledTimeRanges = [[0, 9], [20, 24]],
@@ -36,7 +37,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     removeByDbClick = false
   } = props
 
-  const [timeRange, setTimeRange] = useState<TimeRange | null>([0,10])
+  const [timeRange, setTimeRange] = useState<TimeRange | null>(value)
 
   const handleChange = useCallback((value: TimeRange | null) => {
     if (disabled) {

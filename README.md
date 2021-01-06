@@ -24,3 +24,7 @@ yarn add react-time-range-selector
 0.0.2
 ---
 默认值
+
+0.0.1
+---
+项目初始化可用

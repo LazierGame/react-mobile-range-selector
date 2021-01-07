@@ -6,12 +6,14 @@ import DragAndDrop from "./utils/SingleContext";
 import './index.css'
 
 interface TimeRangeSelectorProps {
+  /** 是否有标尺 */
+  ruler?: boolean;
   /** 是否需要对齐格子 */
   isSnapToGrid?: boolean;
   /** 当前滑动条的高度 */
   height?: number;
   /** 当前滑动条刻度的宽度 */
-  width?: number;
+  splitWidth?: number;
   /** 是否禁用 */
   disabled?: boolean;
   /** 时间范围 */
@@ -30,7 +32,8 @@ interface TimeRangeSelectorProps {
 
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
   const {
-    isSnapToGrid = false,
+    ruler = true,
+    isSnapToGrid = true,
     value = null,
     height = 100,
     disabled = false,
@@ -52,7 +55,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     setTimeRange(value)
     onChange && onChange(value)
   }, [])
-
 
 
   // 是否是不可用时间段，即不可用时间
@@ -102,10 +104,17 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
             }}
           >
             {
-              [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23].map(x => (
+              [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23].map(x => (
                 <li
                   key={x}
                   style={{
+                    ...ruler && {
+                      borderLeft: '1px solid #c8c8c8'
+                    },
+                    paddingTop: 6,
+                    height: 30,
+                    boxSizing: "border-box",
+                    paddingLeft: 4,
                     width: x !== 24 ? 100 : 0,
                     display: 'inline-block'
                   }}
@@ -113,25 +122,25 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
               ))
             }
           </ul>
-            <DragAndDrop>
-              <Container
-                disabled={disabled}
-                disabledTimeRanges={disabledTimeRanges}
-                isDisableTimeRange={isDisableTimeRange}
-                isSnapToGrid={isSnapToGrid}
-                height={height}
-                value={timeRange}
-                boxWidth={boxWidth}
-                onChange={handleChange}
-                removeByDbClick={removeByDbClick}
-              />
-              <CustomDragLayer
-                height={height}
-                disabled={disabled}
-                isDisableTimeRange={isDisableTimeRange}
-                boxWidth={boxWidth}
-              />
-            </DragAndDrop>
+          <DragAndDrop>
+            <Container
+              disabled={disabled}
+              disabledTimeRanges={disabledTimeRanges}
+              isDisableTimeRange={isDisableTimeRange}
+              isSnapToGrid={isSnapToGrid}
+              height={height}
+              value={timeRange}
+              boxWidth={boxWidth}
+              onChange={handleChange}
+              removeByDbClick={removeByDbClick}
+            />
+            <CustomDragLayer
+              height={height}
+              disabled={disabled}
+              isDisableTimeRange={isDisableTimeRange}
+              boxWidth={boxWidth}
+            />
+          </DragAndDrop>
         </div>
       </div>
     </div>

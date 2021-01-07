@@ -8,6 +8,11 @@ The component can modify the span within a certain range by dragging.
 
 ## features
 
+## API
+
+| Property | Description | Type | Default |
+| :----| :---- | :---- | :---- |
+
 
 ## Installation
 

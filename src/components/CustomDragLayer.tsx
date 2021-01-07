@@ -2,7 +2,6 @@ import React from 'react'
 import { XYCoord, useDragLayer } from 'react-dnd'
 import { ItemTypes } from '../interfaces'
 import { BoxDragPreview } from './BoxDragPreview'
-import { snapToGrid } from '../utils/snapToGrid'
 
 const layerStyles: React.CSSProperties = {
   marginTop: 30,
@@ -18,21 +17,13 @@ const layerStyles: React.CSSProperties = {
 function getItemStyles(
   initialOffset: XYCoord | null,
   currentOffset: XYCoord | null,
-  isSnapToGrid: boolean,
 ) {
   if (!initialOffset || !currentOffset) {
     return {
       display: 'none',
     }
   }
-
   let {x} = currentOffset
-
-  if (isSnapToGrid) {
-    x -= initialOffset.x
-    x = snapToGrid(x)
-    x += initialOffset.x
-  }
 
   const transform = `translate(${x}px)`
 
@@ -43,7 +34,6 @@ function getItemStyles(
 }
 
 export interface CustomDragLayerProps {
-  snapToGrid: boolean;
   boxWidth: number;
   disabled: boolean;
   height: number;
@@ -51,7 +41,7 @@ export interface CustomDragLayerProps {
 }
 
 export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
-  const {boxWidth, snapToGrid, height, disabled, isDisableTimeRange} = props
+  const {boxWidth, height, disabled, isDisableTimeRange} = props
 
   const {
     itemType,
@@ -101,7 +91,7 @@ export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
     <div style={layerStyles}>
       <div
         style={
-          getItemStyles(initialOffset, currentOffset, snapToGrid)
+          getItemStyles(initialOffset, currentOffset)
         }
       >
         {renderItem()}

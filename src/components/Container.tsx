@@ -14,7 +14,7 @@ const styles: React.CSSProperties = {
 export interface ContainerProps {
   boxWidth: number;
   removeByDbClick: boolean;
-  snapToGrid: boolean;
+  isSnapToGrid: boolean;
   disabled: boolean,
   height: number;
   isDisableTimeRange: boolean;
@@ -26,7 +26,7 @@ export interface ContainerProps {
 
 const Container: React.FC<ContainerProps> = (
   {
-    snapToGrid,
+    isSnapToGrid,
     height,
     onChange,
     disabled,
@@ -47,7 +47,7 @@ const Container: React.FC<ContainerProps> = (
       }
 
       let left = Math.round(item.left + delta.x)
-      if (snapToGrid) {
+      if (isSnapToGrid) {
         left = doSnapToGrid(left)
       }
 
@@ -77,6 +77,9 @@ const Container: React.FC<ContainerProps> = (
   }
 
   const handleBoxChange = (currentBoxWidth: number) => {
+    if (isSnapToGrid) {
+      currentBoxWidth = doSnapToGrid(currentBoxWidth)
+    }
     const currentTimeRange: TimeRange = [value![0], value![0] + (currentBoxWidth / 100)]
     onChange(currentTimeRange)
   }

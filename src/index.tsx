@@ -6,6 +6,8 @@ import DragAndDrop from "./utils/SingleContext";
 import './index.css'
 
 interface TimeRangeSelectorProps {
+  /** 是否需要对齐格子 */
+  isSnapToGrid?: boolean;
   /** 当前滑动条的高度 */
   height?: number;
   /** 当前滑动条刻度的宽度 */
@@ -28,6 +30,7 @@ interface TimeRangeSelectorProps {
 
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
   const {
+    isSnapToGrid = false,
     value = null,
     height = 100,
     disabled = false,
@@ -115,7 +118,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
                 disabled={disabled}
                 disabledTimeRanges={disabledTimeRanges}
                 isDisableTimeRange={isDisableTimeRange}
-                snapToGrid
+                isSnapToGrid={isSnapToGrid}
                 height={height}
                 value={timeRange}
                 boxWidth={boxWidth}
@@ -126,7 +129,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
                 height={height}
                 disabled={disabled}
                 isDisableTimeRange={isDisableTimeRange}
-                snapToGrid={false}
                 boxWidth={boxWidth}
               />
             </DragAndDrop>

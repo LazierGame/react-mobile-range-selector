@@ -7,7 +7,9 @@ const RNDContext = createDndContext(TouchBackend);
 function useDNDProviderElement(props: any) {
   const manager = useRef(RNDContext);
 
-  if (!props.children) return null;
+  if (!props.children) {
+    return null;
+  }
 
   return (
     <DndProvider manager={manager.current.dragDropManager!}>

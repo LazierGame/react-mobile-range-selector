@@ -20,5 +20,9 @@ function useDNDProviderElement(props: any) {
 
 export default function DragAndDrop(props: any) {
   const DNDElement = useDNDProviderElement(props);
-  return <React.Fragment>{DNDElement}</React.Fragment>;
+  return (
+    <React.Fragment>
+      {DNDElement}
+    </React.Fragment>
+  )
 }

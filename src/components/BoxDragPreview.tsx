@@ -31,7 +31,8 @@ export const BoxDragPreview: React.FC<BoxDragPreviewProps> = memo(
         <Box
           height={height}
           isDisableTimeRange={isDisableTimeRange}
-          disabled={disabled} width={width}
+          disabled={disabled}
+          width={width}
         />
       </div>
     )

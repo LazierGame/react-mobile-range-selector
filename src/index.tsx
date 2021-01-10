@@ -4,8 +4,8 @@ import Container from "./components/Container";
 import { CustomDragLayer } from "./components/CustomDragLayer";
 import DragAndDrop from "./utils/SingleContext";
 import { rangeByType, RangeType } from "./utils/range";
-import './index.css'
 import { snapToGrid } from "./utils/snapToGrid";
+import './index.css'
 
 interface TimeRangeSelectorProps {
   /** 初始化滚动位置 */

@@ -30,25 +30,23 @@ interface TimeRangeSelectorProps {
   onChange?: (value: TimeRange | null) => void;
   /** 每次移动时候跳针的宽度 */
   snap?: number;
-  /** 点击时候添加时间块 */
-  addByClick?: boolean;
-  /** 具有双击去除 */
-  removeByDbClick?: boolean;
+  /** 包含块点击时候穿出当前点击的位置 */
+  onContainClick: (value: number) => void;
 }
 
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
   const {
     initialScrollIndex,
+    onContainClick,
     ruler = true,
     snap = 1,
     isSnapToGrid = true,
     value = null,
     height = 100,
-    splitWidth = 120,
+    splitWidth = 100,
     disabled = false,
     disabledTimeRanges = [[0, 9], [20, 24]],
     onChange,
-    removeByDbClick = false
   } = props
 
   const snapWidth: number = snap * splitWidth
@@ -94,11 +92,17 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
       ref.current.scrollTo({left: snapToGrid(initialScrollIndex & splitWidth, snapWidth)})
     }
   }, [])
+
   const boxWidth: number = Array.isArray(timeRange) && timeRange.length === 2 ? (timeRange[1] - timeRange[0]) * splitWidth : 0
+
+  const handleContainClick= (value: number) => {
+    const left = ref.current.scrollLeft
+    const clickPosition = snapToGrid(left + value, snapWidth)
+    onContainClick && onContainClick(clickPosition / splitWidth)
+  }
 
   return (
     <div
-
       id='scroll'
       style={{
         borderTop: '1px solid rgba(0, 0, 0, .08)',
@@ -158,7 +162,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
             value={timeRange}
             boxWidth={boxWidth}
             onChange={handleChange}
-            removeByDbClick={removeByDbClick}
+            onContainClick={handleContainClick}
           />
           <CustomDragLayer
             height={height}

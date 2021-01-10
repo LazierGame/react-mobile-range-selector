@@ -25,13 +25,12 @@ export interface DraggableBoxProps {
   boxWidth: number;
   height: number;
   left: number;
-  onRemove: () => void;
   onBoxWidthChange: (width: number) => void;
 }
 
 export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
   const {boxWidth, left,
-    height, disabled, isDisableTimeRange, onRemove, onBoxWidthChange} = props
+    height, disabled, isDisableTimeRange, onBoxWidthChange} = props
 
   const [{isDragging}, drag] = useDrag({
     item: {type: ItemTypes.BOX, left, top, width: boxWidth},
@@ -40,11 +39,6 @@ export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
     }),
   })
 
-
-  const handleRemove = () => {
-    onRemove()
-  }
-
   const doubleTouchRef = useRef<boolean>(false)
 
   const handleTouch = () => {
@@ -52,7 +46,6 @@ export const DraggableBox: React.FC<DraggableBoxProps> = (props) => {
       doubleTouchRef.current = false
     }, 750)
     if (doubleTouchRef.current) {
-      handleRemove()
     }
     doubleTouchRef.current = true
   }

@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import { useDrop } from 'react-dnd'
 import { DraggableBox } from './DraggableBox'
-import { snapToGrid as doSnapToGrid, snapToFloor as doSnapToFloor } from '../utils/snapToGrid'
+import { snapToGrid as doSnapToGrid } from '../utils/snapToGrid'
 import { DragItem, ItemTypes, TimeRange } from '../interfaces'
 import BanBlock from "./BanBlock";
 
@@ -13,7 +13,6 @@ const styles: React.CSSProperties = {
 export interface ContainerProps {
   splitWidth: number;
   boxWidth: number;
-  removeByDbClick: boolean;
   isSnapToGrid: boolean;
   disabled: boolean,
   height: number;
@@ -21,6 +20,7 @@ export interface ContainerProps {
   disabledTimeRanges: TimeRange[];
   value: TimeRange | null;
   snapWidth: number;
+  onContainClick: (value: number) => void;
   onChange: (value: TimeRange | null) => void;
 }
 
@@ -34,10 +34,10 @@ const Container: React.FC<ContainerProps> = (
     onChange,
     disabled,
     value,
-    removeByDbClick,
     disabledTimeRanges,
     isDisableTimeRange,
-    boxWidth
+    boxWidth,
+    onContainClick
   }
 ) => {
   const [, drop] = useDrop({
@@ -63,21 +63,6 @@ const Container: React.FC<ContainerProps> = (
     },
   })
 
-  const handleRemove = () => {
-    if (removeByDbClick) {
-      onChange(null)
-    }
-  }
-
-  const handleBoxSet = (e: any) => {
-    if (boxWidth) {
-      return
-    }
-    const clientX: number = e.changedTouches['0'].clientX
-    const currentTimeLeft = (doSnapToFloor(clientX) / splitWidth, snapWidth)
-    const currentTimeRange: TimeRange = [currentTimeLeft, currentTimeLeft + 0.5]
-    onChange(currentTimeRange)
-  }
 
   const handleBoxChange = (currentBoxWidth: number) => {
     if (isSnapToGrid) {
@@ -85,6 +70,10 @@ const Container: React.FC<ContainerProps> = (
     }
     const currentTimeRange: TimeRange = [value![0], value![0] + (currentBoxWidth / splitWidth)]
     onChange(currentTimeRange)
+  }
+
+  const handleContainClick = (e: any) => {
+    onContainClick( e.changedTouches['0'].clientX)
   }
 
 
@@ -98,7 +87,7 @@ const Container: React.FC<ContainerProps> = (
           ...styles,
           height,
         }}
-        onTouchEnd={handleBoxSet}
+        onTouchEnd={handleContainClick}
       >
         {
           disabledTimeRanges.map(x => (
@@ -118,7 +107,6 @@ const Container: React.FC<ContainerProps> = (
             boxWidth={boxWidth}
             left={value![0] * splitWidth}
             onBoxWidthChange={handleBoxChange}
-            onRemove={handleRemove}
           />
         }
       </div>

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { TimeRange } from "./interfaces";
 import Container from "./components/Container";
 import { CustomDragLayer } from "./components/CustomDragLayer";
@@ -48,7 +48,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   const snapWidth: number = snap * splitWidth
 
-  const range = useRef<string[]>((typeof props.range === 'string'?  rangeByType[props.range as RangeType] : props.range) || [])
+  const range = useRef<string[]>((typeof props.range === 'string' ? rangeByType[props.range as RangeType] : props.range) || [])
 
   const [timeRange, setTimeRange] = useState<TimeRange | null>(value)
 
@@ -83,25 +83,36 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     setIsDisableTimeRange(isDisable)
   }, [disabledTimeRanges, timeRange])
 
+
+  useLayoutEffect(() => {
+    const bs = document.getElementById('scroll')
+    console.log('bs', bs)
+    bs!.scrollTo({
+      left: -100
+    })
+  }, [])
   const boxWidth: number = Array.isArray(timeRange) && timeRange.length === 2 ? (timeRange[1] - timeRange[0]) * splitWidth : 0
 
   return (
-    <div style={{
-      borderTop: '1px solid rgba(0, 0, 0, .08)',
-      borderBottom: '1px solid rgba(0, 0, 0, .08)'
-    }}>
+    <div
+      style={{
+        borderTop: '1px solid rgba(0, 0, 0, .08)',
+        borderBottom: '1px solid rgba(0, 0, 0, .08)'
+      }}>
       <div style={{
         overflow: 'hidden',
-        position: 'relative'
+        position: 'relative',
       }}>
-        <div style={{
-          /* 文本不会换行，文本会在在同一行上继续 */
-          whiteSpace: 'nowrap',
-          /* 可滑动 */
-          overflowX: 'scroll'
-        }}>
+        <div
+          id='scroll'
+          style={{
+            /* 文本不会换行，文本会在在同一行上继续 */
+            whiteSpace: 'nowrap',
+            /* 可滑动 */
+            overflowX: 'scroll',
+            left: 200
+          }}>
           <ul
-            id='scroll'
             style={{
               paddingTop: 6,
               height: 30,

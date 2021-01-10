@@ -20,12 +20,14 @@ export interface ContainerProps {
   isDisableTimeRange: boolean;
   disabledTimeRanges: TimeRange[];
   value: TimeRange | null;
+  snapWidth: number;
   onChange: (value: TimeRange | null) => void;
 }
 
 
 const Container: React.FC<ContainerProps> = (
   {
+    snapWidth,
     splitWidth,
     isSnapToGrid,
     height,
@@ -49,7 +51,7 @@ const Container: React.FC<ContainerProps> = (
 
       let left = Math.round(item.left + delta.x)
       if (isSnapToGrid) {
-        left = doSnapToGrid(left)
+        left = doSnapToGrid(left, snapWidth)
       }
 
       // 如果 left 左边小于 0，强制为 0
@@ -72,14 +74,14 @@ const Container: React.FC<ContainerProps> = (
       return
     }
     const clientX: number = e.changedTouches['0'].clientX
-    const currentTimeLeft = (doSnapToFloor(clientX) / splitWidth)
+    const currentTimeLeft = (doSnapToFloor(clientX) / splitWidth, snapWidth)
     const currentTimeRange: TimeRange = [currentTimeLeft, currentTimeLeft + 0.5]
     onChange(currentTimeRange)
   }
 
   const handleBoxChange = (currentBoxWidth: number) => {
     if (isSnapToGrid) {
-      currentBoxWidth = doSnapToGrid(currentBoxWidth)
+      currentBoxWidth = doSnapToGrid(currentBoxWidth, snapWidth)
     }
     const currentTimeRange: TimeRange = [value![0], value![0] + (currentBoxWidth / splitWidth)]
     onChange(currentTimeRange)

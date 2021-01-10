@@ -35,6 +35,7 @@ interface TimeRangeSelectorProps {
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
   const {
     ruler = true,
+    snap = 1,
     isSnapToGrid = true,
     value = null,
     height = 100,
@@ -44,6 +45,8 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     onChange,
     removeByDbClick = false
   } = props
+
+  const snapWidth: number = snap * splitWidth
 
   const range: string[] = (typeof props.range === 'string'?  rangeByType[props.range as RangeType] : props.range) || []
 
@@ -80,7 +83,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     setIsDisableTimeRange(isDisable)
   }, [disabledTimeRanges, timeRange])
 
-  const boxWidth: number = Array.isArray(timeRange) && timeRange.length === 2 ? (timeRange[1] - timeRange[0]) * 100 : 0
+  const boxWidth: number = Array.isArray(timeRange) && timeRange.length === 2 ? (timeRange[1] - timeRange[0]) * splitWidth : 0
 
   return (
     <div style={{
@@ -102,7 +105,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
             style={{
               paddingTop: 6,
               height: 30,
-              width: 2400,
+              width: splitWidth * range.length,
               listStyle: 'none',
               margin: 0,
               padding: 0,
@@ -134,6 +137,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
               disabledTimeRanges={disabledTimeRanges}
               isDisableTimeRange={isDisableTimeRange}
               isSnapToGrid={isSnapToGrid}
+              snapWidth={snapWidth}
               height={height}
               value={timeRange}
               boxWidth={boxWidth}

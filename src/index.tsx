@@ -51,6 +51,8 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   const snapWidth: number = snap * splitWidth
 
+  const scrollRef = useRef<any>(null)
+
   const range = useRef<string[]>((typeof props.range === 'string' ? rangeByType[props.range as RangeType] : props.range) || [])
 
   const [timeRange, setTimeRange] = useState<TimeRange | null>(value)
@@ -86,17 +88,17 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     setIsDisableTimeRange(isDisable)
   }, [disabledTimeRanges, timeRange])
 
-  const ref = useRef<any>(null)
+
   useLayoutEffect(() => {
     if (typeof initialScrollIndex === "number") {
-      ref.current.scrollTo({left: snapToGrid(initialScrollIndex & splitWidth, snapWidth)})
+      scrollRef.current.scrollTo({left: snapToGrid(initialScrollIndex & splitWidth, snapWidth)})
     }
   }, [])
 
   const boxWidth: number = Array.isArray(timeRange) && timeRange.length === 2 ? (timeRange[1] - timeRange[0]) * splitWidth : 0
 
   const handleContainClick= (value: number) => {
-    const left = ref.current.scrollLeft
+    const left = scrollRef.current.scrollLeft
     const clickPosition = snapToGrid(left + value, snapWidth)
     onContainClick && onContainClick(clickPosition / splitWidth)
   }
@@ -112,7 +114,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
         width: '100%'
       }}>
       <div
-        ref={ref}
+        ref={scrollRef}
         style={{
           /* 文本不会换行，文本会在在同一行上继续 */
           whiteSpace: 'nowrap',

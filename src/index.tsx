@@ -5,8 +5,12 @@ import { CustomDragLayer } from "./components/CustomDragLayer";
 import DragAndDrop from "./utils/SingleContext";
 import { rangeByType, RangeType } from "./utils/range";
 import './index.css'
+import { snapToGrid } from "./utils/snapToGrid";
 
 interface TimeRangeSelectorProps {
+  /** 初始化滚动位置 */
+  initialScrollIndex?: number;
+  /** 范围 */
   range: string[] | RangeType;
   /** 是否有标尺 */
   ruler?: boolean;
@@ -34,6 +38,7 @@ interface TimeRangeSelectorProps {
 
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
   const {
+    initialScrollIndex,
     ruler = true,
     snap = 1,
     isSnapToGrid = true,
@@ -83,86 +88,85 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     setIsDisableTimeRange(isDisable)
   }, [disabledTimeRanges, timeRange])
 
-
+  const ref = useRef<any>(null)
   useLayoutEffect(() => {
-    const bs = document.getElementById('scroll')
-    console.log('bs', bs)
-    bs!.scrollTo({
-      left: -100
-    })
+    if (typeof initialScrollIndex === "number") {
+      ref.current.scrollTo({left: snapToGrid(initialScrollIndex & splitWidth, snapWidth)})
+    }
   }, [])
   const boxWidth: number = Array.isArray(timeRange) && timeRange.length === 2 ? (timeRange[1] - timeRange[0]) * splitWidth : 0
 
   return (
     <div
+
+      id='scroll'
       style={{
         borderTop: '1px solid rgba(0, 0, 0, .08)',
-        borderBottom: '1px solid rgba(0, 0, 0, .08)'
-      }}>
-      <div style={{
+        borderBottom: '1px solid rgba(0, 0, 0, .08)',
         overflow: 'hidden',
         position: 'relative',
+        width: '100%'
       }}>
-        <div
-          id='scroll'
+      <div
+        ref={ref}
+        style={{
+          /* 文本不会换行，文本会在在同一行上继续 */
+          whiteSpace: 'nowrap',
+          /* 可滑动 */
+          overflowX: 'scroll'
+          //
+        }}>
+        <ul
+
           style={{
-            /* 文本不会换行，文本会在在同一行上继续 */
-            whiteSpace: 'nowrap',
-            /* 可滑动 */
-            overflowX: 'scroll',
-            left: 200
-          }}>
-          <ul
-            style={{
-              paddingTop: 6,
-              height: 30,
-              width: splitWidth * range.current.length,
-              listStyle: 'none',
-              margin: 0,
-              padding: 0,
-            }}
-          >
-            {
-              range.current.map(x => (
-                <li
-                  key={x}
-                  style={{
-                    ...ruler && {
-                      borderLeft: '1px solid #c8c8c8'
-                    },
-                    paddingTop: 6,
-                    height: 30,
-                    boxSizing: "border-box",
-                    paddingLeft: 4,
-                    width: splitWidth,
-                    display: 'inline-block'
-                  }}
-                >{x}</li>
-              ))
-            }
-          </ul>
-          <DragAndDrop>
-            <Container
-              splitWidth={splitWidth}
-              disabled={disabled}
-              disabledTimeRanges={disabledTimeRanges}
-              isDisableTimeRange={isDisableTimeRange}
-              isSnapToGrid={isSnapToGrid}
-              snapWidth={snapWidth}
-              height={height}
-              value={timeRange}
-              boxWidth={boxWidth}
-              onChange={handleChange}
-              removeByDbClick={removeByDbClick}
-            />
-            <CustomDragLayer
-              height={height}
-              disabled={disabled}
-              isDisableTimeRange={isDisableTimeRange}
-              boxWidth={boxWidth}
-            />
-          </DragAndDrop>
-        </div>
+            paddingTop: 6,
+            height: 30,
+            width: splitWidth * range.current.length,
+            listStyle: 'none',
+            margin: 0,
+            padding: 0,
+          }}
+        >
+          {
+            range.current.map(x => (
+              <li
+                key={x}
+                style={{
+                  ...ruler && {
+                    borderLeft: '1px solid #c8c8c8'
+                  },
+                  paddingTop: 6,
+                  height: 30,
+                  boxSizing: "border-box",
+                  paddingLeft: 4,
+                  width: splitWidth,
+                  display: 'inline-block'
+                }}
+              >{x}</li>
+            ))
+          }
+        </ul>
+        <DragAndDrop>
+          <Container
+            splitWidth={splitWidth}
+            disabled={disabled}
+            disabledTimeRanges={disabledTimeRanges}
+            isDisableTimeRange={isDisableTimeRange}
+            isSnapToGrid={isSnapToGrid}
+            snapWidth={snapWidth}
+            height={height}
+            value={timeRange}
+            boxWidth={boxWidth}
+            onChange={handleChange}
+            removeByDbClick={removeByDbClick}
+          />
+          <CustomDragLayer
+            height={height}
+            disabled={disabled}
+            isDisableTimeRange={isDisableTimeRange}
+            boxWidth={boxWidth}
+          />
+        </DragAndDrop>
       </div>
     </div>
   )

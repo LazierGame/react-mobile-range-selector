@@ -3,9 +3,11 @@ import { TimeRange } from "./interfaces";
 import Container from "./components/Container";
 import { CustomDragLayer } from "./components/CustomDragLayer";
 import DragAndDrop from "./utils/SingleContext";
+import { rangeByType, RangeType } from "./utils/range";
 import './index.css'
 
 interface TimeRangeSelectorProps {
+  range: string[] | RangeType;
   /** 是否有标尺 */
   ruler?: boolean;
   /** 是否需要对齐格子 */
@@ -36,11 +38,14 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     isSnapToGrid = true,
     value = null,
     height = 100,
+    splitWidth = 100,
     disabled = false,
     disabledTimeRanges = [[0, 9], [20, 24]],
     onChange,
     removeByDbClick = false
   } = props
+
+  const range: string[] = (typeof props.range === 'string'?  rangeByType[props.range as RangeType] : props.range) || []
 
   const [timeRange, setTimeRange] = useState<TimeRange | null>(value)
 
@@ -104,7 +109,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
             }}
           >
             {
-              [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23].map(x => (
+              range.map(x => (
                 <li
                   key={x}
                   style={{
@@ -115,15 +120,16 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
                     height: 30,
                     boxSizing: "border-box",
                     paddingLeft: 4,
-                    width: x !== 24 ? 100 : 0,
+                    width: splitWidth,
                     display: 'inline-block'
                   }}
-                >{`${('00' + x).slice(-2)}:00`}</li>
+                >{x}</li>
               ))
             }
           </ul>
           <DragAndDrop>
             <Container
+              splitWidth={splitWidth}
               disabled={disabled}
               disabledTimeRanges={disabledTimeRanges}
               isDisableTimeRange={isDisableTimeRange}

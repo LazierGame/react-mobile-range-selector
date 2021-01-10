@@ -6,12 +6,12 @@ import { DragItem, ItemTypes, TimeRange } from '../interfaces'
 import BanBlock from "./BanBlock";
 
 const styles: React.CSSProperties = {
-  width: 2300,
   border: '1px solid solid',
   position: 'relative',
 }
 
 export interface ContainerProps {
+  splitWidth: number;
   boxWidth: number;
   removeByDbClick: boolean;
   isSnapToGrid: boolean;
@@ -26,6 +26,7 @@ export interface ContainerProps {
 
 const Container: React.FC<ContainerProps> = (
   {
+    splitWidth,
     isSnapToGrid,
     height,
     onChange,
@@ -55,7 +56,7 @@ const Container: React.FC<ContainerProps> = (
       if (left <= 0) {
         left = 0
       }
-      onChange([left / 100, ((left + boxWidth) / 100)])
+      onChange([left / splitWidth, ((left + boxWidth) / splitWidth)])
       return undefined
     },
   })
@@ -71,7 +72,7 @@ const Container: React.FC<ContainerProps> = (
       return
     }
     const clientX: number = e.changedTouches['0'].clientX
-    const currentTimeLeft = (doSnapToFloor(clientX) / 100)
+    const currentTimeLeft = (doSnapToFloor(clientX) / splitWidth)
     const currentTimeRange: TimeRange = [currentTimeLeft, currentTimeLeft + 0.5]
     onChange(currentTimeRange)
   }
@@ -80,7 +81,7 @@ const Container: React.FC<ContainerProps> = (
     if (isSnapToGrid) {
       currentBoxWidth = doSnapToGrid(currentBoxWidth)
     }
-    const currentTimeRange: TimeRange = [value![0], value![0] + (currentBoxWidth / 100)]
+    const currentTimeRange: TimeRange = [value![0], value![0] + (currentBoxWidth / splitWidth)]
     onChange(currentTimeRange)
   }
 
@@ -99,7 +100,12 @@ const Container: React.FC<ContainerProps> = (
       >
         {
           disabledTimeRanges.map(x => (
-            <BanBlock height={height} key={x[0]} range={x}/>
+            <BanBlock
+              splitWidth={splitWidth}
+              height={height}
+              key={x[0]}
+              range={x}
+            />
           ))
         }
         {
@@ -108,7 +114,7 @@ const Container: React.FC<ContainerProps> = (
             disabled={disabled}
             isDisableTimeRange={isDisableTimeRange}
             boxWidth={boxWidth}
-            left={value![0] * 100}
+            left={value![0] * splitWidth}
             onBoxWidthChange={handleBoxChange}
             onRemove={handleRemove}
           />

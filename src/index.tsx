@@ -31,7 +31,7 @@ interface TimeRangeSelectorProps {
   /** 每次移动时候跳针的宽度 */
   snap?: number;
   /** 包含块点击时候穿出当前点击的位置 */
-  onContainClick: (value: number) => void;
+  onContainClick?: (value: number) => void;
 }
 
 function TimeRangeSelector(props: TimeRangeSelectorProps) {

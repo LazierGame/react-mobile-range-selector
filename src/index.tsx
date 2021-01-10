@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { TimeRange } from "./interfaces";
 import Container from "./components/Container";
 import { CustomDragLayer } from "./components/CustomDragLayer";
@@ -39,7 +39,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     isSnapToGrid = true,
     value = null,
     height = 100,
-    splitWidth = 100,
+    splitWidth = 120,
     disabled = false,
     disabledTimeRanges = [[0, 9], [20, 24]],
     onChange,
@@ -48,7 +48,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   const snapWidth: number = snap * splitWidth
 
-  const range: string[] = (typeof props.range === 'string'?  rangeByType[props.range as RangeType] : props.range) || []
+  const range = useRef<string[]>((typeof props.range === 'string'?  rangeByType[props.range as RangeType] : props.range) || [])
 
   const [timeRange, setTimeRange] = useState<TimeRange | null>(value)
 
@@ -87,8 +87,8 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   return (
     <div style={{
-      borderTop: '1px solid rgba(0,0,0,.08)',
-      borderBottom: '1px solid rgba(0,0,0,.08)'
+      borderTop: '1px solid rgba(0, 0, 0, .08)',
+      borderBottom: '1px solid rgba(0, 0, 0, .08)'
     }}>
       <div style={{
         overflow: 'hidden',
@@ -105,14 +105,14 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
             style={{
               paddingTop: 6,
               height: 30,
-              width: splitWidth * range.length,
+              width: splitWidth * range.current.length,
               listStyle: 'none',
               margin: 0,
               padding: 0,
             }}
           >
             {
-              range.map(x => (
+              range.current.map(x => (
                 <li
                   key={x}
                   style={{

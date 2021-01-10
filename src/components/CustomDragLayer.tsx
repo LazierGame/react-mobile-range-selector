@@ -72,21 +72,8 @@ export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
 
   if (!isDragging) {
     return null
-  } else {
-    if (currentOffset?.x) {
-      const leftNumber = currentOffset!.x + boxWidth
-      if (leftNumber + 20 > window.innerWidth) {
-        const data = document.getElementById('scroll')
-
-        if (data?.scrollLeft) {
-          data.scrollTo({
-            left: data?.scrollWidth
-          })
-        }
-
-      }
-    }
   }
+
   return (
     <div style={layerStyles}>
       <div

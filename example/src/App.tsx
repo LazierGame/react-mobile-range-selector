@@ -5,8 +5,13 @@ import { TimeRange } from "../../src/interfaces";
 
 const App = () => {
   const [state, setState] = useState([9, 10] as TimeRange)
+
+  const handleChange = (value: any) => {
+    console.log('xx')
+    setState(value)
+  }
   return <div>
-    <TimeRangeSelector snap={0.25} range='day' value={state}  />
+    <TimeRangeSelector snap={0.5} range='day' value={state} onChange={handleChange}  />
     <button onClick={() => setState(prevState => [prevState[0], prevState[1] + 10])}> +</button>
   </div>
 }

@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React from 'react'
 import { useDrop } from 'react-dnd'
 import { DraggableBox } from './DraggableBox'
 import { snapToGrid as doSnapToGrid } from '../utils/snapToGrid'
@@ -14,7 +14,8 @@ export interface ContainerProps {
   splitWidth: number;
   boxWidth: number;
   isSnapToGrid: boolean;
-  disabled: boolean,
+  totalWidth: number;
+  disabled: boolean;
   height: number;
   isDisableTimeRange: boolean;
   disabledTimeRanges: TimeRange[];
@@ -27,6 +28,7 @@ export interface ContainerProps {
 
 const Container: React.FC<ContainerProps> = (
   {
+    totalWidth,
     snapWidth,
     splitWidth,
     isSnapToGrid,
@@ -49,10 +51,12 @@ const Container: React.FC<ContainerProps> = (
         y: number
       }
 
+      console.log('hh', item.left, delta.x)
       let left = Math.round(item.left + delta.x)
       if (isSnapToGrid) {
         left = doSnapToGrid(left, snapWidth)
       }
+      console.log(left)
 
       // 如果 left 左边小于 0，强制为 0
       if (left <= 0) {
@@ -73,7 +77,7 @@ const Container: React.FC<ContainerProps> = (
   }
 
   const handleContainClick = (e: any) => {
-    onContainClick( e.changedTouches['0'].clientX)
+    onContainClick(e.changedTouches['0'].clientX)
   }
 
 
@@ -89,6 +93,11 @@ const Container: React.FC<ContainerProps> = (
         }}
         onTouchEnd={handleContainClick}
       >
+        <div style={{
+          position: 'absolute',
+          width: totalWidth,
+          height,
+        }}/>
         {
           disabledTimeRanges.map(x => (
             <BanBlock
@@ -115,4 +124,4 @@ const Container: React.FC<ContainerProps> = (
   )
 }
 
-export default memo(Container)
+export default Container

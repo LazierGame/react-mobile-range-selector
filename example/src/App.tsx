@@ -10,7 +10,7 @@ const App = () => {
     setState(value)
   }
   return <div>
-    <TimeRangeSelector snap={0.25} range='day' value={state} onChange={handleChange}  />
+    <TimeRangeSelector isSnapToGrid={false} snap={0.25} range='day' value={state} onChange={handleChange}  />
     <button onClick={() => setState(prevState => [prevState[0], prevState[1] + 1])}> +</button>
   </div>
 }

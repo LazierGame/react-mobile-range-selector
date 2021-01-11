@@ -57,6 +57,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   const [timeRange, setTimeRange] = useState<TimeRange | null>(value)
 
+  console.log('xxxxxxxx', timeRange)
   useEffect(() => {
     setTimeRange(value)
   }, [value])
@@ -65,7 +66,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     if (disabled) {
       return
     }
-    setTimeRange(value)
+    // console.log(value, onChange)
     onChange && onChange(value)
   }, [])
 
@@ -103,6 +104,8 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     onContainClick && onContainClick(clickPosition / splitWidth)
   }
 
+  const totalWidth: number = splitWidth * range.current.length
+
   return (
     <div
       id='scroll'
@@ -123,11 +126,11 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
           //
         }}>
         <ul
-
           style={{
             paddingTop: 6,
             height: 30,
-            width: splitWidth * range.current.length,
+            width: totalWidth,
+            maxWidth: totalWidth,
             listStyle: 'none',
             margin: 0,
             padding: 0,
@@ -154,6 +157,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
         </ul>
         <DragAndDrop>
           <Container
+            totalWidth={totalWidth}
             splitWidth={splitWidth}
             disabled={disabled}
             disabledTimeRanges={disabledTimeRanges}

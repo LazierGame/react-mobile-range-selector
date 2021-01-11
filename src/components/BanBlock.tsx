@@ -20,7 +20,7 @@ function BanBlock(props: BanBoxProps) {
       width,
       height,
       background: 'linear-gradient(45deg,rgba(200, 200, 200, .5) 0, rgba(200, 200, 200, .5) 25%, transparent 25%, transparent 50%,rgba(200, 200, 200, .5) 50%, rgba(200, 200, 200, .5) 75%, transparent 75%, transparent)',
-      backgroundSize: '8px 8px',
+      backgroundSize: '4px 4px',
       position: 'absolute',
       transform: `translateX(${range[0] * splitWidth}px)`,
     }}

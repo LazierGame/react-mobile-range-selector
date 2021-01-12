@@ -57,7 +57,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   const [timeRange, setTimeRange] = useState<TimeRange | null>(value)
 
-  console.log('xxxxxxxx', timeRange)
   useEffect(() => {
     setTimeRange(value)
   }, [value])
@@ -66,7 +65,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     if (disabled) {
       return
     }
-    // console.log(value, onChange)
     onChange && onChange(value)
   }, [])
 

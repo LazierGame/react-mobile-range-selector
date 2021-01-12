@@ -32,7 +32,6 @@ function useSelectorProviderElement(props: any) {
 }
 
 export default function SelectorContextProvide(props: any) {
-  console.log(props)
   const SelectorElement = useSelectorProviderElement(props);
   return (
     <React.Fragment>

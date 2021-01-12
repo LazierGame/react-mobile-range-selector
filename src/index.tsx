@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from
 import { TimeRange } from "./interfaces";
 import Container from "./components/Container";
 import { CustomDragLayer } from "./components/CustomDragLayer";
-import DragAndDrop from "./utils/SingleContext";
+import DragAndDrop from "./utils/DropContext";
 import { rangeByType, RangeType } from "./utils/range";
 import { snapToGrid } from "./utils/snapToGrid";
 import './index.css'

@@ -29,6 +29,15 @@ yarn add react-time-range-selector
 
 ## Changelog
 
+### 0.0.8
+- Add a ruler.
+- Add whether to align the grid.
+- Add grid spacing.
+- Add range array.
+- Add initialization scrolling value.
+- Add click, double-click event and display current node value (cooperate with business)
+- Add a scroll event and pass out the current scroll position (distance node)
+- Remove, click add, double-click delete code (determined by business party)
 
 
 ### 0.0.6(todo)

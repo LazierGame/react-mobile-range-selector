@@ -120,8 +120,8 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
           /* 文本不会换行，文本会在在同一行上继续 */
           whiteSpace: 'nowrap',
           /* 可滑动 */
-          overflowX: 'scroll'
-          //
+          overflowX: 'scroll',
+          scrollSnapType: 'x mandatory'
         }}>
         <ul
           style={{
@@ -142,6 +142,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
                   ...ruler && {
                     borderLeft: '1px solid #c8c8c8'
                   },
+                  scrollSnapAlign: 'start',
                   paddingTop: 6,
                   height: 30,
                   boxSizing: "border-box",

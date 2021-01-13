@@ -121,7 +121,8 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
           whiteSpace: 'nowrap',
           /* 可滑动 */
           overflowX: 'scroll',
-          scrollSnapType: 'x mandatory'
+          scrollSnapType: 'x mandatory',
+          scrollPadding: '0 0 0 10px',
         }}>
         <ul
           style={{

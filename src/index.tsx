@@ -45,7 +45,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     height = 100,
     splitWidth = 100,
     disabled = false,
-    disabledTimeRanges = [[0, 9], [20, 24]],
+    disabledTimeRanges = [[0, 9, 'rgba(253, 148, 10, 1)'], [20, 24]],
     onChange,
   } = props
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { XYCoord, useDragLayer } from 'react-dnd'
 import { ItemTypes } from '../interfaces'
 import { BoxDragPreview } from './BoxDragPreview'
@@ -71,11 +71,6 @@ export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
     }
   }
 
-  const initialLeftRef = useRef<any>(null)
-  const lastLeftRef = useRef<any>(null)
-
-  // 开始拖动
-  const starDragRef = useRef<boolean>(false)
 
   const handleScrollWhenDragging = (currentX: number) => {
     const scrollLeft: number = scrollRef.current.scrollLeft
@@ -83,40 +78,19 @@ export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
     if (currentX < 0) {
       currentLeft -= 20
     }
-    lastLeftRef.current = currentLeft
-    console.log('last', currentLeft)
-    starDragRef.current = false
     scrollRef.current.scrollTo({left: currentLeft})
   }
 
 
   const getCurrentX = (): number => {
     const x = currentOffset?.x || 0
-    console.log(x)
     return x
   }
 
   useEffect(() => {
-    const scrollLeft: number = scrollRef.current.scrollLeft
-    console.log('initial', initialLeftRef.current)
-    if (!isDragging && !starDragRef.current) {
-        if (
-          typeof initialLeftRef.current === 'number' &&
-          typeof lastLeftRef.current === 'number') {
-          console.log('gggggggg', initialLeftRef.current - lastLeftRef.current)
-        }
-    } else {
-      if (!starDragRef.current) {
-        starDragRef.current = true
-        initialLeftRef.current = scrollLeft
-        console.log('initial', initialLeftRef.current)
-      }
-    }
     if (!scrollRef || !currentOffset) {
       return
     }
-
-    // const {x} = currentOffset
     const intervalRef = setInterval(() => {
       handleScrollWhenDragging(getCurrentX() as number)
     }, 50)

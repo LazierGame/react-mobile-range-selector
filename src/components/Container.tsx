@@ -52,14 +52,10 @@ const Container: React.FC<ContainerProps> = (
         y: number
       }
 
-      console.log()
-
       let left = Math.round(scrollRef.current.scrollLeft + delta.x)
-      console.log('hh', delta.x, _item.left)
       if (isSnapToGrid) {
         left = doSnapToGrid(left, snapWidth)
       }
-      console.log(left)
 
       // 如果 left 左边小于 0，强制为 0
       if (left <= 0) {

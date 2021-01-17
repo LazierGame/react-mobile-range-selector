@@ -134,7 +134,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   return (
     <div
-      id='scroll'
       style={{
         borderTop: '1px solid rgba(0, 0, 0, .08)',
         borderBottom: '1px solid rgba(0, 0, 0, .08)',

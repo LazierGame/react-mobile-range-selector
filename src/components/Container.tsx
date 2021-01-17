@@ -22,6 +22,7 @@ export interface ContainerProps {
   value: TimeRange | null;
   snapWidth: number;
   onContainClick: (value: number) => void;
+  scrollRef: any;
   onChange: (value: TimeRange | null) => void;
 }
 
@@ -39,20 +40,22 @@ const Container: React.FC<ContainerProps> = (
     disabledTimeRanges,
     isDisableTimeRange,
     boxWidth,
+    scrollRef,
     onContainClick
   }
 ) => {
   const [, drop] = useDrop({
     accept: ItemTypes.BOX,
-
-    drop(item: DragItem, monitor) {
-      const delta = monitor.getDifferenceFromInitialOffset() as {
+    drop(_item: DragItem, monitor) {
+      const delta = monitor.getSourceClientOffset() as {
         x: number
         y: number
       }
 
-      console.log('hh', item.left, delta.x)
-      let left = Math.round(item.left + delta.x)
+      console.log()
+
+      let left = Math.round(scrollRef.current.scrollLeft + delta.x)
+      console.log('hh', delta.x, _item.left)
       if (isSnapToGrid) {
         left = doSnapToGrid(left, snapWidth)
       }

@@ -92,9 +92,9 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     setIsDisableTimeRange(isDisable)
   }, [disabledTimeRanges, timeRange])
 
-
   useLayoutEffect(() => {
     if (typeof initialScrollIndex === "number") {
+      // todo 这里处理分离
       scrollRef.current.scrollTo({left: snapToGrid(initialScrollIndex * splitWidth, snapWidth)})
     }
   }, [])
@@ -118,6 +118,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
   }
 
   const totalWidth: number = splitWidth * range.current.length
+
 
   const {run: handleScroll} = useThrottleFn(() => {
       const left = scrollRef.current.scrollLeft
@@ -188,6 +189,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
             isSnapToGrid={isSnapToGrid}
             snapWidth={snapWidth}
             height={height}
+            scrollRef={scrollRef}
             value={timeRange}
             boxWidth={boxWidth}
             onChange={handleChange}
@@ -196,6 +198,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
           <CustomDragLayer
             height={height}
             disabled={disabled}
+            scrollRef={scrollRef}
             isDisableTimeRange={isDisableTimeRange}
             boxWidth={boxWidth}
           />

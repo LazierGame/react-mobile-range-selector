@@ -22,7 +22,7 @@ const App = () => {
   return <div>
     <TimeRangeSelector
       initialScrollIndex={hour}
-      isSnapToGrid={false}
+      isSnapToGrid={true}
       scrollLeft={scrollLeft}
       snap={0.25}
       range='day'

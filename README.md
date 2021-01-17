@@ -29,6 +29,11 @@ yarn add react-time-range-selector
 
 ## Changelog
 
+### 0.1.5
+- When the slider exceeds the current view, the scroll bar scrolls itself.
+- Control scroll bar scroll position.
+- Add scroll bar slide speed.
+
 ### 0.0.8
 - Add a ruler.
 - Add whether to align the grid.

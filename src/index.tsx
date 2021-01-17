@@ -35,8 +35,8 @@ interface TimeRangeSelectorProps {
   snap?: number;
   /** 包含块点击时候穿出当前点击的位置 */
   onContainClick?: (value: number) => void;
-  scrollLeft: number;
-  onScrollLeftChange: (val: number) => void;
+  scrollLeft?: number;
+  onScrollLeftChange?: (val: number) => void;
 }
 
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
@@ -125,7 +125,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   const {run: handleScroll} = useThrottleFn(() => {
       const left = scrollRef.current.scrollLeft
-      onScrollLeftChange(left)
+      onScrollLeftChange && onScrollLeftChange(left)
     },
     {
       wait: 500,

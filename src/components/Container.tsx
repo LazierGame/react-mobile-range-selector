@@ -60,6 +60,8 @@ const Container: React.FC<ContainerProps> = (
       // 如果 left 左边小于 0，强制为 0
       if (left <= 0) {
         left = 0
+      } else if ((left + boxWidth) >= totalWidth) {
+        left = totalWidth - boxWidth
       }
       onChange([left / splitWidth, ((left + boxWidth) / splitWidth)])
       return undefined

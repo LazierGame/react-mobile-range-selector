@@ -74,9 +74,11 @@ export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
 
   const handleScrollWhenDragging = (currentX: number) => {
     const scrollLeft: number = scrollRef.current.scrollLeft
-    let currentLeft = scrollLeft
+    let currentLeft: number = scrollLeft
     if (currentX < 0) {
       currentLeft -= 20
+    } else if (currentX + boxWidth > window.innerWidth) {
+      currentLeft += 20
     }
     scrollRef.current.scrollTo({left: currentLeft})
   }

@@ -110,10 +110,10 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   const handleContainClick = (value: number) => {
     const left = scrollRef.current.scrollLeft
-    const clickPosition = snapToGrid(left + value, snapWidth)
-    console.log(clickPosition)
-
-
+    let clickPosition: number = left + value
+    if (isSnapToGrid) {
+      clickPosition = snapToGrid(clickPosition, snapWidth)
+    }
     onContainClick && onContainClick(clickPosition / splitWidth)
   }
 

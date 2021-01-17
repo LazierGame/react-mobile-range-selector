@@ -15,6 +15,7 @@ const App = () => {
   }
 
   const handleScrollLeftChange = (value: number) => {
+    console.log('zzz', value)
     setScrollLeft(value)
   }
 

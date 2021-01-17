@@ -37,12 +37,13 @@ export interface CustomDragLayerProps {
   boxWidth: number;
   disabled: boolean;
   height: number;
+  scrollSpeed: number;
   scrollRef: any;
   isDisableTimeRange: boolean;
 }
 
 export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
-  const {boxWidth, height, disabled, isDisableTimeRange, scrollRef} = props
+  const {boxWidth, height, disabled, isDisableTimeRange, scrollSpeed,scrollRef} = props
 
   const {
     itemType,
@@ -76,9 +77,9 @@ export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
     const scrollLeft: number = scrollRef.current.scrollLeft
     let currentLeft: number = scrollLeft
     if (currentX < 0) {
-      currentLeft -= 20
+      currentLeft -= scrollSpeed
     } else if (currentX + boxWidth > window.innerWidth) {
-      currentLeft += 20
+      currentLeft += scrollSpeed
     }
     scrollRef.current.scrollTo({left: currentLeft})
   }

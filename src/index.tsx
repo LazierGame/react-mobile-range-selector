@@ -29,6 +29,8 @@ interface TimeRangeSelectorProps {
   disabledTimeRanges?: TimeRange[];
   /** 修改 */
   onChange?: (value: TimeRange | null) => void;
+  /** 滚动速度 */
+  scrollSpeed?: number;
   /** 每次移动时候跳针的宽度 */
   snap?: number;
   /** 包含块点击时候穿出当前点击的位置 */
@@ -48,6 +50,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     height = 100,
     splitWidth = 100,
     disabled = false,
+    scrollSpeed = 25,
     disabledTimeRanges = [[0, 9], [20, 24]],
     onChange,
     scrollLeft,
@@ -199,6 +202,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
             height={height}
             disabled={disabled}
             scrollRef={scrollRef}
+            scrollSpeed={scrollSpeed}
             isDisableTimeRange={isDisableTimeRange}
             boxWidth={boxWidth}
           />

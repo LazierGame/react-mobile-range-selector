@@ -22,6 +22,7 @@ export interface ContainerProps {
   value: TimeRange | null;
   snapWidth: number;
   onContainClick: (value: number) => void;
+
   scrollRef: any;
   onChange: (value: TimeRange | null) => void;
 }

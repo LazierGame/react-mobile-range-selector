@@ -128,7 +128,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
       onScrollLeftChange && onScrollLeftChange(left)
     },
     {
-      wait: 500,
+      wait: 60,
     }
   );
 

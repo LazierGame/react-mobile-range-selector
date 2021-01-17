@@ -5,6 +5,7 @@ import { CustomDragLayer } from "./components/CustomDragLayer";
 import DragAndDrop from "./utils/DropContext";
 import { rangeByType, RangeType } from "./utils/range";
 import { snapToGrid } from "./utils/snapToGrid";
+import useThrottleFn from "./utils/useThrottleFn";
 import './index.css'
 
 interface TimeRangeSelectorProps {
@@ -32,6 +33,8 @@ interface TimeRangeSelectorProps {
   snap?: number;
   /** 包含块点击时候穿出当前点击的位置 */
   onContainClick?: (value: number) => void;
+  scrollLeft: number;
+  onScrollLeftChange: (val: number) => void;
 }
 
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
@@ -47,6 +50,8 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     disabled = false,
     disabledTimeRanges = [[0, 9], [20, 24]],
     onChange,
+    scrollLeft,
+    onScrollLeftChange
   } = props
 
   const snapWidth: number = snap * splitWidth
@@ -94,15 +99,34 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     }
   }, [])
 
+  useLayoutEffect(() => {
+    if (typeof scrollLeft === "number") {
+      scrollRef.current.scrollTo({left: scrollLeft})
+    }
+  }, [scrollLeft])
+
+
   const boxWidth: number = Array.isArray(timeRange) && timeRange.length === 2 ? (timeRange[1] - timeRange[0]) * splitWidth : 0
 
-  const handleContainClick= (value: number) => {
+  const handleContainClick = (value: number) => {
     const left = scrollRef.current.scrollLeft
     const clickPosition = snapToGrid(left + value, snapWidth)
+    console.log(clickPosition)
+
+
     onContainClick && onContainClick(clickPosition / splitWidth)
   }
 
   const totalWidth: number = splitWidth * range.current.length
+
+  const {run: handleScroll} = useThrottleFn(() => {
+      const left = scrollRef.current.scrollLeft
+      onScrollLeftChange(left)
+    },
+    {
+      wait: 500,
+    }
+  );
 
   return (
     <div
@@ -116,6 +140,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
       }}>
       <div
         ref={scrollRef}
+        onScroll={handleScroll}
         style={{
           /* 文本不会换行，文本会在在同一行上继续 */
           whiteSpace: 'nowrap',

@@ -29,6 +29,9 @@ yarn add react-time-range-selector
 
 ## Changelog
 
+### 0.1.8
+- add "draggable"
+
 ### 0.1.5
 - When the slider exceeds the current view, the scroll bar scrolls itself.
 - Control scroll bar scroll position.

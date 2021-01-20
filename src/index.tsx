@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { TimeRange } from "./interfaces";
+import DragContainer from "./components/DragContainer";
 import Container from "./components/Container";
 import { CustomDragLayer } from "./components/CustomDragLayer";
 import DragAndDrop from "./utils/DropContext";
@@ -9,6 +10,8 @@ import useThrottleFn from "./utils/useThrottleFn";
 import './index.css'
 
 interface TimeRangeSelectorProps {
+  /** 如果不可以拖拽，则将 drag 功能去除 */
+  draggable?: boolean;
   /** 初始化滚动位置 */
   initialScrollIndex?: number;
   /** 范围 */
@@ -41,6 +44,7 @@ interface TimeRangeSelectorProps {
 
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
   const {
+    draggable = true,
     initialScrollIndex,
     onContainClick,
     ruler = true,
@@ -181,31 +185,44 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
             ))
           }
         </ul>
-        <DragAndDrop>
-          <Container
-            totalWidth={totalWidth}
-            splitWidth={splitWidth}
-            disabled={disabled}
-            disabledTimeRanges={disabledTimeRanges}
-            isDisableTimeRange={isDisableTimeRange}
-            isSnapToGrid={isSnapToGrid}
-            snapWidth={snapWidth}
-            height={height}
-            scrollRef={scrollRef}
-            value={timeRange}
-            boxWidth={boxWidth}
-            onChange={handleChange}
-            onContainClick={handleContainClick}
-          />
-          <CustomDragLayer
-            height={height}
-            disabled={disabled}
-            scrollRef={scrollRef}
-            scrollSpeed={scrollSpeed}
-            isDisableTimeRange={isDisableTimeRange}
-            boxWidth={boxWidth}
-          />
-        </DragAndDrop>
+        {
+          draggable ?
+            (
+              <DragAndDrop>
+                <DragContainer
+                  totalWidth={totalWidth}
+                  splitWidth={splitWidth}
+                  disabled={disabled}
+                  disabledTimeRanges={disabledTimeRanges}
+                  isDisableTimeRange={isDisableTimeRange}
+                  isSnapToGrid={isSnapToGrid}
+                  snapWidth={snapWidth}
+                  height={height}
+                  scrollRef={scrollRef}
+                  value={timeRange}
+                  boxWidth={boxWidth}
+                  onChange={handleChange}
+                  onContainClick={handleContainClick}
+                />
+                <CustomDragLayer
+                  height={height}
+                  disabled={disabled}
+                  scrollRef={scrollRef}
+                  scrollSpeed={scrollSpeed}
+                  isDisableTimeRange={isDisableTimeRange}
+                  boxWidth={boxWidth}
+                />
+              </DragAndDrop>
+            ) : (
+              <Container
+                totalWidth={totalWidth}
+                splitWidth={splitWidth}
+                disabledTimeRanges={disabledTimeRanges}
+                height={height}
+                onContainClick={handleContainClick}
+              />
+            )
+        }
       </div>
     </div>
   )

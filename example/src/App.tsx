@@ -26,6 +26,7 @@ const App = () => {
 
   return <div>
     <TimeRangeSelector
+      draggable={false}
       initialScrollIndex={hour}
       isSnapToGrid={true}
       scrollLeft={scrollLeft}

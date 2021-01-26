@@ -34,6 +34,7 @@ const Container: React.FC<ContainerProps> = (
     <div style={{
       background: '#fff',
     }}>
+
       <div
         style={{
           ...styles,

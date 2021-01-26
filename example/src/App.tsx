@@ -9,35 +9,28 @@ const App = () => {
     setState(value)
   }
 
-  const [state2, setState2] = useState([9, 10] as TimeRange)
-  const handleChange2 = (value: any) => {
-    setState2(value)
-  }
+  // const [state2, setState2] = useState([9, 10] as TimeRange)
+  // const handleChange2 = (value: any) => {
+  //   setState2(value)
+  // }
 
   const hour: number = (new Date()).getHours()
 
   const [scrollLeft, setScrollLeft] = useState(hour * 100)
 
 
-
-  const handleScrollLeftChange = (value: number) => {
-    setScrollLeft(value)
-  }
-
   return <div>
     <TimeRangeSelector
-      draggable={false}
       initialScrollIndex={hour}
       isSnapToGrid={true}
       scrollLeft={scrollLeft}
       snap={0.25}
       range='day'
       value={state}
-      onScrollLeftChange={handleScrollLeftChange}
       onChange={handleChange}
     />
     <button onClick={() => setScrollLeft(prevState => prevState + 100)}> +</button>
-    <TimeRangeSelector initialScrollIndex={(new Date()).getHours()} isSnapToGrid={false} snap={0.25} range='day' value={state2} onChange={handleChange2}  />
+    {/*<TimeRangeSelector initialScrollIndex={(new Date()).getHours()} isSnapToGrid={false} snap={0.25} range='day' value={state2} onChange={handleChange2}  />*/}
   </div>
 }
 

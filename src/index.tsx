@@ -123,7 +123,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
   }
   const totalWidth: number = splitWidth * range.current.length
 
-
   return (
     <div
       style={{

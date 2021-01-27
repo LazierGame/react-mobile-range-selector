@@ -19,7 +19,7 @@ interface TimeRangeSelectorProps {
   height?: number;
   /** 当前滑动条刻度的宽度 */
   splitWidth?: number;
-  /** 是否禁用, todo(在禁用时候无法调整 div 没做) */
+  /** 是否禁用 */
   disabled?: boolean;
   /** 时间范围 */
   value?: TimeRange;
@@ -163,14 +163,17 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
         </ul>
         {
           disabled ? (
-                <Container
-                  totalWidth={totalWidth}
-                  splitWidth={splitWidth}
-                  disabledTimeRanges={disabledTimeRanges}
-                  height={height}
-                  onContainClick={handleContainClick}
-                />
-            ) :  (
+            <Container
+              left={value?.[0] ? value![0] * splitWidth : 0}
+              boxWidth={boxWidth}
+              isDisableTimeRange={isDisableTimeRange}
+              totalWidth={totalWidth}
+              splitWidth={splitWidth}
+              disabledTimeRanges={disabledTimeRanges}
+              height={height}
+              onContainClick={handleContainClick}
+            />
+          ) : (
             <DragAndDrop>
               <DragContainer
                 totalWidth={totalWidth}

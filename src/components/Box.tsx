@@ -13,8 +13,7 @@ export interface BoxProps {
   isDisableTimeRange: boolean;
   /** 当前为禁用项 */
   disabled?: boolean;
-  /** 当前时间可使用? */
-  canUse?: boolean;
+  /** 高度 */
   height: number;
   /** 当前宽度 */
   width?: number;

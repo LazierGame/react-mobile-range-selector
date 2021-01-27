@@ -81,7 +81,7 @@ export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
     } else if (currentX + boxWidth > window.innerWidth) {
       currentLeft += scrollSpeed
     }
-    scrollRef.current.scrollTo({left: currentLeft})
+    scrollRef.current?.scrollTo({left: currentLeft})
   }
 
 
@@ -91,12 +91,14 @@ export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
   }
 
   useEffect(() => {
-    if (!scrollRef || !currentOffset) {
+    if (!scrollRef || !currentOffset || !scrollRef.current?.scrollTo) {
       return
     }
+
     const intervalRef = setInterval(() => {
       handleScrollWhenDragging(getCurrentX() as number)
     }, 50)
+
     return () => {
       clearInterval(intervalRef)
     }

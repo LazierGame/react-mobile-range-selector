@@ -11,8 +11,6 @@ import './index.css'
 interface TimeRangeSelectorProps {
   /** 如果不可以拖拽，则将 drag 功能去除 */
   draggable?: boolean;
-  /** 初始化滚动位置 */
-  initialScrollIndex?: number;
   /** 范围 */
   range: string[] | RangeType;
   /** 是否有标尺 */
@@ -43,7 +41,6 @@ interface TimeRangeSelectorProps {
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
   const {
     draggable = true,
-    initialScrollIndex,
     onContainClick,
     ruler = true,
     snap = 1,
@@ -96,24 +93,17 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     setIsDisableTimeRange(isDisable)
   }, [disabledTimeRanges, timeRange])
 
-  useLayoutEffect(() => {
-    if (typeof initialScrollIndex === "number") {
-      // todo 这里处理分离
-      scrollRef.current.scrollTo({left: snapToGrid(initialScrollIndex * splitWidth, snapWidth)})
-    }
-  }, [])
 
   useLayoutEffect(() => {
     if (typeof scrollLeft === "number") {
-      scrollRef.current.scrollTo({left: scrollLeft})
+      // chorme 浏览器 40 版本下会无效
+      scrollRef.current?.scrollTo({left: scrollLeft})
     }
   }, [scrollLeft])
-
 
   const boxWidth: number = Array.isArray(timeRange) && timeRange.length === 2 ? (timeRange[1] - timeRange[0]) * splitWidth : 0
 
   const handleContainClick = (value: number) => {
-    console.log('xxxx')
     const left = scrollRef.current.scrollLeft
     let clickPosition: number = left + value
     if (isSnapToGrid) {

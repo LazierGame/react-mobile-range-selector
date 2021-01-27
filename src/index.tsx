@@ -35,8 +35,8 @@ interface TimeRangeSelectorProps {
   onContainClick?: (value: number) => void;
   /** 调整到左边 left 的距离(px) */
   scrollLeft?: number;
-  /** 禁止 box 是否有 border */
-  banBoxBorder?: boolean;
+  /** 为 0 或者 不传递则没有，否则为当前颜色的宽度 */
+  disableBoxBorderWidth?: number;
 }
 
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
@@ -52,7 +52,8 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     scrollSpeed = 25,
     disabledTimeRanges = [[0, 9], [20, 24]],
     onChange,
-    scrollLeft
+    scrollLeft,
+    disableBoxBorderWidth = 0
   } = props
 
   const snapWidth: number = snap * splitWidth
@@ -171,6 +172,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
               splitWidth={splitWidth}
               disabledTimeRanges={disabledTimeRanges}
               height={height}
+              disableBoxBorderWidth={disableBoxBorderWidth}
               onContainClick={handleContainClick}
             />
           ) : (
@@ -187,6 +189,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
                 scrollRef={scrollRef}
                 value={timeRange}
                 boxWidth={boxWidth}
+                disableBoxBorderWidth={disableBoxBorderWidth}
                 onChange={handleChange}
                 onContainClick={handleContainClick}
               />

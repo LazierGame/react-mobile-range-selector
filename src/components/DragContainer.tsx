@@ -21,6 +21,7 @@ export interface DragContainerProps {
   disabledTimeRanges: TimeRange[];
   value: TimeRange | null;
   snapWidth: number;
+  disableBoxBorderWidth: number;
   onContainClick: (value: number) => void;
 
   scrollRef: any;
@@ -38,6 +39,7 @@ const DragContainer: React.FC<DragContainerProps> = (
     onChange,
     disabled,
     value,
+    disableBoxBorderWidth,
     disabledTimeRanges,
     isDisableTimeRange,
     boxWidth,
@@ -103,6 +105,7 @@ const DragContainer: React.FC<DragContainerProps> = (
         {
           disabledTimeRanges.map(x => (
             <BanBlock
+              disableBoxBorderWidth={disableBoxBorderWidth}
               splitWidth={splitWidth}
               height={height}
               key={x[0]}

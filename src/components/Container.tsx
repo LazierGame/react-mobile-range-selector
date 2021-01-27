@@ -16,6 +16,7 @@ export interface ContainerProps {
   totalWidth: number;
   height: number;
   disabledTimeRanges: TimeRange[];
+  disableBoxBorderWidth: number;
   onContainClick: (value: number) => void;
 }
 
@@ -29,6 +30,7 @@ const Container: React.FC<ContainerProps> = (
     splitWidth,
     height,
     disabledTimeRanges,
+    disableBoxBorderWidth,
     onContainClick
   }
 ) => {
@@ -64,6 +66,7 @@ const Container: React.FC<ContainerProps> = (
         {
           disabledTimeRanges.map(x => (
             <BanBlock
+              disableBoxBorderWidth={disableBoxBorderWidth}
               splitWidth={splitWidth}
               height={height}
               key={x[0]}

@@ -9,8 +9,6 @@ import { snapToGrid } from "./utils/snapToGrid";
 import './index.css'
 
 interface TimeRangeSelectorProps {
-  /** 如果不可以拖拽，则将 drag 功能去除 */
-  draggable?: boolean;
   /** 范围 */
   range: string[] | RangeType;
   /** 是否有标尺 */
@@ -21,7 +19,7 @@ interface TimeRangeSelectorProps {
   height?: number;
   /** 当前滑动条刻度的宽度 */
   splitWidth?: number;
-  /** 是否禁用 */
+  /** 是否禁用, todo(在禁用时候无法调整 div 没做) */
   disabled?: boolean;
   /** 时间范围 */
   value?: TimeRange;
@@ -35,12 +33,14 @@ interface TimeRangeSelectorProps {
   snap?: number;
   /** 包含块点击时候穿出当前点击的位置 */
   onContainClick?: (value: number) => void;
+  /** 调整到左边 left 的距离(px) */
   scrollLeft?: number;
+  /** 禁止 box 是否有 border */
+  banBoxBorder?: boolean;
 }
 
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
   const {
-    draggable = true,
     onContainClick,
     ruler = true,
     snap = 1,
@@ -162,34 +162,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
           }
         </ul>
         {
-          draggable ?
-            (
-              <DragAndDrop>
-                <DragContainer
-                  totalWidth={totalWidth}
-                  splitWidth={splitWidth}
-                  disabled={disabled}
-                  disabledTimeRanges={disabledTimeRanges}
-                  isDisableTimeRange={isDisableTimeRange}
-                  isSnapToGrid={isSnapToGrid}
-                  snapWidth={snapWidth}
-                  height={height}
-                  scrollRef={scrollRef}
-                  value={timeRange}
-                  boxWidth={boxWidth}
-                  onChange={handleChange}
-                  onContainClick={handleContainClick}
-                />
-                <CustomDragLayer
-                  height={height}
-                  disabled={disabled}
-                  scrollRef={scrollRef}
-                  scrollSpeed={scrollSpeed}
-                  isDisableTimeRange={isDisableTimeRange}
-                  boxWidth={boxWidth}
-                />
-              </DragAndDrop>
-            ) : (
+          disabled ? (
                 <Container
                   totalWidth={totalWidth}
                   splitWidth={splitWidth}
@@ -197,7 +170,33 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
                   height={height}
                   onContainClick={handleContainClick}
                 />
-            )
+            ) :  (
+            <DragAndDrop>
+              <DragContainer
+                totalWidth={totalWidth}
+                splitWidth={splitWidth}
+                disabled={disabled}
+                disabledTimeRanges={disabledTimeRanges}
+                isDisableTimeRange={isDisableTimeRange}
+                isSnapToGrid={isSnapToGrid}
+                snapWidth={snapWidth}
+                height={height}
+                scrollRef={scrollRef}
+                value={timeRange}
+                boxWidth={boxWidth}
+                onChange={handleChange}
+                onContainClick={handleContainClick}
+              />
+              <CustomDragLayer
+                height={height}
+                disabled={disabled}
+                scrollRef={scrollRef}
+                scrollSpeed={scrollSpeed}
+                isDisableTimeRange={isDisableTimeRange}
+                boxWidth={boxWidth}
+              />
+            </DragAndDrop>
+          )
         }
       </div>
     </div>

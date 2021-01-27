@@ -23,8 +23,6 @@ export interface DragContainerProps {
   value: TimeRange | null;
   snapWidth: number;
   disableBoxBorderWidth: number;
-  onContainClick: (value: number) => void;
-
   scrollRef: any;
   onChange: (value: TimeRange | null) => void;
 }
@@ -46,7 +44,6 @@ const DragContainer: React.FC<DragContainerProps> = (
     isDisableTimeRange,
     boxWidth,
     scrollRef,
-    onContainClick
   }
 ) => {
   const [, drop] = useDrop({
@@ -82,10 +79,6 @@ const DragContainer: React.FC<DragContainerProps> = (
     onChange(currentTimeRange)
   }
 
-  const handleContainClick = (e: any) => {
-    onContainClick(e.changedTouches['0'].clientX)
-  }
-
 
   return (
     <div style={{
@@ -97,7 +90,6 @@ const DragContainer: React.FC<DragContainerProps> = (
           ...styles,
           height,
         }}
-        onTouchEnd={handleContainClick}
         id={uid}
       >
         <div style={{

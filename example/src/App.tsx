@@ -24,7 +24,6 @@ const App = () => {
       isSnapToGrid={true}
       scrollLeft={scrollLeft}
       snap={0.25}
-      disabled
       range='day'
       value={state}
       onChange={handleChange}

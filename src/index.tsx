@@ -6,7 +6,10 @@ import { CustomDragLayer } from "./components/CustomDragLayer";
 import DragAndDrop from "./utils/DropContext";
 import { rangeByType, RangeType } from "./utils/range";
 import { snapToGrid } from "./utils/snapToGrid";
-import {generateUUID} from "./utils/uid";
+import { generateUUID } from "./utils/uid";
+// @ts-ignore
+import AlloyFinger from 'alloyfinger'
+
 import './index.css'
 
 interface TimeRangeSelectorProps {
@@ -108,6 +111,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
   const boxWidth: number = Array.isArray(timeRange) && timeRange.length === 2 ? (timeRange[1] - timeRange[0]) * splitWidth : 0
 
   const handleContainClick = (value: number) => {
+    console.log('value', value)
     const left = scrollRef.current.scrollLeft
     let clickPosition: number = left + value
     if (isSnapToGrid) {
@@ -116,6 +120,20 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     onContainClick && onContainClick(clickPosition / splitWidth)
   }
   const totalWidth: number = splitWidth * range.current.length
+
+
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      // todo, 先解决当前问题,  后续用 nextTick 解决
+      const currentDom = document.getElementById(uidRef.current)
+      new AlloyFinger(currentDom, {
+        tap: function (e: any) {
+          const tapValue = e?.changedTouches?.[0]?.clientX
+          handleContainClick(tapValue)
+        },
+      });
+    }, 750)
+  }, [])
 
   return (
     <div
@@ -177,7 +195,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
               disabledTimeRanges={disabledTimeRanges}
               height={height}
               disableBoxBorderWidth={disableBoxBorderWidth}
-              onContainClick={handleContainClick}
             />
           ) : (
             <DragAndDrop>
@@ -196,7 +213,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
                 boxWidth={boxWidth}
                 disableBoxBorderWidth={disableBoxBorderWidth}
                 onChange={handleChange}
-                onContainClick={handleContainClick}
               />
               <CustomDragLayer
                 height={height}

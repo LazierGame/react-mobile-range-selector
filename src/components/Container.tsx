@@ -18,7 +18,6 @@ export interface ContainerProps {
   height: number;
   disabledTimeRanges: TimeRange[];
   disableBoxBorderWidth: number;
-  onContainClick: (value: number) => void;
 }
 
 
@@ -32,14 +31,10 @@ const Container: React.FC<ContainerProps> = (
     splitWidth,
     height,
     disabledTimeRanges,
-    disableBoxBorderWidth,
-    onContainClick
+    disableBoxBorderWidth
   }
 ) => {
 
-  const handleContainClick = (e: any) => {
-    onContainClick(e.changedTouches['0'].clientX)
-  }
 
   return (
     <div style={{
@@ -51,7 +46,6 @@ const Container: React.FC<ContainerProps> = (
           height,
         }}
         id={uid}
-        onTouchEnd={handleContainClick}
       >
         {
           boxWidth &&  <DisabledBox

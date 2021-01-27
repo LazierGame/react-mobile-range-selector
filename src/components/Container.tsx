@@ -9,6 +9,7 @@ const styles: React.CSSProperties = {
 }
 
 export interface ContainerProps {
+  uid: string;
   boxWidth: number;
   left: number;
   isDisableTimeRange: boolean;
@@ -23,6 +24,7 @@ export interface ContainerProps {
 
 const Container: React.FC<ContainerProps> = (
   {
+    uid,
     boxWidth,
     left,
     isDisableTimeRange,
@@ -48,6 +50,7 @@ const Container: React.FC<ContainerProps> = (
           ...styles,
           height,
         }}
+        id={uid}
         onTouchEnd={handleContainClick}
       >
         {

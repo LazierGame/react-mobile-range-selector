@@ -6,6 +6,7 @@ import { CustomDragLayer } from "./components/CustomDragLayer";
 import DragAndDrop from "./utils/DropContext";
 import { rangeByType, RangeType } from "./utils/range";
 import { snapToGrid } from "./utils/snapToGrid";
+import {generateUUID} from "./utils/uid";
 import './index.css'
 
 interface TimeRangeSelectorProps {
@@ -55,6 +56,8 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     scrollLeft,
     disableBoxBorderWidth = 0
   } = props
+
+  const uidRef = useRef<string>(generateUUID())
 
   const snapWidth: number = snap * splitWidth
 
@@ -165,6 +168,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
         {
           disabled ? (
             <Container
+              uid={uidRef.current}
               left={value?.[0] ? value![0] * splitWidth : 0}
               boxWidth={boxWidth}
               isDisableTimeRange={isDisableTimeRange}
@@ -178,6 +182,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
           ) : (
             <DragAndDrop>
               <DragContainer
+                uid={uidRef.current}
                 totalWidth={totalWidth}
                 splitWidth={splitWidth}
                 disabled={disabled}

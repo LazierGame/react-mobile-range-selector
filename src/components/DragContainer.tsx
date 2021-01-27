@@ -11,6 +11,7 @@ const styles: React.CSSProperties = {
 }
 
 export interface DragContainerProps {
+  uid: string;
   splitWidth: number;
   boxWidth: number;
   isSnapToGrid: boolean;
@@ -31,6 +32,7 @@ export interface DragContainerProps {
 
 const DragContainer: React.FC<DragContainerProps> = (
   {
+    uid,
     totalWidth,
     snapWidth,
     splitWidth,
@@ -96,6 +98,7 @@ const DragContainer: React.FC<DragContainerProps> = (
           height,
         }}
         onTouchEnd={handleContainClick}
+        id={uid}
       >
         <div style={{
           position: 'absolute',

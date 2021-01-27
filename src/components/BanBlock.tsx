@@ -18,6 +18,7 @@ function BanBlock(props: BanBoxProps) {
   const width: number = (range[1] - range[0]) * splitWidth
   const color = range[2] || '' + 'rgba(200, 200, 200, .5)'
   const background = `linear-gradient(45deg, ${color} 0, ${color} 25%, transparent 25%, transparent 50%,${color} 50%, ${color} 75%, transparent 75%, transparent)`
+
   return <div
     style={{
       width,
@@ -28,8 +29,8 @@ function BanBlock(props: BanBoxProps) {
       position: 'absolute',
       transform: `translateX(${range[0] * splitWidth}px)`,
       ...disableBoxBorderWidth && {
-        borderLeft: `${disableBoxBorderWidth} solid ${color}`,
-        borderRight: `${disableBoxBorderWidth} solid ${color}`,
+        borderLeft: `${disableBoxBorderWidth}px solid ${color}`,
+        borderRight: `${disableBoxBorderWidth}px solid ${color}`,
       }
     }}
   />

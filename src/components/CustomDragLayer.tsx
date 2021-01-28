@@ -81,9 +81,7 @@ export const CustomDragLayer: React.FC<CustomDragLayerProps> = (props) => {
     } else if (currentX + boxWidth > window.innerWidth) {
       currentLeft += scrollSpeed
     }
-    if (scrollRef.current?.scrollTo) {
-      scrollRef.current.scrollTo({left: currentLeft})
-    }
+    scrollRef.current?.scrollTo?.({left: currentLeft})
   }
 
 

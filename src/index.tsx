@@ -108,9 +108,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
   useLayoutEffect(() => {
     if (typeof initialScrollLeft === "number") {
       // chorme 浏览器 40 版本下会无效
-      if (scrollRef.current?.scrollTo) {
-        scrollRef.current.scrollTo({left: initialScrollLeft})
-      }
+      scrollRef.current?.scrollTo?.({left: initialScrollLeft})
     }
   }, [])
 
@@ -118,9 +116,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
   useLayoutEffect(() => {
     if (typeof scrollLeft === "number") {
       // chorme 浏览器 40 版本下会无效
-      if (scrollRef.current?.scrollTo) {
-        scrollRef.current.scrollTo({left: scrollLeft})
-      }
+      scrollRef.current?.scrollTo?.({left: scrollLeft})
     }
   }, [scrollLeft])
 

@@ -45,6 +45,8 @@ interface TimeRangeSelectorProps {
   disableBoxBorderWidth?: number;
 }
 
+
+
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
   const {
     onContainClick,
@@ -106,7 +108,9 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
   useLayoutEffect(() => {
     if (typeof initialScrollLeft === "number") {
       // chorme 浏览器 40 版本下会无效
-      scrollRef.current?.scrollTo({left: initialScrollLeft})
+      if (scrollRef.current?.scrollTo) {
+        scrollRef.current.scrollTo({left: initialScrollLeft})
+      }
     }
   }, [])
 
@@ -114,7 +118,9 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
   useLayoutEffect(() => {
     if (typeof scrollLeft === "number") {
       // chorme 浏览器 40 版本下会无效
-      scrollRef.current?.scrollTo({left: scrollLeft})
+      if (scrollRef.current?.scrollTo) {
+        scrollRef.current.scrollTo({left: scrollLeft})
+      }
     }
   }, [scrollLeft])
 
@@ -213,6 +219,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
               splitWidth={splitWidth}
               disabledTimeRanges={disabledTimeRanges}
               height={height}
+
               disableBoxBorderWidth={disableBoxBorderWidth}
             />
           ) : (

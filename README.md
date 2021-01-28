@@ -29,6 +29,12 @@ yarn add react-time-range-selector
 
 ## Changelog
 
+### 0.1.9
+- Add the width of the isolation line between two forbidden blocks (if 0, no)
+- Refactoring configuration items
+- Add gesture library, and click event will be triggered when dragging
+- Elegant degradation, not set when scrollTo cannot be used
+
 ### 0.1.8
 - add "draggable"
 

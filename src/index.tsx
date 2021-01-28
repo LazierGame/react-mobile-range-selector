@@ -37,6 +37,8 @@ interface TimeRangeSelectorProps {
   snap?: number;
   /** 包含块点击时候穿出当前点击的位置 */
   onContainClick?: (value: number) => void;
+  /** 初始化调整到左边 left 的距离(px) */
+  initialScrollLeft?: number;
   /** 调整到左边 left 的距离(px) */
   scrollLeft?: number;
   /** 为 0 或者 不传递则没有，否则为当前颜色的宽度 */
@@ -54,6 +56,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     splitWidth = 100,
     disabled = false,
     scrollSpeed = 25,
+    initialScrollLeft,
     disabledTimeRanges = [[0, 9], [20, 24]],
     onChange,
     scrollLeft,
@@ -99,6 +102,13 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
     setIsDisableTimeRange(isDisable)
   }, [disabledTimeRanges, timeRange])
+
+  useLayoutEffect(() => {
+    if (typeof initialScrollLeft === "number") {
+      // chorme 浏览器 40 版本下会无效
+      scrollRef.current?.scrollTo({left: initialScrollLeft})
+    }
+  }, [])
 
 
   useLayoutEffect(() => {

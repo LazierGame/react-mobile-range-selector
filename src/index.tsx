@@ -133,6 +133,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
 
   useLayoutEffect(() => {
+
     let af: any
 
     setTimeout(() => {
@@ -141,6 +142,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
       af = new AlloyFinger(currentDom, {
         tap: function (e: any) {
           const tapValue = e?.changedTouches?.[0]?.clientX
+          // fix 此时会保存闭包，希望重新去一次数据
           handleContainClick(tapValue)
         },
       });

@@ -150,7 +150,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
       console.log('af', af)
       af = null
     }
-  }, [handleContainClick])
+  }, [])
 
   return (
     <div

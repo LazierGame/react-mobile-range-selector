@@ -48,7 +48,7 @@ const Container: React.FC<ContainerProps> = (
         id={uid}
       >
         {
-          boxWidth &&  <DisabledBox
+          !!boxWidth &&  <DisabledBox
             isDisableTimeRange={isDisableTimeRange}
             boxWidth={boxWidth}
             height={height}

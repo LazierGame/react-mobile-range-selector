@@ -43,6 +43,8 @@ interface TimeRangeSelectorProps {
   scrollLeft?: number;
   /** 为 0 或者 不传递则没有，否则为当前颜色的宽度 */
   disableBoxBorderWidth?: number;
+  /** 是否是移动端(特定功能) */
+  isMobile?: boolean
 }
 
 
@@ -62,6 +64,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     disabledTimeRanges = [[0, 9], [20, 24]],
     onChange,
     scrollLeft,
+    isMobile = true,
     disableBoxBorderWidth = 0
   } = props
 
@@ -123,7 +126,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
   const boxWidth: number = Array.isArray(timeRange) && timeRange.length === 2 ? (timeRange[1] - timeRange[0]) * splitWidth : 0
 
   const handleContainClick = (value: number) => {
-    console.log('value', value)
     const left = scrollRef.current.scrollLeft
     let clickPosition: number = left + value
     if (isSnapToGrid) {
@@ -131,13 +133,14 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     }
     onContainClick && onContainClick(clickPosition / splitWidth)
   }
+
   const totalWidth: number = splitWidth * range.current.length
 
-
   useLayoutEffect(() => {
-
+    if (!isMobile) {
+      return
+    }
     let af: any
-
     setTimeout(() => {
       // todo, 先解决当前问题,  后续用 nextTick 解决
       const currentDom = document.getElementById(uidRef.current)
@@ -155,6 +158,13 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
       af = null
     }
   }, [])
+
+  const handleBlockClick = (e: any) => {
+    if (isMobile) {
+      return
+    }
+    handleContainClick(e.clientX)
+  }
 
   return (
     <div
@@ -215,7 +225,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
               splitWidth={splitWidth}
               disabledTimeRanges={disabledTimeRanges}
               height={height}
-
               disableBoxBorderWidth={disableBoxBorderWidth}
             />
           ) : (
@@ -234,6 +243,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
                 value={timeRange}
                 boxWidth={boxWidth}
                 disableBoxBorderWidth={disableBoxBorderWidth}
+                onContainerClick={handleBlockClick}
                 onChange={handleChange}
               />
               <CustomDragLayer

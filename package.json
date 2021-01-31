@@ -1,6 +1,6 @@
 {
   "name": "react-time-range-selector",
-  "version": "0.1.14",
+  "version": "0.1.14-no-modern",
   "description": "time range selector",
   "author": "wsafight",
   "license": "MIT",

@@ -4,7 +4,6 @@ import DragContainer from "./components/DragContainer";
 import Container from "./components/Container";
 import { CustomDragLayer } from "./components/CustomDragLayer";
 import DragAndDrop from "./utils/DropContext";
-import { rangeByType, RangeType } from "./utils/range";
 import { snapToGrid } from "./utils/snapToGrid";
 import { generateUUID } from "./utils/uid";
 // @ts-ignore
@@ -14,7 +13,7 @@ import './index.css'
 
 interface TimeRangeSelectorProps {
   /** 范围 */
-  range: string[] | RangeType;
+  range: string[];
   /** 是否有标尺 */
   ruler?: boolean;
   /** 是否需要对齐格子 */
@@ -43,8 +42,6 @@ interface TimeRangeSelectorProps {
   scrollLeft?: number;
   /** 为 0 或者 不传递则没有，否则为当前颜色的宽度 */
   disableBoxBorderWidth?: number;
-  /** 是否是移动端(特定功能) */
-  isMobile?: boolean
 }
 
 
@@ -64,7 +61,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     disabledTimeRanges = [[0, 9], [20, 24]],
     onChange,
     scrollLeft,
-    isMobile = true,
     disableBoxBorderWidth = 0
   } = props
 
@@ -74,7 +70,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   const scrollRef = useRef<any>(null)
 
-  const range = useRef<string[]>((typeof props.range === 'string' ? rangeByType[props.range as RangeType] : props.range) || [])
+  const range = useRef<string[]>(props.range || [])
 
   const [timeRange, setTimeRange] = useState<TimeRange | null>(value)
 
@@ -137,9 +133,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
   const totalWidth: number = splitWidth * range.current.length
 
   useLayoutEffect(() => {
-    if (!isMobile) {
-      return
-    }
     let af: any
     setTimeout(() => {
       // todo, 先解决当前问题,  后续用 nextTick 解决
@@ -159,12 +152,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     }
   }, [])
 
-  const handleBlockClick = (e: any) => {
-    if (isMobile) {
-      return
-    }
-    handleContainClick(e.clientX)
-  }
 
   return (
     <div
@@ -243,7 +230,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
                 value={timeRange}
                 boxWidth={boxWidth}
                 disableBoxBorderWidth={disableBoxBorderWidth}
-                onContainerClick={handleBlockClick}
                 onChange={handleChange}
               />
               <CustomDragLayer

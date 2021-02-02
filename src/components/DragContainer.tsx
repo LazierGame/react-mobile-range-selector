@@ -24,7 +24,6 @@ export interface DragContainerProps {
   snapWidth: number;
   disableBoxBorderWidth: number;
   scrollRef: any;
-  onContainerClick: any;
   onChange: (value: TimeRange | null) => void;
 }
 
@@ -44,7 +43,6 @@ const DragContainer: React.FC<DragContainerProps> = (
     isDisableTimeRange,
     boxWidth,
     scrollRef,
-    onContainerClick,
     onChange,
   }
 ) => {
@@ -93,7 +91,6 @@ const DragContainer: React.FC<DragContainerProps> = (
           height,
         }}
         id={uid}
-        onClick={onContainerClick}
       >
         <div style={{
           position: 'absolute',

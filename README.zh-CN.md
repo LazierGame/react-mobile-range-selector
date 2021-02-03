@@ -8,11 +8,22 @@
 
 
 ## 配置
-
 | 参数 | 说明 | 类型 | 默认值 |
 | :----| :---- | :---- | :---- |
-
-
+| range | 当前选择器的范围 | string[] | [] |
+| value | 范围值(左边到右边) | [number, number] / null | null |
+| height | 当前滑动区高度 | number | 100 |
+| splitWidth | 当前滑动条刻度的距离 | number | 100 |
+| disabled| 组件禁用 | boolean| false|
+| disabledRanges | 禁用的范围区域(左值，右值，颜色) | [number, number,color ][] | [] |
+|  disableBoxBorderWidth | 禁用区域的边框宽度 | number | 0 |
+| isSnapToGrid | 滑动完成停留时是否对其刻度 | boolean | true |
+| snap | 停留时刻度值，1 表示整格，0.5 表示半格 | number | 1 |
+| ruler | 选择器是否展示标尺 | boolean | true |
+| scrollSpeed | 滑块贴近边缘，反方向滚动速度 | number | 25 |
+| scrollLeft | 当前左边距离原点的距离,动态调整 | number  | undefined |
+| onChange | 修改范围后的回调 | (value: TimeRange | null) => void| undefined |
+| onContainClick | 点击区域块的回调，返回当前点击的数值 | (value: number) => void| undefined |
 ## 安装
 
 ```bash

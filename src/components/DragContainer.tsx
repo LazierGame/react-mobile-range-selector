@@ -19,7 +19,7 @@ export interface DragContainerProps {
   disabled: boolean;
   height: number;
   isDisableTimeRange: boolean;
-  disabledTimeRanges: TimeRange[];
+  disabledRanges: TimeRange[];
   value: TimeRange | null;
   snapWidth: number;
   disableBoxBorderWidth: number;
@@ -39,7 +39,7 @@ const DragContainer: React.FC<DragContainerProps> = (
     disabled,
     value,
     disableBoxBorderWidth,
-    disabledTimeRanges,
+    disabledRanges,
     isDisableTimeRange,
     boxWidth,
     scrollRef,
@@ -98,7 +98,7 @@ const DragContainer: React.FC<DragContainerProps> = (
           height,
         }}/>
         {
-          disabledTimeRanges.map(x => (
+          disabledRanges.map(x => (
             <BanBlock
               disableBoxBorderWidth={disableBoxBorderWidth}
               splitWidth={splitWidth}

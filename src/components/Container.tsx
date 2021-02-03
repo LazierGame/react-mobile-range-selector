@@ -16,7 +16,7 @@ export interface ContainerProps {
   splitWidth: number;
   totalWidth: number;
   height: number;
-  disabledTimeRanges: TimeRange[];
+  disabledRanges: TimeRange[];
   disableBoxBorderWidth: number;
 }
 
@@ -30,7 +30,7 @@ const Container: React.FC<ContainerProps> = (
     totalWidth,
     splitWidth,
     height,
-    disabledTimeRanges,
+    disabledRanges,
     disableBoxBorderWidth
   }
 ) => {
@@ -61,7 +61,7 @@ const Container: React.FC<ContainerProps> = (
           height,
         }}/>
         {
-          disabledTimeRanges.map(x => (
+          disabledRanges.map(x => (
             <BanBlock
               disableBoxBorderWidth={disableBoxBorderWidth}
               splitWidth={splitWidth}

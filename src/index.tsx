@@ -27,7 +27,7 @@ interface TimeRangeSelectorProps {
   /** 时间范围 */
   value?: TimeRange;
   /** 禁用的时间范围 */
-  disabledTimeRanges?: TimeRange[];
+  disabledRanges?: TimeRange[];
   /** 修改 */
   onChange?: (value: TimeRange | null) => void;
   /** 滚动速度 */
@@ -58,7 +58,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     disabled = false,
     scrollSpeed = 25,
     initialScrollLeft,
-    disabledTimeRanges = [[0, 9], [20, 24]],
+    disabledRanges = [],
     onChange,
     scrollLeft,
     disableBoxBorderWidth = 0
@@ -95,14 +95,14 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
       return
     }
 
-    const isDisable: boolean = disabledTimeRanges.some(x => {
+    const isDisable: boolean = disabledRanges.some(x => {
       const maxNum = Math.max(...[timeRange[0], timeRange[1], x[0], x[1]])
       const minNum = Math.min(...[timeRange[0], timeRange[1], x[0], x[1]])
       return maxNum - minNum < (timeRange[1] - timeRange[0]) + (x[1] - x[0])
     })
 
     setIsDisableTimeRange(isDisable)
-  }, [disabledTimeRanges, timeRange])
+  }, [disabledRanges, timeRange])
 
   useLayoutEffect(() => {
     if (typeof initialScrollLeft === "number") {
@@ -210,7 +210,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
               isDisableTimeRange={isDisableTimeRange}
               totalWidth={totalWidth}
               splitWidth={splitWidth}
-              disabledTimeRanges={disabledTimeRanges}
+              disabledRanges={disabledRanges}
               height={height}
               disableBoxBorderWidth={disableBoxBorderWidth}
             />
@@ -221,7 +221,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
                 totalWidth={totalWidth}
                 splitWidth={splitWidth}
                 disabled={disabled}
-                disabledTimeRanges={disabledTimeRanges}
+                disabledRanges={disabledRanges}
                 isDisableTimeRange={isDisableTimeRange}
                 isSnapToGrid={isSnapToGrid}
                 snapWidth={snapWidth}

@@ -16,7 +16,7 @@
 | splitWidth | 当前滑动条刻度的距离 | number | 100 |
 | disabled| 组件禁用 | boolean| false|
 | disabledRanges | 禁用的范围区域(左值，右值，颜色) | [number, number,color ][] | [] |
-|  disableBoxBorderWidth | 禁用区域的边框宽度 | number | 0 |
+| disableBoxBorderWidth | 禁用区域的边框宽度 | number | 0 |
 | isSnapToGrid | 滑动完成停留时是否对其刻度 | boolean | true |
 | snap | 停留时刻度值，1 表示整格，0.5 表示半格 | number | 1 |
 | ruler | 选择器是否展示标尺 | boolean | true |

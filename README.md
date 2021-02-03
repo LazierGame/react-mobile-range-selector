@@ -12,6 +12,20 @@ The component can modify the span within a certain range by dragging.
 
 | Property | Description | Type | Default |
 | :----| :---- | :---- | :---- |
+| range | The scope of the current selector | string[] | [] |
+| value | Range value (left to right) | [number, number] / null | null |
+| height | Current sliding zone height | number | 100 |
+| splitWidth | The distance of the current slider scale | number | 100 |
+| disabledRanges | Disabled range area (left, right, color) | [number, number,color ][] | [] |
+| disableBoxBorderWidth | If the width of the border of the disabled area is 0, there is no border | number | 0 |
+| disabled| Component disabled | boolean| false|
+| isSnapToGrid | Is it calibrated when the slide stops | boolean | true |
+| snap | The degree value of dwell time is 1 for the whole lattice and 0.5 for the half lattice | number | 1 |
+| ruler | Does the selector display the ruler | boolean | true |
+| scrollSpeed | The slider is close to the edge and the rolling speed is opposite | number | 25 |
+| scrollLeft | The current left distance from the origin, dynamic adjustment | number  | undefined |
+| onChange | Callback after modifying scope | (value: TimeRange | null) => void| undefined |
+| onContainClick | Click the callback of the area block to return the value of the current click | (value: number) => void| undefined |
 
 
 ## Installation

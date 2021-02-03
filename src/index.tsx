@@ -8,40 +8,37 @@ import { snapToGrid } from "./utils/snapToGrid";
 import { generateUUID } from "./utils/uid";
 // @ts-ignore
 import AlloyFinger from 'alloyfinger'
-
 import './index.css'
 
 interface TimeRangeSelectorProps {
-  /** 范围 */
+  /** 当前选择器的范围 */
   range: string[];
-  /** 是否有标尺 */
-  ruler?: boolean;
-  /** 是否需要对齐格子 */
-  isSnapToGrid?: boolean;
-  /** 当前滑动条的高度 */
-  height?: number;
-  /** 当前滑动条刻度的宽度 */
-  splitWidth?: number;
-  /** 是否禁用 */
-  disabled?: boolean;
-  /** 时间范围 */
+  /** 范围值(左边到右边) */
   value?: TimeRange;
-  /** 禁用的时间范围 */
+  /** 当前滑动区高度 */
+  height?: number;
+  /** 当前滑动条刻度的距离 */
+  splitWidth?: number;
+  /** 禁用的范围区域(左值，右值，颜色) */
   disabledRanges?: TimeRange[];
-  /** 修改 */
-  onChange?: (value: TimeRange | null) => void;
-  /** 滚动速度 */
-  scrollSpeed?: number;
-  /** 每次移动时候跳针的宽度 */
-  snap?: number;
-  /** 包含块点击时候穿出当前点击的位置 */
-  onContainClick?: (value: number) => void;
-  /** 初始化调整到左边 left 的距离(px) */
-  initialScrollLeft?: number;
-  /** 调整到左边 left 的距离(px) */
-  scrollLeft?: number;
-  /** 为 0 或者 不传递则没有，否则为当前颜色的宽度 */
+  /** 禁用区域的边框宽度，为 0 则没有边框 */
   disableBoxBorderWidth?: number;
+  /** 组件禁用 */
+  disabled?: boolean;
+  /** 滑动完成停留时是否对其刻度 */
+  isSnapToGrid?: boolean;
+  /** 停留时刻度值，1 表示整格，0.5 表示半格 */
+  snap?: number;
+  /** 选择器是否展示标尺 */
+  ruler?: boolean;
+  /** 滑块贴近边缘，反方向滚动速度 */
+  scrollSpeed?: number;
+  /** 当前左边距离原点的距离,动态调整 */
+  scrollLeft?: number;
+  /** 修改范围后的回调  */
+  onChange?: (value: TimeRange | null) => void;
+  /** 点击区域块的回调，返回当前点击的数值 */
+  onContainClick?: (value: number) => void;
 }
 
 
@@ -57,7 +54,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     splitWidth = 100,
     disabled = false,
     scrollSpeed = 25,
-    initialScrollLeft,
     disabledRanges = [],
     onChange,
     scrollLeft,
@@ -103,14 +99,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
     setIsDisableTimeRange(isDisable)
   }, [disabledRanges, timeRange])
-
-  useLayoutEffect(() => {
-    if (typeof initialScrollLeft === "number") {
-      // chorme 浏览器 40 版本下会无效
-      scrollRef.current?.scrollTo?.({left: initialScrollLeft})
-    }
-  }, [])
-
 
   useLayoutEffect(() => {
     if (typeof scrollLeft === "number") {

@@ -1,7 +1,7 @@
 {
   "name": "react-mobile-range-selector",
   "version": "0.2.0",
-  "description": "time range selector",
+  "description": "mobile range selector",
   "author": "wsafight",
   "license": "MIT",
   "main": "dist/index.js",
@@ -26,16 +26,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LazierGame/react-time-range-selector.git"
+    "url": "git+https://github.com/LazierGame/react-mobile-range-selector.git"
   },
   "keywords": [
     "time-range",
     "selector"
   ],
   "bugs": {
-    "url": "https://github.com/LazierGame/react-time-range-selector/issues"
+    "url": "https://github.com/LazierGame/react-mobile-range-selector/issues"
   },
-  "homepage": "https://github.com/LazierGame/react-time-range-selector#readme",
+  "homepage": "https://github.com/LazierGame/react-mobile-range-selector#readme",
   "dependencies": {
     "re-resizable": "^6.9.0",
     "react-dnd": "^11.1.3",

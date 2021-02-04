@@ -43,6 +43,8 @@ yarn add react-time-range-selector
 
 ## Changelog
 
+### 0.1.14
+- For the specific business development has been completed, the subsequent version will be changed to the general version.
 ### 0.1.9
 - Add the width of the isolation line between two forbidden blocks (if 0, no)
 - Refactoring configuration items

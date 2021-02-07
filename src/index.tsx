@@ -39,8 +39,9 @@ interface TimeRangeSelectorProps {
   onChange?: (value: TimeRange | null) => void;
   /** 点击区域块的回调，返回当前点击的数值 */
   onContainClick?: (value: number) => void;
+  /** 双击区域块的回调，返回当前点击的数值 */
+  onContainDbClick?: (value: number) => void;
 }
-
 
 
 function TimeRangeSelector(props: TimeRangeSelectorProps) {
@@ -57,7 +58,8 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     disabledRanges = [],
     onChange,
     scrollLeft,
-    disableBoxBorderWidth = 0
+    disableBoxBorderWidth = 0,
+    onContainDbClick,
   } = props
 
   const uidRef = useRef<string>(generateUUID())
@@ -109,13 +111,21 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
   const boxWidth: number = Array.isArray(timeRange) && timeRange.length === 2 ? (timeRange[1] - timeRange[0]) * splitWidth : 0
 
-  const handleContainClick = (value: number) => {
+  const getClickPosition = (value: number) => {
     const left = scrollRef.current.scrollLeft
     let clickPosition: number = left + value
     if (isSnapToGrid) {
       clickPosition = snapToGrid(clickPosition, snapWidth)
     }
-    onContainClick && onContainClick(clickPosition / splitWidth)
+    return clickPosition
+  }
+
+  const handleContainClick = (value: number) => {
+    onContainClick && onContainClick(getClickPosition(value) / splitWidth)
+  }
+
+  const handleContainDbClick = (value: number) => {
+    onContainDbClick && onContainDbClick(getClickPosition(value) / splitWidth)
   }
 
   const totalWidth: number = splitWidth * range.current.length
@@ -131,6 +141,10 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
           // fix 此时会保存闭包，希望重新去一次数据
           handleContainClick(tapValue)
         },
+        doubleTap: function (e: any) {
+          const tapValue = e?.changedTouches?.[0]?.clientX
+          handleContainDbClick(tapValue)
+        }
       });
     }, 750)
 

@@ -24,6 +24,8 @@
 | scrollLeft | 当前左边距离原点的距离,动态调整 | number  | undefined |
 | onChange | 修改范围后的回调 | (value: TimeRange | null) => void| undefined |
 | onContainClick | 点击区域块的回调，返回当前点击的数值 | (value: number) => void| undefined |
+| onContainDbClick | 双击区域块的回调，返回当前点击的数值 | (value: number) => void | undefined |
+
 
 ## 安装
 

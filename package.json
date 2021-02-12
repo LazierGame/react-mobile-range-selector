@@ -81,6 +81,8 @@
     "@storybook/react": "^6.1.17",
     "@storybook/addon-links": "^6.1.17",
     "@storybook/addon-essentials": "^6.1.17",
+    "@storybook/addon-info": "^5.3.21",
+    "react-docgen-typescript-loader": "^3.7.2",
     "storybook-mobile": "^0.1.29"
   },
   "files": [

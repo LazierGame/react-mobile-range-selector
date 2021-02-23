@@ -41,6 +41,8 @@ interface TimeRangeSelectorProps {
   onContainClick?: (value: number) => void;
   /** 双击区域块的回调，返回当前点击的数值 */
   onContainDbClick?: (value: number) => void;
+  /** 手动滑动后子项目将吸附到其容器的位置 */
+  scrollSnapAlign?: 'start' | 'center' | 'end'
 }
 
 
@@ -60,6 +62,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     scrollLeft,
     disableBoxBorderWidth = 0,
     onContainDbClick,
+    scrollSnapAlign,
   } = props
 
   const uidRef = useRef<string>(generateUUID())
@@ -131,6 +134,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
   const totalWidth: number = splitWidth * range.current.length
 
   useLayoutEffect(() => {
+    // @ts-ignore
     let af: any
     setTimeout(() => {
       // todo, 先解决当前问题,  后续用 nextTick 解决
@@ -149,7 +153,6 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
     }, 750)
 
     return () => {
-      console.log('af', af)
       af = null
     }
   }, [])
@@ -192,6 +195,7 @@ function TimeRangeSelector(props: TimeRangeSelectorProps) {
                   ...ruler && {
                     borderLeft: '1px solid #c8c8c8'
                   },
+                  ...scrollSnapAlign && {scrollSnapAlign},
                   paddingTop: 6,
                   height: 30,
                   boxSizing: "border-box",

@@ -26,8 +26,7 @@ The component can modify the span within a certain range by dragging.
 | scrollLeft | The current left distance from the origin, dynamic adjustment | number  | undefined |
 | onChange | Callback after modifying scope | (value: TimeRange | null) => void| undefined |
 | onContainClick | Click the callback of the area block to return the value of the current click | (value: number) => void| undefined |
-| onContainDbClick | Double click the callback of the area block to return the value of the current click  | (value: number) => void | undefined |
-
+| scrollSnapAlign | After manual sliding, the sub item will be attached to its container position | 'start'/ 'center'/ 'end' | undefined |
 ## Installation
 
 ```bash

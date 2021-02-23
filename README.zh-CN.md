@@ -25,7 +25,7 @@
 | onChange | 修改范围后的回调 | (value: TimeRange | null) => void| undefined |
 | onContainClick | 点击区域块的回调，返回当前点击的数值 | (value: number) => void| undefined |
 | onContainDbClick | 双击区域块的回调，返回当前点击的数值 | (value: number) => void | undefined |
-
+| scrollSnapAlign | 手动滑动后子项目将吸附到其容器的位置 | 'start'/ 'center'/ 'end' | undefined |
 
 ## 安装
 

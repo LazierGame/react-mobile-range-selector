@@ -8,7 +8,7 @@ import { snapToGrid } from "./utils/snapToGrid";
 import { generateUUID } from "./utils/uid";
 // @ts-ignore
 import AlloyFinger from 'alloyfinger'
-import './index.css'
+// import './index.css'
 
 interface TimeRangeSelectorProps {
   /** 当前选择器的范围 */

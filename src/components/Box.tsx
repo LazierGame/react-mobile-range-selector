@@ -35,7 +35,7 @@ export const Box: React.FC<BoxProps> = (
     onChange,
   }: BoxProps) => {
 
-  const handleResizeChange = (_e: TouchEvent, _direction: Direction, _ref: HTMLElement, d: NumberSize) => {
+  const handleResizeChange = (_e: any, _direction: Direction, _ref: HTMLElement, d: NumberSize) => {
     onChange && onChange(oldWidth + d.width)
   }
 

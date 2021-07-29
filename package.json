@@ -1,6 +1,6 @@
 {
   "name": "react-mobile-range-selector",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "mobile range selector",
   "author": "wsafight",
   "license": "MIT",
@@ -10,20 +10,6 @@
   "source": "src/index.tsx",
   "engines": {
     "node": ">=10"
-  },
-  "scripts": {
-    "build": "microbundle-crl --format modern,cjs",
-    "start": "microbundle-crl watch --format modern,cjs",
-    "prepare": "run-s build",
-    "test": "run-s test:unit test:lint test:build",
-    "test:build": "run-s build",
-    "test:lint": "eslint .",
-    "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
-    "test:watch": "react-scripts test --env=jsdom",
-    "predeploy": "cd example && yarn install && yarn run build",
-    "deploy": "gh-pages -d example/build",
-    "storybook": "start-storybook -p 9001",
-    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
@@ -37,6 +23,45 @@
     "url": "https://github.com/LazierGame/react-mobile-range-selector/issues"
   },
   "homepage": "https://github.com/LazierGame/react-mobile-range-selector#readme",
+  "files": [
+    "dist"
+  ],
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "size-limit": [
+    {
+      "path": "dist/react-mobile-range-selector.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/react-mobile-range-selector.esm.js",
+      "limit": "10 KB"
+    }
+  ],
   "dependencies": {
     "re-resizable": "^6.9.0",
     "react-dnd": "^11.1.3",
@@ -44,48 +69,24 @@
     "lodash.throttle": "^4.1.1",
     "alloyfinger": "^0.1.16"
   },
-  "peerDependencies": {
-    "react": "^16.0.0"
-  },
   "devDependencies": {
-    "@types/lodash.throttle": "^4.1.6",
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.3",
-    "@testing-library/user-event": "^12.6.2",
-    "@types/jest": "^26.0.20",
-    "@types/node": "^14.14.22",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.14.1",
-    "@typescript-eslint/parser": "^4.14.1",
-    "babel-eslint": "^10.1.0",
-    "cross-env": "^7.0.3",
-    "eslint": "^7.18.0",
-    "eslint-config-prettier": "^7.2.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-config-standard-react": "^11.0.1",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.22.0",
-    "eslint-plugin-standard": "^5.0.0",
-    "gh-pages": "^3.1.0",
-    "microbundle-crl": "^0.13.11",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^2.2.1",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-scripts": "^4.0.2",
-    "typescript": "^4.1.3",
-    "@storybook/react": "^6.1.17",
-    "@storybook/addon-links": "^6.1.17",
-    "@storybook/addon-essentials": "^6.1.17",
+    "@babel/core": "^7.14.8",
+    "@size-limit/preset-small-lib": "^5.0.2",
+    "@storybook/addon-essentials": "^6.3.6",
     "@storybook/addon-info": "^5.3.21",
-    "react-docgen-typescript-loader": "^3.7.2",
-    "storybook-mobile": "^0.1.29"
-  },
-  "files": [
-    "dist"
-  ]
+    "@storybook/addon-links": "^6.3.6",
+    "@storybook/addons": "^6.3.6",
+    "@storybook/react": "^6.3.6",
+    "@types/react": "^17.0.15",
+    "@types/react-dom": "^17.0.9",
+    "babel-loader": "^8.2.2",
+    "husky": "^7.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-is": "^17.0.2",
+    "size-limit": "^5.0.2",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.3.0",
+    "typescript": "^4.3.5"
+  }
 }
